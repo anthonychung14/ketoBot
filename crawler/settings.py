@@ -23,6 +23,8 @@ DATABASE = {
   'database': 'keto'
 }
 
+#Django - Scrapy integration
+
 def setup_django_env(path):
     import imp, os
 
@@ -32,8 +34,13 @@ def setup_django_env(path):
 setup_django_env('./ketoMon/')
 
 
+import sys
+sys.path.append('../ketoMon')
+from django.core.wsgi import get_wsgi_application
+application = get_wsgi_application()
+
 ITEM_PIPELINES = {
-   'spiders.pipelines.RecipePipeline': 300,
+   'crawler.pipelines.RecipePipeline': 300,
 }
 
 DOWNLOAD_DELAY=3

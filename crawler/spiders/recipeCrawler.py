@@ -42,20 +42,32 @@ class RecipeCrawlerSpider(CrawlSpider):
 
         #next: calories, fat, carbs, fiber, carbs, protein
           #store values with appropriate headers
-
       soup = BeautifulSoup(html, 'lxml')      
+      
       recipe = soup.find('div', attrs={'class': 'entry-content'})
-      ingredients = recipe.find('table')
-      for row in ingredients.findAll('tr'):
-        listCells = [];
-        for cell in row.findAll('td'):
-          listCells.append(cell.text.encode('utf-8').strip())
-        listRows.append(listCells)
+      recipe_titleParent = soup.find('div', attrs={'class': 'articleTitle'})
+      recipe_title = recipe_titleParent.find('h1').text
+
+      imageParent = soup.findChild('div', attrs={'class': 'postImage_f'})
+      image = imageParent.find('img')['src']
+
+      RecipeItem['title'] = recipe_title
+      RecipeItem['image'] = image
+      RecipeItem['recipe_directions'] = ["a", "b", "c"]
+
+      yield RecipeItem
+
+      # ingredients = recipe.find('table')
+      # for row in ingredients.findAll('tr'):
+      #   listCells = [];
+      #   for cell in row.findAll('td'):
+      #     listCells.append(cell.text.encode('utf-8').strip())
+      #   listRows.append(listCells)
       
 
-    ##Now...you insert each thing into the database somehow
-      outfile = open("./testRecipe.csv",'w')
-      writer = csv.writer(outfile)
+    # ##Nope. Do it right. Send it into the pipeline to handle
+    #   outfile = open("./testRecipe.csv",'w')
+    #   writer = csv.writer(outfile)
 
-      for row in listRows:
-        writer.writerow(row)
+    #   for row in listRows:
+    #     writer.writerow(row)

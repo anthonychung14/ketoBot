@@ -10,4 +10,11 @@ from scrapy.item import Item, Field
 class RecipeItem(Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
-    recipeName= Field()    
+    title = Field()
+    image = Field()
+    recipe_nutrition= Field()
+    recipe_directions= Field()
+    recipe_ingredients= Field()
+    ingredient_nutrition = Field()
+
+

@@ -1,3 +1,5 @@
+#Deprecated => Used to upgrade the crawler
+
 from scrapy import Spider
 from scrapy.selector import Selector
 from crawler.items import RecipeItem

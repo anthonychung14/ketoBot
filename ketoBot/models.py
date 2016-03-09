@@ -26,7 +26,6 @@ class Recipe_Nutrition (models.Model):
 class Recipe_Directions (models.Model):    
     recipe_id = models.ForeignKey(Recipe, on_delete=models.CASCADE)
     direction_step = models.CharField(max_length=200)
-    direction_step = models.CharField(max_length=200)
     direction_picture = models.CharField(max_length=200)
 
 class Ingredient (models.Model):
