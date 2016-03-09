@@ -5,7 +5,11 @@
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
+from ketoBot.models import Recipe
 
 class RecipePipeLine(object):
     def process_item(self, item, spider):
-        return item
+        print(item)
+        recipe = Recipe(recipe_title="booya")
+        recipe.save()
+        return recipe

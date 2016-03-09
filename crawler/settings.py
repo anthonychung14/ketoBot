@@ -32,6 +32,11 @@ def setup_django_env(path):
 setup_django_env('./ketoMon/')
 
 
+ITEM_PIPELINES = {
+   'spiders.pipelines.RecipePipeline': 300,
+}
+
+DOWNLOAD_DELAY=3
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'stack (+http://www.yourdomain.com)'
 
@@ -41,7 +46,6 @@ setup_django_env('./ketoMon/')
 # Configure a delay for requests for the same website (default: 0)
 # See http://scrapy.readthedocs.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-DOWNLOAD_DELAY=3
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN=16
 #CONCURRENT_REQUESTS_PER_IP=16
@@ -78,9 +82,6 @@ DOWNLOAD_DELAY=3
 
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'stack.pipelines.SomePipeline': 300,
-#}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
