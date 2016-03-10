@@ -1,4 +1,5 @@
 import requests
+import re
 from bs4 import BeautifulSoup
 
 url = 'http://www.ruled.me/slow-cooker-keto-chicken-tikka-masala/'
@@ -15,4 +16,27 @@ recipe_title = recipe_titleParent.find('h1').text
 imageParent = soup.findChild('div', attrs={'class': 'postImage_f'})
 image = imageParent.find('img')['src']
 
-print (recipe_title)
+date_parent = soup.find('div', attrs={'class': 'articleData'})
+date = date_parent.text
+
+ingredient_parent = soup.find('div', attrs={'class': 'entry-content'})
+ingredient = ingredient_parent.findAll('li', attrs={'class': 'ingredient'})
+
+ingredients = []
+
+for ingred in ingredient:
+  ingredients.append(ingred.text)
+
+def split_on_letter(s):    
+    item = re.compile("[A-Z][^A-Z]*").search(s)
+    quantity = s[:item.start()]
+    
+    if re.compile("[^\W\d]").search(quantity):
+      match = re.compile("[^\W\d]").search(quantity)
+      print(s[:match.start()], s[match.start():])
+    else:
+      match = ""
+      print(s[:match.start()], s[match.start():])
+
+for s in ingredients:
+  split_on_letter(s)

@@ -25,7 +25,7 @@ class RecipeCrawlerSpider(CrawlSpider):
   def parse_item(self, response):
       recipes = Selector(response).xpath('//h2[@class="entry-title"]/a')
       for recipe in recipes:
-          url = recipe.xpath('@href').extract()[0]
+          url = recipe.xpath('@href').extract()[0]          
           yield scrapy.Request(url, callback=self.parse_recipe)
 
   def parse_recipe(self, response):
@@ -51,11 +51,25 @@ class RecipeCrawlerSpider(CrawlSpider):
       imageParent = soup.findChild('div', attrs={'class': 'postImage_f'})
       image = imageParent.find('img')['src']
 
-      RecipeItem['title'] = recipe_title
-      RecipeItem['image'] = image
-      RecipeItem['recipe_directions'] = ["a", "b", "c"]
+      date_parent = soup.find('div', attrs={'class': 'articleData'})
+      date_dirty = date_parent.text
+      date_final = date_dirty.split('on ')[1]
 
-      yield RecipeItem
+      ingredient_parent = soup.find('div', attrs={'class': 'entry-content'})
+      ingredient = ingredient_parent.findAll('li', attrs={'class': 'ingredient'})
+      ingredients = []
+      for ingred in ingredient:
+        ingredients.append(ingred.text)
+
+      item = RecipeItem()
+
+      item['title'] = recipe_title
+      item['image'] = image
+      item['date'] = date_final
+      item['recipe_type'] = "Lunch"
+      item['recipe_directions'] = ["a", "b", "c"]
+
+      yield item
 
       # ingredients = recipe.find('table')
       # for row in ingredients.findAll('tr'):

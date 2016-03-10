@@ -4,14 +4,8 @@ from django.db import models
 
 class Recipe(models.Model):
     recipe_title = models.CharField(max_length=200)
-    recipe_type = (
-      ('B', 'Breakfast'),
-      ('L', 'Lunch'),
-      ('D', 'Dinner'),
-      ('Dst', 'Dessert'),
-      ('S', 'Snack')
-    )
-    recipe_date = models.DateTimeField('date published')
+    recipe_date = models.CharField(max_length=200)
+    recipe_type = models.CharField(max_length=200)
     recipe_picture = models.CharField(max_length=200)
 
 class Recipe_Nutrition (models.Model):

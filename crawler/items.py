@@ -12,6 +12,8 @@ class RecipeItem(Item):
     # name = scrapy.Field()
     title = Field()
     image = Field()
+    date = Field()
+    recipe_type = Field()
     recipe_nutrition= Field()
     recipe_directions= Field()
     recipe_ingredients= Field()
