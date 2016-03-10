@@ -7,6 +7,7 @@ from scrapy.selector import Selector
 
 from bs4 import BeautifulSoup
 import requests
+import re
 import csv
 
 #Creates the item.
@@ -57,9 +58,28 @@ class RecipeCrawlerSpider(CrawlSpider):
 
       ingredient_parent = soup.find('div', attrs={'class': 'entry-content'})
       ingredient = ingredient_parent.findAll('li', attrs={'class': 'ingredient'})
+
       ingredients = []
+      finalIngredients = []
+
       for ingred in ingredient:
         ingredients.append(ingred.text)
+
+      def split_on_letter(s):    
+          item = re.compile("[A-Z][^A-Z]*").search(s)
+          quantity = s[:item.start()]
+          
+          if re.compile("[^\W\d]").search(quantity):
+            match = re.compile("[^\W\d]").search(quantity)
+            amount = s[:match.start()]
+            grocery = s[item.start():]
+            measure = " ".join(re.findall("[a-zA-Z]+", s[:item.start()]))
+            finalIngredients.append([amount, measure, grocery])
+          else:
+            finalIngredients.append(["", "", s])
+
+      for s in ingredients:
+        split_on_letter(s)
 
       item = RecipeItem()
 
@@ -67,7 +87,7 @@ class RecipeCrawlerSpider(CrawlSpider):
       item['image'] = image
       item['date'] = date_final
       item['recipe_type'] = "Lunch"
-      item['recipe_directions'] = ["a", "b", "c"]
+      item['recipe_ingredients'] = finalIngredients
 
       yield item
 

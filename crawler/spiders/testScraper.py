@@ -23,6 +23,7 @@ ingredient_parent = soup.find('div', attrs={'class': 'entry-content'})
 ingredient = ingredient_parent.findAll('li', attrs={'class': 'ingredient'})
 
 ingredients = []
+finalIngredients = []
 
 for ingred in ingredient:
   ingredients.append(ingred.text)
@@ -33,10 +34,14 @@ def split_on_letter(s):
     
     if re.compile("[^\W\d]").search(quantity):
       match = re.compile("[^\W\d]").search(quantity)
-      print(s[:match.start()], s[match.start():])
+      amount = s[:match.start()]
+      grocery = s[item.start():]
+      measure = " ".join(re.findall("[a-zA-Z]+", s[:item.start()]))
+      finalIngredients.append([amount, measure, grocery])
     else:
-      match = ""
-      print(s[:match.start()], s[match.start():])
+      finalIngredients.append(["", "", s])
 
 for s in ingredients:
   split_on_letter(s)
+
+print finalIngredients
