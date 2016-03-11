@@ -1,6 +1,7 @@
 import requests
 import re
 from bs4 import BeautifulSoup
+import fractions as Fraction
 
 url = 'http://www.ruled.me/slow-cooker-keto-chicken-tikka-masala/'
 
@@ -44,4 +45,4 @@ def split_on_letter(s):
 for s in ingredients:
   split_on_letter(s)
 
-print finalIngredients
+
