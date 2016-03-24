@@ -2,7 +2,6 @@ from __future__ import unicode_literals
 
 from django.db import models
 
-
 #Recipe object in ES => Provides recommendations for initial fit
 class Recipe(models.Model):
     title = models.CharField(max_length=200)
