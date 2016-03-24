@@ -21,5 +21,6 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^diet/', include('ketoBot.urls')),
+    url(r'^ketoBot/', include('ketoBot.urls')),
+    # url(r'^users/', include('users.urls')),
 ]
