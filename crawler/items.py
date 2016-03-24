@@ -1,22 +1,52 @@
-# -*- coding: utf-8 -*-
-
-# Define here the models for your scraped items
-#
-# See documentation in:
-# http://doc.scrapy.org/en/latest/topics/items.html
-
 from scrapy.item import Item, Field
 
+#This is the meat for the first phase
 class RecipeItem(Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
+    #normalMetaData
+    id = Field()
+    pk = Field()
     title = Field()
     image = Field()
     date = Field()
-    recipe_type = Field()
-    recipe_nutrition= Field()
-    recipe_directions= Field()
-    recipe_ingredients= Field()
-    ingredient_nutrition = Field()
+    
+    #Lunch/Dinner/Breakfast/Snack?
+    time = Field()
+    
+    #array
+    directions= Field()    
+    
+    #array of dictionaries
+    ingredients = Field()
+    
+    #dictionary
+    recMacros = Field()
 
+    #rawTable
+    rawTable = Field()
+    rawIngredients = Field()
 
+#Majority of parsed data lives here
+#Post analysis will be done
+class IngredientData(Item):
+    recipe = Field()
+    amount = Field()
+    measurement = Field()
+    name = Field()
+    ingredMacros = Field()
+
+class RecipeElastic(Item):
+    id = Field()
+    title = Field()
+    date = Field()
+    
+    #Lunch/Dinner/Breakfast/Snack?
+    time = Field()
+    
+    #array
+    directions= Field()    
+    
+    #array of dictionaries
+    ingredients = Field()    
+    
+    #dictionary
+    recMacros = Field()

@@ -1,17 +1,9 @@
-# -*- coding: utf-8 -*-
-
-# Scrapy settings for stack project
-#
-# For simplicity, this file contains only settings considered important or
-# commonly used. You can find more settings consulting the documentation:
-#
-#     http://doc.scrapy.org/en/latest/topics/settings.html
-#     http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
-#     http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
+from scrapy import log
+import logging
 
 BOT_NAME = 'keto'
 
-SPIDER_MODULES = ['crawler.spiders']
+SPIDER_MODULES = ['crawler.spiders.recipeCrawler']
 NEWSPIDER_MODULE = 'crawler.spiders'
 
 DATABASE = {
@@ -23,6 +15,8 @@ DATABASE = {
   'database': 'keto'
 }
 
+DOWNLOAD_HANDLERS = {'s3': None}
+
 #Django - Scrapy integration
 
 def setup_django_env(path):
@@ -33,15 +27,27 @@ def setup_django_env(path):
 
 setup_django_env('./ketoMon/')
 
-
 import sys
 sys.path.append('../ketoMon')
 from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()
 
+#Pipeline order + ES integration
 ITEM_PIPELINES = {
-   'crawler.pipelines.RecipePipeline': 300,
+   'crawler.pipelines.RecipePipeline': 200,
+   'crawler.pipelines.IngredientPipeline': 300,
+   'crawler.pipelines.RecipeNutritionPipeline': 400,
+   'crawler.pipelines.ElasticReducer': 500,
+   'scrapyelasticsearch.scrapyelasticsearch.ElasticSearchPipeline': 1000
 }
+
+ELASTICSEARCH_SERVER = 'localhost' 
+ELASTICSEARCH_PORT = 9200 
+ELASTICSEARCH_INDEX = 'recipes'
+ELASTICSEARCH_TYPE = 'lunch'
+ELASTICSEARCH_UNIQ_KEY = ''
+ELASTICSEARCH_LOG_LEVEL= logging.DEBUG
+
 
 DOWNLOAD_DELAY=3
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
