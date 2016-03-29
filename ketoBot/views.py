@@ -12,7 +12,13 @@ from ketoBot.serializers import RecipeSerializer, IngredientSerializer
 
 from .models import Recipe, Ingredient
 
-# Create your views here.
+# API Endpoints
+# @api_view(['POST'])
+# def create_profile(request):
+#   serializer = 
+
+  
+
 @api_view(['GET', 'POST'])
 def recipe_list(request):
     if request.method == 'GET':
@@ -53,7 +59,5 @@ def recipe_detail(request, pk):
       # }    
       # return render(request, 'ketoBot/index.html', context)
 
-# def recipe_detail(request, recipe_id):
-#     recipe = get_object_or_404(Recipe, pk=recipe_id)
-#     ingredients = Ingredient.objects.filter(r=recipe.id)
-#     return render(request, 'ketoBot/detail.html', {'recipe': recipe,'ingredients': ingredients})
+def reactApp(request):    
+    return render(request, 'ketoBot/index.html')
