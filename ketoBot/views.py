@@ -17,8 +17,6 @@ from .models import Recipe, Ingredient
 # def create_profile(request):
 #   serializer = 
 
-  
-
 @api_view(['GET', 'POST'])
 def recipe_list(request):
     if request.method == 'GET':

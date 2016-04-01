@@ -1,12 +1,15 @@
+# -*- coding: utf-8 -*-
+
 import requests
 import re
 import pandas as pd
+import numpy as np
 
 from bs4 import BeautifulSoup
 from fractions import Fraction
 from scrapy.selector import Selector
 
-url = 'http://www.ruled.me/seared-skirt-steak-with-cilantro-paste/'
+url = 'http://www.ruled.me/low-carb-chili-lime-meatballs/'
 
 response = requests.get(url)
 html = response.content
@@ -14,14 +17,74 @@ html = response.content
 ingredientList = Selector(text=html).xpath('//table/tbody/tr/td[1]/text()').extract()
 
 
-table = pd.read_html(html, header=0, index_col=0, flavor="bs4")
-x = table[0]
+#Handling if there is an embedded recipe
+table = pd.read_html(html, header=0, index_col=0, flavor="bs4", encoding="utf-8")
+table = table[0].dropna(thresh=1)
+ingredientColumn = list(table.index.values)
 
-ingredientColumn = list(x.index.values)
+columnHeaders= list(table.columns)
+newTable = pd.DataFrame(data=table, index=ingredientColumn, columns=columnHeaders)
+newFood = []
 
-for s in ingredientColumn:
-  if "Totals" not in s and "serving" not in s.lower():
-      print(s)
+# Solution #1 => Find first total and break
+# for index, row in newTable.iterrows():
+#   if "Totals" in index:
+#     print(row[0])
+#     break;
+
+
+totals = list(newTable.loc['Totals'].iloc[0])
+
+print(totals)
+
+#creates a new list of ingredients to parse
+#All attempting to split between sub-recipes
+# flag = False
+# for index, row in newTable.iterrows():        
+#     if "serving" in index.lower() and flag==False:
+#       flag = True
+#       newIndex = newTable.index.get_loc(index)
+#     if flag == True and 'serving' not in index.lower():
+#       newFood.append(index)
+
+# gotIndex = ""
+
+# for index, item in enumerate(newIndex):
+#   if item == True:
+#     gotIndex = index
+#     break;
+
+# # print(newTable[:gotIndex+1])
+# print(newTable[gotIndex+1:])
+
+#Check to see if newFood ends up getting added
+
+
+
+
+
+# print (ingredientColumn)
+
+# for s 
+#   float('nan') != float('nan')
+
+
+
+
+
+# print(pd.isnull(table).any(1).nonzero()[0])
+
+#gives a weird one dimensional array of row values
+# print(np.where(table[0].notnull())[0])
+
+#not possible because this is an object array with more than just integers
+# print(table[np.isnan(table[0])])
+
+
+
+# for s in ingredientColumn:
+#   if "Totals" not in s and "serving" not in s.lower():
+#     print("ingredient worked", s)
  
 
 

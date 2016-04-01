@@ -16,7 +16,7 @@ from crawler.items import RecipeItem
 class RecipeCrawlerSpider(CrawlSpider):
   name = 'ruledMeCrawler'
   allowed_domains = ['ruled.me']
-  start_urls = ['http://www.ruled.me/keto-recipes/lunch/']
+  start_urls = ['http://www.ruled.me/keto-recipes/snacks/']
 
   rules = (
       #make this 0-9 when you're ready to get all of it
@@ -37,10 +37,10 @@ class RecipeCrawlerSpider(CrawlSpider):
 
       recipe = RecipeItem()
       #Hard-coded for now. consider parsing the url to get lunch
-      recipe['time'] = "Lunch"
+      recipe['time'] = "Snacks"
       
       #get dataframe from html table.
-      table = pd.read_html(html, header=0, index_col=0, flavor="bs4")
+      table = pd.read_html(html, header=0, index_col=0, flavor="bs4", encoding="utf-8")
       dataframe = [];
       for tab in table:
         dataframe.append(tab)
