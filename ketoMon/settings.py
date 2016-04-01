@@ -1,7 +1,9 @@
 import os
+import sys
+from django.conf import settings
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+#You will need to change this to whitelists
+CORS_ORIGIN_ALLOW_ALL = True
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
@@ -18,11 +20,25 @@ ALLOWED_HOSTS = []
 #     'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',)
 # }
 
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# Application definition
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'CACHE': not settings.DEBUG,
+        'BUNDLE_DIR_NAME': 'bundles/',
+        'STATS_FILE': 'webpack-stats.json',
+        # FIXME: Explore usage of fsnotify
+        'POLL_INTERVAL': 0.1,
+        'IGNORE': ['.+\.hot-update.js', '.+\.map']
+    }
+}
+
 
 INSTALLED_APPS = [
     'ketoBot.apps.ketoBotConfig',
+    'corsheaders', 
     'users.apps.UsersConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -30,10 +46,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework'
+    'rest_framework',
+    'webpack_loader'
 ]
 
 MIDDLEWARE_CLASSES = [
+    'corsheaders.middleware.CorsMiddleware', 
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -63,7 +81,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'ketoMon.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
@@ -115,3 +132,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'assets'), # We do this so that django's collectstatic copies or our bundles to the STATIC_ROOT or syncs them to whatever storage we use.
+    # 'http://localhost:3000/assets/bundles/'
+)
+
+
