@@ -8,8 +8,8 @@ class Recipe(models.Model):
     date = models.CharField(max_length=200)
     time = models.CharField(max_length=200)
     image = models.CharField(max_length=200)
-    class Meta:
-        unique_together = ('title', 'image')
+    # class Meta:
+    #     unique_together = ('title', 'image')
 
 class Recipe_Nutrition (models.Model):
     r = models.ForeignKey(Recipe, on_delete=models.CASCADE)

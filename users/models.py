@@ -9,9 +9,15 @@ class UserAuth(models.Model):
 class UserChoose(models.Model):
   user = models.ForeignKey(UserAuth, on_delete=models.CASCADE)
   r = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+  restrict = models.CharField(max_length=100)
   eatAgain = models.BooleanField()
 
 class UserNutrition(models.Model):
-  user = models.ForeignKey(UserAuth, on_delete=models.CASCADE)
+  # user = models.ForeignKey(UserAuth, on_delete=models.CASCADE)
+  name = models.CharField(max_length=100, default="test")
+  calories =  models.IntegerField(default=0)
+  fats =  models.IntegerField(default=0)
+  carbs =  models.IntegerField(default=0)
+  protein =  models.IntegerField(default=0)
 
 
