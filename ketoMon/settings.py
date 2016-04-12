@@ -26,15 +26,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 WEBPACK_LOADER = {
     'DEFAULT': {
-        'CACHE': not settings.DEBUG,
-        'BUNDLE_DIR_NAME': 'bundles/',
-        'STATS_FILE': 'webpack-stats.json',
-        # FIXME: Explore usage of fsnotify
-        'POLL_INTERVAL': 0.1,
-        'IGNORE': ['.+\.hot-update.js', '.+\.map']
+        'BUNDLE_DIR_NAME': 'dist/',
+        'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json')
     }
 }
 
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'client'), # We do this so that django's collectstatic copies or our bundles to the STATIC_ROOT or syncs them to whatever storage we use.
+    'localhost:3000/dist/bundle'
+)
 
 INSTALLED_APPS = [
     'ketoBot.apps.ketoBotConfig',
@@ -132,10 +132,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
-
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'assets'), # We do this so that django's collectstatic copies or our bundles to the STATIC_ROOT or syncs them to whatever storage we use.
-    # 'http://localhost:3000/assets/bundles/'
-)
-
 

@@ -1,0 +1,30 @@
+@import '../../../src/containers/App/styles/screens';
+
+:local(.styles) {
+  flex: 0 0 100%;
+  position: relative;
+
+  background-size: 100% auto;
+  background-image: url(files/background.jpg);
+
+  height: 200px;
+
+  @media (min-width: 768px) and (max-width: 992px) {
+    height: 340px;
+  }
+
+  @media (#{ $phone }) {
+    height: 320px;
+  }
+
+  h1.title {
+    color: #FFF;
+    font-size: 60px;
+  }
+
+  p {
+    color: #FFF;
+  }
+
+
+}

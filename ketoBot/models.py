@@ -7,11 +7,9 @@ class Recipe(models.Model):
     title = models.CharField(max_length=200)
     date = models.CharField(max_length=200)
     time = models.CharField(max_length=200)
-    image = models.CharField(max_length=200)
-    # class Meta:
-    #     unique_together = ('title', 'image')
+    image = models.CharField(max_length=200)    
 
-class Recipe_Nutrition (models.Model):
+class Recipe_Nutrition(models.Model):    
     r = models.ForeignKey(Recipe, on_delete=models.CASCADE)
     servings = models.IntegerField(default=0)
     calories = models.IntegerField(default=0)

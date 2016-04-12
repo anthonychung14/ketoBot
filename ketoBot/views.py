@@ -8,19 +8,14 @@ import json
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from ketoBot.serializers import RecipeSerializer, IngredientSerializer
 
-from .models import Recipe, Ingredient
-
-# API Endpoints
-# @api_view(['POST'])
-# def create_profile(request):
-#   serializer = 
+from ketoBot.serializers import RecipeSerializer, IngredientSerializer, RecipeNutritionSerializer
+from .models import Recipe, Ingredient, Recipe_Nutrition
 
 @api_view(['GET', 'POST'])
 def recipe_list(request):
     if request.method == 'GET':
-      latest_recipes = Recipe.objects.order_by('title')[:10]
+      latest_recipes = Recipe.objects.order_by('?')[:20]
       serializer = RecipeSerializer(latest_recipes, many=True)
       return Response(serializer.data)
     

@@ -1,5 +1,0 @@
-curl -XPOST 'localhost:9200/recipes/_search?lunch' -d '
-{
-  "query": { "match": {"ingredients.name": "cumin"}},
-  "_source": ["title"]
-}'

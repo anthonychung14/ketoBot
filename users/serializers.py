@@ -14,4 +14,4 @@ class UserInfoSerializer(serializers.ModelSerializer):
 class UserDietSerializer(serializers.ModelSerializer):
     class Meta:
       model = UserNutrition
-      fields = ('name', 'calories', 'fats', 'carbs', 'protein')
+      fields = ('name', 'date', 'calories', 'fats', 'carbs', 'protein')

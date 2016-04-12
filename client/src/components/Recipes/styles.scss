@@ -1,0 +1,40 @@
+:local(.styles) {
+  position: relative;
+  padding: 50px 0;
+  border-top: 1px solid #CCC;
+
+  h2 {
+    margin-bottom: 50px;
+  }
+
+  a {
+    font-size: 12px;
+  }
+
+  p {
+    font-size: 14px;
+    padding: 0 10%;
+  }
+
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  .recipeHeader {
+    flex: 0 0 100%;
+    text-align: center;
+  }
+
+  .card {
+    margin: 5px 5px 5px 5px;  
+    height: 300px;
+    & input {
+      display: none
+    }
+    &:hover input {
+      display: block;
+    }    
+  }
+}

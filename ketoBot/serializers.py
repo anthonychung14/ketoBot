@@ -1,12 +1,17 @@
 from rest_framework import serializers
-from models import Ingredient, Recipe
-
-class RecipeSerializer(serializers.ModelSerializer):    
+from models import Ingredient, Recipe, Recipe_Nutrition
+      
+class RecipeSerializer(serializers.ModelSerializer):        
     class Meta:
       model = Recipe
-      fields = ('title', 'date', 'time')
-      
+      fields = ('id', 'title', 'date', 'time', 'image')
+
 class IngredientSerializer(serializers.ModelSerializer):
     class Meta:
       model = Ingredient
       fields = ('amount', 'measurement', 'name')
+
+class RecipeNutritionSerializer(serializers.ModelSerializer):
+    class Meta:
+      model = Recipe_Nutrition
+      fields = ('servings', 'calories', 'net_carbs', 'fat', 'protein')

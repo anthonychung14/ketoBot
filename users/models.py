@@ -15,6 +15,7 @@ class UserChoose(models.Model):
 class UserNutrition(models.Model):
   # user = models.ForeignKey(UserAuth, on_delete=models.CASCADE)
   name = models.CharField(max_length=100, default="test")
+  date = models.CharField(max_length=100)
   calories =  models.IntegerField(default=0)
   fats =  models.IntegerField(default=0)
   carbs =  models.IntegerField(default=0)
