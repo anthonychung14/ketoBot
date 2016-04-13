@@ -4,6 +4,7 @@ import fetch from 'isomorphic-fetch'
 const baseURL = "http://localhost:8000"
 const ketoBot = "/ketoBot"
 const recipes = "/recipes"
+const recipe_nutrition = "/nutrition"
 const userDiet = "/users/diet"
 
 const ES_URL = "http://localhost:9200"
@@ -23,8 +24,9 @@ export function openModal(element) {
   }
 }
 
+//REQUEST NUTRITIONAL INFO
 export const REQUEST_NUTRITION = "REQUEST_NUTRITION"
-export function requestNutrition() {
+export function requestNutrition(request) {
   return {
     type: REQUEST_NUTRITION,
     payload: request
@@ -32,12 +34,30 @@ export function requestNutrition() {
 }
 
 export const RECEIVE_NUTRITION = "RECEIVE_NUTRITION"
-export function receiveNUTRITION(request, json) {
+export function receiveNutrition(request, json) {
   return {
     type: RECEIVE_NUTRITION,
     request,
     nutrition: json,
     receivedAt: Date.now()
+  }
+}
+
+export function fetchNutrition(request) {
+  return function(dispatch) {
+    dispatch(requestNutrition(request))    
+    console.log('CONFIRMING REQUEST AINT EMPTY', request)
+    return fetch(baseURL+ketoBot+recipe_nutrition, {
+      method: 'POST',
+      data: JSON.stringify({ids: request})     
+    })
+      .then(response => {
+        console.log("fetch success", response)
+        response.json()}
+      )
+      .then(json => dispatch(receiveNutrition(request, json))
+    )
+    //TODO: error handling
   }
 }
 

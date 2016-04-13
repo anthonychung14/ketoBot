@@ -8,6 +8,9 @@ import json
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework.parsers import JSONParser
+from rest_framework.decorators import parser_classes
+
 
 from ketoBot.serializers import RecipeSerializer, IngredientSerializer, RecipeNutritionSerializer
 from .models import Recipe, Ingredient, Recipe_Nutrition
@@ -28,6 +31,15 @@ def recipe_list(request):
         return Response(
           serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(['POST', 'OPTIONS'])
+def recipe_nutrition(request):
+  # requestedRecipes = 
+  # serializer = RecipeNutritionSerializer(requestedRecipes, many=True)    
+    print(request.body, "here some data")
+    return Response(request.POST)  
+
+
+#This is for ElasticSearch
 @api_view(['GET', 'POST'])
 def search(request):
     data = {

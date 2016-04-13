@@ -35,9 +35,16 @@ function mapDispatchToProps(dispatch) {
 
 export class Recipes extends Component {
   componentWillMount () {
+    let boundFetchNutrition = this.props.actions.fetchNutrition 
+
     this.props.actions.fetchRecipes()
     .then(function(data) {
-      console.log(data.recipes, "this is a promise?")
+      let randomRecipesID = data.recipes.map((element, key) => {
+        return element.id
+      })
+      console.log("inside success promise")
+      //make another async call for the nutritional info
+      boundFetchNutrition(randomRecipesID)
     })
   }
 
