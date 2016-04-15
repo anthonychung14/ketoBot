@@ -14,4 +14,4 @@ class IngredientSerializer(serializers.ModelSerializer):
 class RecipeNutritionSerializer(serializers.ModelSerializer):
     class Meta:
       model = Recipe_Nutrition
-      fields = ('servings', 'calories', 'net_carbs', 'fat', 'protein')
+      fields = ('r', 'servings', 'calories', 'net_carb', 'fat', 'protein')

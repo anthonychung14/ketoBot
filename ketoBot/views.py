@@ -31,12 +31,15 @@ def recipe_list(request):
         return Response(
           serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@api_view(['POST', 'OPTIONS'])
+@api_view(['GET'])
 def recipe_nutrition(request):
   # requestedRecipes = 
-  # serializer = RecipeNutritionSerializer(requestedRecipes, many=True)    
-    print(request.body, "here some data")
-    return Response(request.POST)  
+  # serializer = RecipeNutritionSerializer(requestedRecipes, many=True)        
+    splitStrip = filter(None, request.query_params['ids'].strip().split(','))
+    recipeIds = [int(numeric_string) for numeric_string in splitStrip]    
+    gotRecipeNutrition = Recipe_Nutrition.objects.filter(r__in=recipeIds)
+    serializer = RecipeNutritionSerializer(gotRecipeNutrition, many=True)
+    return Response(serializer.data)  
 
 
 #This is for ElasticSearch
