@@ -30,8 +30,10 @@ export class Search extends Component {
   render() {
     return (
       <section className={`${styles}`}>
-        <button onClick={this.handleClick.bind(this)}>Search Box</button>        
         <div>
+        <h1>Search for something</h1>
+        <input type="text"></input>
+        <button onClick={this.handleClick.bind(this)}>Search Box</button>        
         </div>
       </section>
     );

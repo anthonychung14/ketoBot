@@ -18,13 +18,13 @@ export class Header extends Component {
 
             <div className="col-xs-5 col-sm-5 col-md-5 col-lg-5">
               <nav>
-                <Link to="/home" activeClassName="active">
+                <Link to="/dashboard" activeClassName="active">
                   Dashboard
                 </Link>
-                <Link to="/list" activeClassName="active">
+                <Link to="/home" activeClassName="active">
                   Recipe Queue
                 </Link>
-                <Link to="/grocery" activeClassName="active">
+                <Link to="/groceries" activeClassName="active">
                   Grocery Stack
                 </Link>
               </nav>

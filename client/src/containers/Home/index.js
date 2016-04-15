@@ -37,23 +37,23 @@ export class Home extends Component {
           className="tabs"
           onChange={this.handleChange}
           value={this.state.slideIndex}>
-            <Tab label="Macro Target" value={0} />
-            <Tab label="Recipe Recs" value={1} />
-            <Tab label="Filler" value={2} />
+            <Tab label="Recommended" value={0} />
+            <Tab label="What's new" value={1} />
+            <Tab label="Search" value={2} />
         </Tabs>
-
+        
         <SwipeableViews
           className="tabView"
           index={this.state.slideIndex}
           onChangeIndex={this.handleChange}>
           <div className="tabView">
-            <UserForm />              
-          </div>
-          <div className="tabView">
             <Recipes/>
           </div>
           <div className="tabView">
-            slide n°3
+            <Search />
+          </div>
+          <div className="tabView">
+            <Search />
           </div>
         </SwipeableViews>
 
