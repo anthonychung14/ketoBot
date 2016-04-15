@@ -1,8 +1,8 @@
 :local(.styles) {
   display: -webkit-flex;
   display: flex;
-  -webkit-flex-direction: row;
-  flex-direction: row;
+  -webkit-flex-direction: column;
+  flex-direction: column;
   flex-wrap: wrap;
 
   .tabs {
@@ -12,10 +12,4 @@
 
   padding: 50px 0;
   
-  .tabView {
-    flex: 0 0 100%;
-    margin: 10px;
-    align-self: center;
-    border-style: solid;
-  }
 }

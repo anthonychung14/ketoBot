@@ -8,7 +8,7 @@ from crawler.items import RecipeItem, IngredientData, RecipeElastic
 class RecipePipeline(object):
     def process_item(self, item, spider):        
         #PSQL save
-        recipe = Recipe(title=item['title'], image=item['image'], date=item['date'], time=item['time'])
+        recipe = Recipe(title=item['title'], image=item['images'], date=item['date'], time=item['time'])
         recipe.save()
         item['id'] = recipe.id          
         item['pk'] = Recipe.objects.get(id = recipe.id)
@@ -34,6 +34,7 @@ class IngredientPipeline(object):
           ingredList = []
           recipeForeignKey = item['pk']
 
+          #things get messed up here
           #Parse function
           def split_on_letter(s):    
               item = re.compile("[A-Z][^A-Z]*").search(s)
@@ -106,9 +107,6 @@ class ElasticReducer(object):
       item['time'] = recipeCopy['time']      
       item['ingredients'] = recipeCopy['rawIngredients']
       item['recMacros'] = recipeCopy['recMacros']
-
       return item
-
-
 
         

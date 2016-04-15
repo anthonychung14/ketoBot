@@ -8,16 +8,10 @@ import { styles } from './styles.scss';
 
 class UserForm extends Component {  
   render() {
-    const { fields: {name, calories, fats, carbs, protein}, handleSubmit } = this.props;
+    const { fields: {calories, fats, carbs, protein}, handleSubmit } = this.props;
     return (              
         <section className={`${styles}`}>
-        <h3>Enter Targets</h3>
-        <form onSubmit={handleSubmit(this.props.createDiet)}>
-   
-          <div className="form-group">
-            <label>Name</label>
-            <input type="text" className="form-control" {...name} />
-          </div>
+        <form onSubmit={handleSubmit(this.props.createDiet)}>          
 
           <div className="form-group">
             <label>Calories</label>
@@ -50,5 +44,5 @@ class UserForm extends Component {
 
 export default reduxForm({
   form: 'nutritionForm',
-  fields: ["name", "calories", "fats", "carbs", "protein"]
+  fields: ["calories", "fats", "carbs", "protein"]
 }, null, { createDiet })(UserForm);

@@ -16,7 +16,7 @@ from crawler.items import RecipeItem
 class RecipeCrawlerSpider(CrawlSpider):
   name = 'ruledMeCrawler'
   allowed_domains = ['ruled.me']
-  start_urls = ['http://www.ruled.me/keto-recipes/snacks/']
+  start_urls = ['http://www.ruled.me/keto-recipes/dinner/']
 
   rules = (
       #make this 0-9 when you're ready to get all of it
@@ -37,7 +37,7 @@ class RecipeCrawlerSpider(CrawlSpider):
 
       recipe = RecipeItem()
       #Hard-coded for now. consider parsing the url to get lunch
-      recipe['time'] = "Snacks"
+      recipe['time'] = "Dinner"
       
       #get dataframe from html table.
       table = pd.read_html(html, header=0, index_col=0, flavor="bs4", encoding="utf-8")
@@ -56,7 +56,7 @@ class RecipeCrawlerSpider(CrawlSpider):
 
       imageParent = soup.findChild('div', attrs={'class': 'postImage_f'})
       image = imageParent.find('img')['src']
-      recipe['image'] = image
+      recipe['image_urls'] = [image]
 
       date_parent = soup.find('div', attrs={'class': 'articleData'})
       date_dirty = date_parent.text

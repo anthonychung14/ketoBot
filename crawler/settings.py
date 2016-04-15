@@ -15,7 +15,7 @@ DATABASE = {
   'database': 'keto'
 }
 
-DOWNLOAD_HANDLERS = {'s3': None}
+# DOWNLOAD_HANDLERS = {'s3': None}
 
 #Django - Scrapy integration
 
@@ -34,6 +34,7 @@ application = get_wsgi_application()
 
 #Pipeline order + ES integration
 ITEM_PIPELINES = {
+   'scrapy.contrib.pipeline.images.ImagesPipeline': 100,
    'crawler.pipelines.RecipePipeline': 200,
    'crawler.pipelines.IngredientPipeline': 300,
    'crawler.pipelines.RecipeNutritionPipeline': 400,
@@ -44,12 +45,27 @@ ITEM_PIPELINES = {
 ELASTICSEARCH_SERVER = 'localhost' 
 ELASTICSEARCH_PORT = 9200 
 ELASTICSEARCH_INDEX = 'recipes'
-ELASTICSEARCH_TYPE = 'snacks'
+ELASTICSEARCH_TYPE = 'dinner'
 ELASTICSEARCH_UNIQ_KEY = ''
 ELASTICSEARCH_LOG_LEVEL= logging.DEBUG
 
-
 DOWNLOAD_DELAY=3
+
+IMAGES_STORE = 's3://ketobot/'
+
+# The amount of days until we re-download the image
+IMAGES_EXPIRES = 180     
+
+# You can add as many of these as you want
+
+AWS_ACCESS_KEY_ID = 'AKIAJCZVXGMS45K67CRA'
+AWS_SECRET_ACCESS_KEY= 'bIT2YNI/rgP/ahLQNlc0Ji6Ysm9k0XH+p8qwmj1b'
+
+IMAGES_THUMBS = {
+    'small': (50, 50), 
+    'big': (300, 300)
+}
+
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'stack (+http://www.yourdomain.com)'
 

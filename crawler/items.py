@@ -6,7 +6,8 @@ class RecipeItem(Item):
     id = Field()
     pk = Field()
     title = Field()
-    image = Field()
+    image_urls = Field()
+    images = Field()
     date = Field()
     
     #Lunch/Dinner/Breakfast/Snack?
