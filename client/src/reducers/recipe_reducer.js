@@ -1,10 +1,5 @@
-import { REQUEST_RECIPES, RECEIVE_RECIPES, SELECT_MACROS } from '../actions/items'
+import { REQUEST_RECIPES, RECEIVE_RECIPES, REQUEST_NUTRITION, RECEIVE_NUTRITION, SELECT_MACROS } from '../actions/items'
 
-const initialState = {
-  isFetching: false,
-  all: [],
-  one: []
-}
 
 export function selectMacros(state = 'Anthony', action) {
   switch(action.type) {
@@ -13,6 +8,11 @@ export function selectMacros(state = 'Anthony', action) {
     default:
       return state
   }
+}
+
+const initialState = {
+  isFetching: false,
+  all: []  
 }
 
 export function recipes(state = initialState, action) {
@@ -31,24 +31,43 @@ export function recipes(state = initialState, action) {
   }
 }
 
+export function nutrition(state={}, action) {
+  switch(action.type) {
+    case REQUEST_NUTRITION:
+      return Object.assign({}, state, {
+        isFetching: true
+      })
+    case RECEIVE_NUTRITION:
+      return Object.assign({}, state, {
+        isFetching: false,
+        nutrition: action.nutrition
+      })
+    default:
+      return state;
+  }
+}
 
 export function recipesUser(state={}, action) {
-  switch(action.type) {
-    case SELECT_MACROS:
-    case "RECEIVE_RECIPES":
+  switch(action.type) {    
+    case RECEIVE_RECIPES:
     case REQUEST_RECIPES:
       return Object.assign({}, state, {
-        //Not sure about this line...
-        macros: recipes(state[action.macros], action)
+        recipes: recipes(state[action.recipes], action)
       })
+    case RECEIVE_NUTRITION:
+    case REQUEST_NUTRITION:      
+      return Object.assign({}, state, {
+        recipeNutrition: nutrition(state[action.nutrition], action)
+      })        
     default:
       return state
   }
 }
 
 
-    // case GET_RECIPES:
-    //   return {
-    //     ...state,
-    //     all: action.payload.data
-    // }
+// Remember what spread does? Figure it out
+// case GET_RECIPES:
+//   return {
+//     ...state,
+//     all: action.payload.data
+// }

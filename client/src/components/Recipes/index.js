@@ -11,7 +11,10 @@ import { Card, CardImage, Heading, Text } from 'rebass'
 import { RecipeModal } from 'components/RecipeModal'
 
 function mapStateToProps(state) {
-  return { recipes: state.recipesUser.macros.all, modalState: state.modalState };
+  return { 
+    recipes: state.recipesUser.recipes.all,
+    recipeNutrition: state.recipesUser.recipeNutrition, 
+    modalState: state.modalState };
 }
 
 function mapDispatchToProps(dispatch) {
@@ -20,41 +23,29 @@ function mapDispatchToProps(dispatch) {
 
 @connect(mapStateToProps, mapDispatchToProps)
 
-//Roadblock: based on this click, we want to make an async call to the DB based on a prop of element
-
-//based on the random API call, we're stuck again. Do we make two sequential calls to the API? naw
-//Easiest solution: after component mounts, we map out all the ids of the random foods retrieved, then make one more
-//API call based on those ids only. We hold those in memory and then serve them when clicked.
-
 //In reality, I think I can do this when I have redis. I can stick all the data I got into redis
-
-//Best practice solution: Redo your table schema
-
 //After choosing one thing to cook, we will save the list of ingredients for purchase
 //We will then pass this off to Numpy to initiate the matrix solver for the rest
 
 export class Recipes extends Component {
   componentWillMount () {
     let boundFetchNutrition = this.props.actions.fetchNutrition 
-
     this.props.actions.fetchRecipes()
     .then(function(data) {
       let randomRecipesID = data.recipes.map((element, key) => {
         return element.id
-      })
-      console.log("inside success promise")
-      //make another async call for the nutritional info
+      })      
       boundFetchNutrition(randomRecipesID)
     })
   }
 
-  getRecipeInfo (element, index) {
-    console.log(element)
-    this.props.actions.openModal(element)    
+  getRecipeInfo (element, index) {        
+    let nutrition = this.props.recipeNutrition.nutrition[element.id] || null
+    this.props.actions.openModal(element, nutrition)    
   }
 
   renderRecipe(element, index) {
-    let boundRecipeInfo = this.getRecipeInfo.bind(this, element, index)
+    let boundRecipeInfo = this.getRecipeInfo.bind(this, element)
     return (
         <Card rounded={true} width={256} key={index}>
           <CardImage src={element.image} />
@@ -71,12 +62,11 @@ export class Recipes extends Component {
         <div className="recipeHeader">
         <h2>Choose something to cook for the week</h2>
         </div>
-        {this.props.recipes.map((element,key) => this.renderRecipe(element,key))}                  
+        {this.props.recipes.map((element,key) => this.renderRecipe(element,key))}
         <RecipeModal
           modalState ={this.props.modalState}
-          openModal={this.props.actions.openModal}
-          />
-      </section>
+          openModal={this.props.actions.openModal}/>      
+        </section>
     );
   }
 }

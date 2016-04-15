@@ -9,15 +9,31 @@ export class RecipeModal extends Component {
     super(props);
   }
 
-  render() {
-    const activeItem = this.props.modalState.activeItem || "none"
-    console.log(activeItem)
+  render() {                
+    if (!this.props.modalState.open) { return ( <span/>) }
+    const activeItem = this.props.modalState.activeItem
+    const nutrition = activeItem.nutrition    
     return (
-       <Modal className="payment" show={this.props.modalState.open} onHide={this.props.openModal}>        
+       <Modal show={this.props.modalState.open} onHide={this.props.openModal}>        
         <Modal.Body>            
-          {activeItem.title}
+          <table>
+          <tbody>
+            <tr>
+              <th>Calories</th>
+              <th>Fat</th>
+              <th>Protein</th>
+              <th>Net Carbs</th>
+            </tr>
+            <tr>
+              <td>{nutrition.calories}</td>
+              <td>{nutrition.fat}</td>
+              <td>{nutrition.protein}</td>
+              <td>{nutrition.net_carb}</td>
+            </tr>
+          </tbody>
+          </table>
         </Modal.Body>
       </Modal>    
     );
-  }
+  } 
 }

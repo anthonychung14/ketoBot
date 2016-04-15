@@ -17,10 +17,14 @@ export const SEARCH_RECIPES = "SEARCH_RECIPES"
 
 //NAV TO MODAL
 export const OPEN_MODAL = "OPEN_MODAL"
-export function openModal(element) {  
+export function openModal(element, nutrition) {  
+  let recipeInfo = {}
+  if (element) {
+    recipeInfo = { recipe: element, nutrition }
+  }
   return {
     type: OPEN_MODAL,
-    payload: element || null
+    payload: recipeInfo
   }
 }
 
@@ -34,28 +38,30 @@ export function requestNutrition(request) {
 }
 
 export const RECEIVE_NUTRITION = "RECEIVE_NUTRITION"
-export function receiveNutrition(request, json) {
+export function receiveNutrition(request, json) {  
+  let newJSON = {};
+  json.forEach((element, index) => {
+     newJSON[element.r] = element
+  })
   return {
-    type: RECEIVE_NUTRITION,
+    type: RECEIVE_NUTRITION,    
     request,
-    nutrition: json,
+    nutrition: newJSON,
     receivedAt: Date.now()
   }
 }
 
 export function fetchNutrition(request) {
   return function(dispatch) {
-    dispatch(requestNutrition(request))    
-    console.log('CONFIRMING REQUEST AINT EMPTY', request)
-    return fetch(baseURL+ketoBot+recipe_nutrition, {
-      method: 'POST',
-      data: JSON.stringify({ids: request})     
-    })
-      .then(response => {
-        console.log("fetch success", response)
-        response.json()}
-      )
-      .then(json => dispatch(receiveNutrition(request, json))
+    dispatch(requestNutrition(request))            
+    let url = new URL(baseURL+ketoBot+recipe_nutrition)
+    url.search = "ids="
+    request.forEach(id => url.search += id+",")
+    return fetch(url)
+      .then(response => response.json())
+      .then(json => {
+        dispatch(receiveNutrition(request, json))
+      }
     )
     //TODO: error handling
   }
