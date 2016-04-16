@@ -10,8 +10,9 @@ import { Groceries } from 'containers/Groceries';
 
 export default (
   <Route path="/" component={App}>
-    <IndexRoute component={Home} />
+    <IndexRoute component={Dashboard} />
     <Route path="dashboard" component={Dashboard} />
+    <Route path="recipe" component={Home} />
     <Route path="groceries" component={Groceries} />
     <Route status={404} path="*" component={Home} />
   </Route>

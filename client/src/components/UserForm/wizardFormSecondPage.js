@@ -1,14 +1,11 @@
 import React, { Component, PropTypes } from 'react'
 import { reduxForm } from 'redux-form'
-export const fields = [ 'email', 'sex' ]
+export const fields = [ 'time', 'preference' ]
 
 const validate = values => {
   const errors = {}
-  if (!values.email) {
-    errors.email = 'Required'
-  }
-  if (!values.sex) {
-    errors.sex = 'Required'
+  if (!values.time) {
+    errors.time = 'Required'
   }
   return errors
 }
@@ -16,29 +13,19 @@ const validate = values => {
 class WizardFormSecondPage extends Component {
   render() {
     const {
-      fields: { email, sex },
+      fields: { time, preference },
       handleSubmit,
       previousPage
     } = this.props
     return (<form onSubmit={handleSubmit}>
         <div>
-          <label>Email</label>
+          <label>time</label>
           <div>
-            <input type="email" placeholder="Email" {...email}/>
+            <input type="text" placeholder="should have checkboxes" {...time}/>
           </div>
-          {email.touched && email.error && <div>{email.error}</div>}
+          {time.touched && time.error && <div>{time.error}</div>}
         </div>
-        <div>
-          <label>Sex</label>
-          <div>
-            <label>
-              <input type="radio" {...sex} value="male" checked={sex.value === 'male'}/> Male
-            </label>
-            <label>
-              <input type="radio" {...sex} value="female" checked={sex.value === 'female'}/> Female
-            </label>
-          </div>
-          {sex.touched && sex.error && <div>{sex.error}</div>}
+        <div>                             
         </div>
         <div>
           <button type="button" onClick={previousPage}>

@@ -7,22 +7,22 @@ const validate = values => {
   if (!values.calories) {
     errors.calories = 'Required'
   } else if (values.calories.length > 15) {
-    errors.calories = 'Must be 15 characters or less'
+    errors.calories = 'Form validation thing son'
   }
   if (!values.fat) {
     errors.fat = 'Required'
   } else if (values.fat.length > 15) {
-    errors.fat = 'Must be 15 characters or less'
+    errors.fat = 'Form validation thing son'
   }
   if (!values.protein) {
     errors.protein = 'Required'
   } else if (values.protein.length > 15) {
-    errors.protein = 'Must be 15 characters or less'
+    errors.protein = 'Form validation thing son'
   }
   if (!values.carbs) {
     errors.carbs = 'Required'
   } else if (values.carbs.length > 15) {
-    errors.carbs = 'Must be 15 characters or less'
+    errors.carbs = 'Form validation thing son'
   }
   return errors
 }

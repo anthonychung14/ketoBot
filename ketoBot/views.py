@@ -18,7 +18,7 @@ from .models import Recipe, Ingredient, Recipe_Nutrition
 @api_view(['GET', 'POST'])
 def recipe_list(request):
     if request.method == 'GET':
-      latest_recipes = Recipe.objects.order_by('?')[:20]
+      latest_recipes = Recipe.objects.order_by('?').exclude(time='Dinner')[:20]
       serializer = RecipeSerializer(latest_recipes, many=True)
       return Response(serializer.data)
     
