@@ -5,7 +5,6 @@ import WizardFormThirdPage from './WizardFormThirdPage'
 
 import { styles } from './styles.scss';
 
-
 class WizardForm extends Component {
   constructor(props) {
     super(props)

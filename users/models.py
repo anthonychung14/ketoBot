@@ -12,13 +12,18 @@ class UserChoose(models.Model):
   restrict = models.CharField(max_length=100)
   eatAgain = models.BooleanField()
 
-class UserNutrition(models.Model):
+class UserPlan(models.Model):
   # user = models.ForeignKey(UserAuth, on_delete=models.CASCADE)
-  name = models.CharField(max_length=100, default="test")
-  date = models.CharField(max_length=100)
-  calories =  models.IntegerField(default=0)
+  name = models.CharField(max_length=100, default="Anthony")
+  date = models.DateTimeField(auto_now_add=True)
+  calories = models.IntegerField(default=0)
   fats =  models.IntegerField(default=0)
   carbs =  models.IntegerField(default=0)
   protein =  models.IntegerField(default=0)
+  days = models.IntegerField(default=0)
+  meals = models.IntegerField(default=0)
+  freeCal = models.IntegerField(default=0)
+  want = models.CharField(max_length=100, default="none")
+  noWant = models.CharField(max_length=100, default="none")
 
 

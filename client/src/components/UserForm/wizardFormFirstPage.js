@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { reduxForm } from 'redux-form'
-export const fields = [ 'calories', 'fat', 'protein', 'carbs' ]
 
+export const fields = [ 'calories', 'fat', 'protein', 'carbs' ]
 const validate = values => {
   const errors = {}
   if (!values.calories) {
@@ -83,7 +83,7 @@ WizardFormFirstPage.propTypes = {
 }
 
 export default reduxForm({
-  form: 'wizard',              // <------ same form name
+  form: 'userPlan',              // <------ same form name
   fields,                      // <------ only fields on this page
   destroyOnUnmount: false,     // <------ preserve form data
   validate                     // <------ only validates the fields on this page

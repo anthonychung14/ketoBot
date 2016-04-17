@@ -7,23 +7,25 @@ import json
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from users.serializers import UserDietSerializer
+from users.serializers import UserPlanSerializer
 
-from .models import UserAuth, UserChoose, UserNutrition
+from .models import UserAuth, UserChoose, UserPlan
 
 @api_view(['GET', 'POST'])
-def userDiet(request):  
-  if request.method == 'POST':
-    print(request.data, "REQUEST DATA")
-    serializer = UserDietSerializer(data = request.data)
-    if serializer.is_valid():
-      serializer.save()
-      return Response(serializer.data, status=status.HTTP_201_CREATED)
-    else:
-      return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+def userPlan(request):  
+  if request.method == 'POST':    
+
+    print(request.body, "json?")
+    # serializer = UserPlanSerializer(data = request.data)
+    # if serializer.is_valid():
+    #   serializer.save()
+      # return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response("Got it")
+    # else:
+    #   return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
   elif request.method == 'GET':
-    print("gotta get it")
+    return Response("gotta get it")
 
 
 def userInfo(request):

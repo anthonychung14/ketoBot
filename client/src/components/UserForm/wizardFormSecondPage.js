@@ -1,11 +1,14 @@
 import React, { Component, PropTypes } from 'react'
 import { reduxForm } from 'redux-form'
-export const fields = [ 'time', 'preference' ]
 
+export const fields = [ 'days', 'meals', 'freeCal' ]
 const validate = values => {
   const errors = {}
-  if (!values.time) {
-    errors.time = 'Required'
+  if (!values.days) {
+    errors.days = 'Required'
+  }
+  if (!values.meals) {
+    errors.meals = 'Required'
   }
   return errors
 }
@@ -13,20 +16,33 @@ const validate = values => {
 class WizardFormSecondPage extends Component {
   render() {
     const {
-      fields: { time, preference },
+      fields: { days, meals, freeCal },
       handleSubmit,
       previousPage
     } = this.props
     return (<form onSubmit={handleSubmit}>
         <div>
-          <label>time</label>
+          <label>How many days are we planning?</label>
           <div>
-            <input type="text" placeholder="should have checkboxes" {...time}/>
+            <input type="number" placeholder="should have checkboxes" {...days}/>
           </div>
-          {time.touched && time.error && <div>{time.error}</div>}
+          {days.touched && days.error && <div>{days.error}</div>}
         </div>
-        <div>                             
+        <div>
+          <label>How many meals per day?</label>
+          <div>
+            <input type="number" placeholder="should have checkboxes" {...meals}/>          
+          </div>
+            {meals.touched && meals.error && <div>{meals.error}</div>}
         </div>
+         <div>
+          <label>Free calories per day?</label>
+          <div>
+            <input type="number" placeholder="should have checkboxes" {...freeCal}/>          
+          </div>
+            {freeCal.touched && freeCal.error && <div>{freeCal.error}</div>}
+        </div>            
+        
         <div>
           <button type="button" onClick={previousPage}>
             <i/> Previous
@@ -47,7 +63,7 @@ WizardFormSecondPage.propTypes = {
 }
 
 export default reduxForm({
-  form: 'wizard',              // <------ same form name
+  form: 'userPlan',              // <------ same form name
   fields,                      // <------ only fields on this page
   destroyOnUnmount: false,     // <------ preserve form data
   validate                     // <------ only validates the fields on this page

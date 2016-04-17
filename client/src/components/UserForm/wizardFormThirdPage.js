@@ -1,46 +1,51 @@
 import React, { Component, PropTypes } from 'react'
 import { reduxForm } from 'redux-form'
-export const fields = [ 'firstName', 'lastName', 'email', 'sex', 'favoriteColor', 'employed', 'notes' ]
+import { Link } from 'react-router'
+
+import { postPlan } from '../../actions/userPlan'
+
+export const fields = [ 'calories', 'fat', 'protein', 'carbs', 'days', 'meals', 'freeCal', 'want', 'noWant' ]
 // ^^ All fields on last form
 
 const validate = values => {
   const errors = {}
-  if (!values.favoriteColor) {
-    errors.favoriteColor = 'Required'
-  }
   return errors
 }
 
 class WizardFormThirdPage extends Component {
+  static contextTypes = {
+    router: PropTypes.object
+  }
+
+  onSubmit(props) {
+    this.props.postPlan(props)    
+  }
+
   render() {
     const {
-      fields: { favoriteColor, employed, notes },
+      fields: { want, noWant },
       handleSubmit,
       previousPage,
       submitting
       } = this.props
-    return (<form onSubmit={handleSubmit}>
+    return (
+      <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
         <div>
-          <label>Favorite Color</label>
+          <label>Something you'd love</label>
           <div>
-            <select {...favoriteColor} value={favoriteColor.value || ''}>
-              <option></option>
-              <option value="ff0000">Red</option>
-              <option value="00ff00">Green</option>
-              <option value="0000ff">Blue</option>
+            <select {...want} value={want.value || ''}>
+              <option value="anything">Anything!</option>
+              <option value="chicken">Chicken</option>
+              <option value="beef">Beef</option>
+              <option value="fish">Fish</option>
             </select>
           </div>
-          {favoriteColor.touched && favoriteColor.error && <div>{favoriteColor.error}</div>}
         </div>
+      
         <div>
-          <label>
-            <input type="checkbox" {...employed}/> Employed
-          </label>
-        </div>
-        <div>
-          <label>Notes</label>
+          <label>Something you aren't feeling</label>
           <div>
-            <textarea {...notes} value={notes.value || ''}/>
+            <input type="text" {...noWant} value={noWant.value || ''}/>
           </div>
         </div>
         <div>
@@ -64,8 +69,8 @@ WizardFormThirdPage.propTypes = {
 }
 
 export default reduxForm({
-  form: 'wizard',              // <------ same form name
+  form: 'userPlan',              // <------ same form name
   fields,                      // <------ all fields on last wizard page
   destroyOnUnmount: false,     // <------ preserve form data
   validate                     // <------ only validates the fields on this page
-})(WizardFormThirdPage)
+}, null, { postPlan })(WizardFormThirdPage)

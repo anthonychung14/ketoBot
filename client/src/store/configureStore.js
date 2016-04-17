@@ -26,7 +26,6 @@ export default function configureStore(initialState) {
 
   
 //This is what logs everytime
-  store.dispatch(selectMacros('Anthony'))
   store.dispatch(fetchRecipes('Anthony')).then(() =>
     console.log(store.getState())
   )
