@@ -86,6 +86,5 @@ export function fetchRecipes(request) {
       .then(response => response.json())
       .then(json => dispatch(receiveRecipes(request, json))
     )
-    //TODO: error handling
   }
 }

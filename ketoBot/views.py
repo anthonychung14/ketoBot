@@ -45,13 +45,33 @@ def recipe_nutrition(request):
 #This is for ElasticSearch
 @api_view(['GET', 'POST'])
 def search(request):
-    data = {
-      "query": { "match": {"ingredients.name": "tomato"}},
-      "_source": ["title", "recMacros"]
-    }
-    response = requests.post("http://localhost:9200/recipes/_search", data=json.dumps(data))
-    print(response.json())
-    return Response(response.json())
+  searchData = json.loads(request.body)
+  userPref = {
+    'want': searchData['want'] or "",
+    'noWant': searchData['noWant'] or ""
+  }
+  
+  data = {
+     "_source": ["id"],
+     "query": {
+      "filtered": {
+         "query": {
+            "match": {
+               "title": userPref['want']
+            }
+         },
+         "filter": {
+            "not": {
+               "term": {
+                  "ingredients": userPref['noWant']
+               }
+            }
+         },  
+       }
+     }
+  }
+  response = requests.post("http://localhost:9200/recipes/_search", data=json.dumps(data))
+  return Response(response.json())
     
 
 @api_view(['GET', 'PUT', 'DELETE'])

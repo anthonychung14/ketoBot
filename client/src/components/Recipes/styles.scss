@@ -21,6 +21,7 @@
   -webkit-flex-direction: row;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: center;
 
   .recipeHeader {
     flex: 0 0 100%;
@@ -30,9 +31,11 @@
   .card {
     margin: 5px 5px 5px 5px;  
     height: 300px;
+    
     & input {
       display: none
     }
+    
     &:hover input {
       display: block;
     }    

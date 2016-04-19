@@ -14,8 +14,7 @@ from .models import UserAuth, UserChoose, UserPlan
 @api_view(['GET', 'POST'])
 def userPlan(request):  
   if request.method == 'POST':    
-
-    print(request.body, "json?")
+    # print(request.body, "json?")
     # serializer = UserPlanSerializer(data = request.data)
     # if serializer.is_valid():
     #   serializer.save()

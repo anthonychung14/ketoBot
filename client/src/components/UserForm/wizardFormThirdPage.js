@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { reduxForm } from 'redux-form'
 import { Link } from 'react-router'
 
-import { postPlan } from '../../actions/userPlan'
+import { postProcess } from '../../actions/userPlan'
 
 export const fields = [ 'calories', 'fat', 'protein', 'carbs', 'days', 'meals', 'freeCal', 'want', 'noWant' ]
 // ^^ All fields on last form
@@ -18,7 +18,7 @@ class WizardFormThirdPage extends Component {
   }
 
   onSubmit(props) {
-    this.props.postPlan(props)    
+    this.props.postProcess(props)    
   }
 
   render() {
@@ -34,7 +34,7 @@ class WizardFormThirdPage extends Component {
           <label>Something you'd love</label>
           <div>
             <select {...want} value={want.value || ''}>
-              <option value="anything">Anything!</option>
+              <option value="">Anything!</option>
               <option value="chicken">Chicken</option>
               <option value="beef">Beef</option>
               <option value="fish">Fish</option>
@@ -73,4 +73,4 @@ export default reduxForm({
   fields,                      // <------ all fields on last wizard page
   destroyOnUnmount: false,     // <------ preserve form data
   validate                     // <------ only validates the fields on this page
-}, null, { postPlan })(WizardFormThirdPage)
+}, null, { postProcess })(WizardFormThirdPage)
