@@ -11,6 +11,7 @@ from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
 from rest_framework.decorators import parser_classes
 
+from django.core.cache import cache
 
 from ketoBot.serializers import RecipeSerializer, IngredientSerializer, RecipeNutritionSerializer
 from .models import Recipe, Ingredient, Recipe_Nutrition
@@ -18,9 +19,14 @@ from .models import Recipe, Ingredient, Recipe_Nutrition
 @api_view(['GET', 'POST'])
 def recipe_list(request):
     if request.method == 'GET':
-      latest_recipes = Recipe.objects.order_by('?').exclude(time='Dinner')[:20]
-      serializer = RecipeSerializer(latest_recipes, many=True)
-      return Response(serializer.data)
+      if cache.get("recipeCache"):
+        serializer = RecipeSerializer(cache.get("recipeCache"), many=True)                
+        return Response(serializer.data)
+      else:
+        latest_recipes = Recipe.objects.order_by('?').exclude(time='Dinner')[:20]
+        cache.set("recipeCache", latest_recipes, timeout=10800)        
+        serializer = RecipeSerializer(latest_recipes, many=True)                
+        return Response(serializer.data)
     
     elif request.method == 'POST':
       serializer = RecipeSerializer(data=request.DATA)
