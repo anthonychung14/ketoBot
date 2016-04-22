@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import * as actionCreators from '../../actions/items'
+import * as actionCreators from '../../actions/userPlan'
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
@@ -9,7 +9,7 @@ import { styles } from './styles.scss';
 
 
 function mapStateToProps(state) {
-  return { recipes: state.recipes };
+  return { searchResults: state.search };
 }
 
 function mapDispatchToProps(dispatch) {
@@ -20,11 +20,13 @@ function mapDispatchToProps(dispatch) {
 
 export class Search extends Component {
   componentWillMount () {
-
+    console.log(this.props)
+    //fetch user data and display it somewhere?
+    //make it live on the state
   }
 
   handleClick() {
-    this.props.actions.searchRecipes()
+    console.log("props back", this.props.searchResults)
   }
 
   render() {

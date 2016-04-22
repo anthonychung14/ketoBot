@@ -1,4 +1,4 @@
-@import '../../../src/containers/App/styles/screens';
+@import '../../../../src/containers/App/styles/screens';
 
 :local(.styles) {
   flex: 0 0 100%;
@@ -13,7 +13,7 @@
     height: 340px;
   }
 
-  @media (#{ $phone }) {
+  @media (#{ $phone }) {w
     height: 320px;
   }
 

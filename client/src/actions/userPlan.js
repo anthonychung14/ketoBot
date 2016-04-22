@@ -1,76 +1,67 @@
 import fetch from 'isomorphic-fetch'
 import axios from 'axios'
 
+import { retrieveSearch } from './searchRecipes'
+
 const baseURL = "http://localhost:8000"
 const userPlan = "/users/plan"
 const ketoBot = "/ketoBot"
 const recipeSearch = "/recipes/search"
 
-const ES_URL = "http://localhost:9200"
-const ES_REC = "/recipes/_search?q="
-
 
 ///POST USER PLAN
 export const POST_PLAN = "POST_PLAN"
 export function postPlan(props) {  
-  const request = axios({
-    url: `${baseURL}${userPlan}`,
+  const request = fetch(`${baseURL}${userPlan}`, {    
     method: 'POST',    
     headers: {
       'content-type': "application/json"      
     },
     data: JSON.stringify(props)
   })
+  .then(response => response.json())  
   return {
-    type: POST_PLAN,
-    payload: request
-  }
+      type: POST_PLAN,
+      payload: request
+  }  
 }
 
-export function postProcess(request) {
+export function postProcess(request, router) {
   return function(dispatch) {
     dispatch(postPlan(request))      
-    dispatch(searchRecipes(request))      
+    dispatch(retrieveSearch(request))
+      .then(() => {
+        router.push('recipe')
+      })
   }
 }
 
-//TODO:
-  //1. do one more GET from DJANGO based on that
-    //2. when receive IDs, GET DJANGO
-    //3. when finish, navigate and render them
-
-//ES Actions
-export const SEARCH_RECIPES = "SEARCH_RECIPES"
-export function searchRecipes(props) {  
+//GET USER DATA
+export const REQUEST_PLAN = "REQUEST_PLAN"
+export function requestPlan(request) {
   return {
-    type: SEARCH_RECIPES,
+    type: REQUEST_PLAN,
     payload: request
   }
 }
 
-export function receieveSearch(request, json) {
+export const RECEIVE_PLAN = "RECEIVE_PLAN"
+export function receivePlan(request, json) {
   return {
-    type: RECEIVE_SEARCH,
+    type: RECEIVE_PLAN,
     request,
-    results: json    
+    userPlan: json
   }
 }
 
-// const request = axios({
-//   url: `${baseURL}${ketoBot}${recipeSearch}`,
-//   method: 'POST',
-//   headers: {
-//     'content-type': "application/json"      
-//   },
-//   data: JSON.stringify(props)     
-// })  
-
-export const RETRIEVE_SEARCH = "RETRIEVE_SEARCH"
-export function retrieveSearch(formProps) {
+export function fetchPlan(request) {
   return function(dispatch) {
-    dispatch(SEARCH_RECIPES(formProps))
-    return fetch()
-      .then(results => console.log(results, "here are results"))
+    dispatch(requestPlan(request))
+    return fetch(`${baseURL}${userPlan}`)
+      .then(response => response.json())
+      .then(json => {
+        dispatch(receivePlan(request, json))
+    })
   }
 }
 

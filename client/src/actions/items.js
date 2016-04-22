@@ -56,7 +56,6 @@ export function fetchNutrition(request) {
         dispatch(receiveNutrition(request, json))
       }
     )
-    //TODO: error handling
   }
 }
 

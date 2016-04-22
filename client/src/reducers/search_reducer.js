@@ -1,18 +1,23 @@
-import { SEARCH_RECIPES } from '../actions/items'
+import { SEARCH_RECIPES, RECEIVE_SEARCH } from '../actions/searchRecipes'
 
 const initialState = {
-  searchTerm: "",
+  isSearching: false,
   searchResults: []
 }
 
 export function search(state = initialState, action) {
   switch(action.type) {
     case SEARCH_RECIPES:
-      return {
-        ...state,
-        searchResults: action.payload.data
-      }
+      return Object.assign({}, state, {
+        isSearching: true
+      })
+    
+    case RECEIVE_SEARCH:
+      return Object.assign({}, state, {
+        isSearching: false,
+        searchResults: action.results
+      })
     default:
-      return state
+      return state;
   }
 }

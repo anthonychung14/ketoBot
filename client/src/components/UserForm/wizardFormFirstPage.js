@@ -40,7 +40,6 @@ class WizardFormFirstPage extends Component {
           <div>
             <input type="text" placeholder="Calories" {...calories}/>
           </div>
-          {calories.touched && calories.error && <div>{calories.error}</div>}
         </div>
         
         <div>
@@ -48,7 +47,6 @@ class WizardFormFirstPage extends Component {
           <div>
             <input type="text" placeholder="Fat" {...fat}/>
           </div>
-          {fat.touched && fat.error && <div>{fat.error}</div>}
         </div>
         
         <div>
@@ -56,7 +54,6 @@ class WizardFormFirstPage extends Component {
         <div>
           <input type="text" placeholder="Protein" {...protein}/>
         </div>
-        {protein.touched && protein.error && <div>{protein.error}</div>}
         </div>
         
         <div>
@@ -64,7 +61,6 @@ class WizardFormFirstPage extends Component {
           <div>
             <input type="text" placeholder="Carbs" {...carbs}/>
           </div>
-          {carbs.touched && carbs.error && <div>{carbs.error}</div>}
         </div>        
         
         <div>
@@ -88,3 +84,5 @@ export default reduxForm({
   destroyOnUnmount: false,     // <------ preserve form data
   validate                     // <------ only validates the fields on this page
 })(WizardFormFirstPage)
+
+// {calories.touched && calories.error && <div>{calories.error}</div>}

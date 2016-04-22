@@ -1,4 +1,4 @@
-from rest_framework import serializers
+from rest_framework import serializers, viewsets
 from models import Ingredient, Recipe, Recipe_Nutrition
       
 class RecipeSerializer(serializers.ModelSerializer):        

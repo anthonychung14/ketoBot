@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import LoadingOrderAnimation from 'react-loading-order-with-animation';
 
 /* utils */
-import { setParallax } from '../../utils/parallax';
+import { setParallax } from '../../../utils/parallax';
 
 /* component styles */
 import { styles } from './styles.scss';

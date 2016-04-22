@@ -1,9 +1,10 @@
 :local(.styles) {
   display: -webkit-flex;
   display: flex;
-  -webkit-flex-direction: column;
-  flex-direction: column;
+  -webkit-flex-direction: row;
+  flex-direction: row;
   flex-wrap: wrap;
+  justify-content: space-around;
 
   .tabs {
     flex: 0 0 100%;

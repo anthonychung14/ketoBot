@@ -26,21 +26,18 @@ class WizardFormSecondPage extends Component {
           <div>
             <input type="number" placeholder="should have checkboxes" {...days}/>
           </div>
-          {days.touched && days.error && <div>{days.error}</div>}
         </div>
         <div>
           <label>How many meals per day?</label>
           <div>
             <input type="number" placeholder="should have checkboxes" {...meals}/>          
           </div>
-            {meals.touched && meals.error && <div>{meals.error}</div>}
         </div>
          <div>
           <label>Free calories per day?</label>
           <div>
             <input type="number" placeholder="should have checkboxes" {...freeCal}/>          
           </div>
-            {freeCal.touched && freeCal.error && <div>{freeCal.error}</div>}
         </div>            
         
         <div>
@@ -66,5 +63,7 @@ export default reduxForm({
   form: 'userPlan',              // <------ same form name
   fields,                      // <------ only fields on this page
   destroyOnUnmount: false,     // <------ preserve form data
-  validate                     // <------ only validates the fields on this page
+                       // <------ only validates the fields on this page
 })(WizardFormSecondPage)
+
+// {days.touched && days.error && <div>{days.error}</div>}

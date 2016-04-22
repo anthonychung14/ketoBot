@@ -51,33 +51,43 @@ def recipe_nutrition(request):
 #This is for ElasticSearch
 @api_view(['GET', 'POST'])
 def search(request):
-  searchData = json.loads(request.body)
-  userPref = {
-    'want': searchData['want'] or "",
-    'noWant': searchData['noWant'] or ""
-  }
-  
+  # searchData = json.loads(request.body)  
+  # decodedData = json.loads(searchData['data'])
   data = {
-     "_source": ["id"],
+    "_source": ["id"],
      "query": {
       "filtered": {
          "query": {
             "match": {
-               "title": userPref['want']
+               "title": 'chicken'
             }
          },
          "filter": {
             "not": {
                "term": {
-                  "ingredients": userPref['noWant']
+                  "ingredients": 'tomato'
                }
             }
          },  
        }
      }
   }
-  response = requests.post("http://localhost:9200/recipes/_search", data=json.dumps(data))
-  return Response(response.json())
+  response = requests.post("http://localhost:9200/recipes/_search", data=json.dumps(data))  
+  
+  elasticJSON = response.json()['hits']['hits']  
+  searchIDs = [ x['_source']['id'] for x in elasticJSON ]
+
+  gotSearchRecipe = Recipe.objects.filter(pk__in=searchIDs)
+  gotSearchNutrition = Recipe_Nutrition.objects.filter(r__in=searchIDs)
+
+  serializerRecipe = RecipeSerializer(gotSearchRecipe, many=True)
+  serializerNutrition = RecipeNutritionSerializer(gotSearchNutrition, many=True)
+
+  data = {
+    'searchRecipe': serializerRecipe.data,
+    'searchNutrition': serializerNutrition.data
+  }
+  return Response(data)  
     
 
 @api_view(['GET', 'PUT', 'DELETE'])

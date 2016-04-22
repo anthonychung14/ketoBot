@@ -5,9 +5,20 @@ import * as actionCreators from '../../actions/items'
 
 /* component styles */
 import { styles } from './styles.scss';
-import { Modal } from 'react-bootstrap'
 
-export class RecipeModal extends Component {
+function mapStateToProps(state) {
+  return { 
+    object: state.object
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return { actions: bindActionCreators(actionCreators, dispatch)}
+}
+
+@connect(mapStateToProps, mapDispatchToProps)
+
+export class ExSmartComp extends Component {
   constructor(props) {
     super(props);
   }

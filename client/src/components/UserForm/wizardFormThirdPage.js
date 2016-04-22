@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { reduxForm } from 'redux-form'
 import { Link } from 'react-router'
 
-import { postProcess } from '../../actions/userPlan'
+import { postProcess } from '../../actions/searchRecipes'
 
 export const fields = [ 'calories', 'fat', 'protein', 'carbs', 'days', 'meals', 'freeCal', 'want', 'noWant' ]
 // ^^ All fields on last form
@@ -18,7 +18,7 @@ class WizardFormThirdPage extends Component {
   }
 
   onSubmit(props) {
-    this.props.postProcess(props)    
+    this.props.postProcess(props, this.context.router)    
   }
 
   render() {

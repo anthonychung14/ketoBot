@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 /* components */
-import { TopImage } from 'components/TopImage';
+import { TopImage } from 'components/Static/TopImage';
 import { Recipes } from 'components/Recipes';
 import { Search } from 'containers/Search'
 import UserForm from 'components/UserForm';
@@ -47,10 +47,10 @@ export class Home extends Component {
           index={this.state.slideIndex}
           onChangeIndex={this.handleChange}>
           <div className="tabView">
-            <Recipes/>
+            <Search />
           </div>
           <div className="tabView">
-            <Search />
+            <Recipes/>
           </div>
           <div className="tabView">
             <Search />
