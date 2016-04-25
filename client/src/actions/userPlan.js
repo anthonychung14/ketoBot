@@ -11,15 +11,14 @@ const recipeSearch = "/recipes/search"
 
 ///POST USER PLAN
 export const POST_PLAN = "POST_PLAN"
-export function postPlan(props) {  
+export function postPlan(props) {    
   const request = fetch(`${baseURL}${userPlan}`, {    
     method: 'POST',    
     headers: {
       'content-type': "application/json"      
     },
-    data: JSON.stringify(props)
+    body: JSON.stringify(props)
   })
-  .then(response => response.json())  
   return {
       type: POST_PLAN,
       payload: request
@@ -57,10 +56,15 @@ export function receivePlan(request, json) {
 export function fetchPlan(request) {
   return function(dispatch) {
     dispatch(requestPlan(request))
-    return fetch(`${baseURL}${userPlan}`)
-      .then(response => response.json())
+    return fetch(`${baseURL}${userPlan}`, {
+      method: 'GET'
+    })
+      .then(response => {
+        return response.json()
+      })
       .then(json => {
-        dispatch(receivePlan(request, json))
+        let parsed = JSON.parse(json)
+        dispatch(receivePlan(request, parsed))
     })
   }
 }

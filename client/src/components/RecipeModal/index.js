@@ -23,39 +23,12 @@ export class RecipeModal extends Component {
     return (
        <Modal show={this.props.modalState.open} onHide={this.props.openModal}>        
         <Modal.Body>            
-          <h3>Calculate leftover</h3>
-          <table>
-            <tbody>
-              <tr>
-                <th></th>
-                <th>Calories</th>
-                <th>Fat</th>
-                <th>Protein</th>
-                <th>Net Carbs</th>
-              </tr>
-              <tr>
-                <td>Your calorie needs</td>
-                <td>{userMacros.calories}</td>
-                <td>{userMacros.fat}</td>
-                <td>{userMacros.protein}</td>
-                <td>{userMacros.carbs}</td>
-              </tr>
-              <tr>
-                <td>{activeItem.recipe.title}</td>
-                <td>{nutrition.calories}</td>
-                <td>{nutrition.fat}</td>
-                <td>{nutrition.protein}</td>
-                <td>{nutrition.net_carb}</td>
-              </tr>
-              <tr>
-                <td>REMAINING</td>
-                <td>CALORIES</td>
-                <td>FAT</td>
-                <td>PROTEIN</td>
-                <td>NETCARBS</td>
-              </tr>
-            </tbody>
-          </table>
+          <h2>List of Ingredients</h2>
+              <ul>
+                <li>1 Chicken</li>
+                <li>2 lbs rice</li>
+                <li>3 sticks of butter</li>
+              </ul>            
           <button>Add to plan</button>      
         </Modal.Body>
       </Modal>    

@@ -30,6 +30,7 @@ class WizardForm extends Component {
     const { page } = this.state
     return (
       <section className={`${styles}`}>        
+      <h3>This appears conditionally</h3>
       <div>
         {page === 1 && <WizardFormFirstPage onSubmit={this.nextPage}/>}        
         {page === 2 && <WizardFormSecondPage previousPage={this.previousPage} onSubmit={this.nextPage}/>}

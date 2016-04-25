@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { reduxForm } from 'redux-form'
 import { Link } from 'react-router'
 
-import { postProcess } from '../../actions/searchRecipes'
+import { postProcess } from '../../actions/userPlan'
 
 export const fields = [ 'calories', 'fat', 'protein', 'carbs', 'days', 'meals', 'freeCal', 'want', 'noWant' ]
 // ^^ All fields on last form

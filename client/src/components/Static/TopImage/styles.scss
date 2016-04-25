@@ -2,19 +2,29 @@
 
 :local(.styles) {
   flex: 0 0 100%;
-  position: relative;
-
-  background-size: 100% auto;
-  background-image: url(files/background.jpg);
-
-  height: 200px;
+  position: absolute;
 
   @media (min-width: 768px) and (max-width: 992px) {
     height: 340px;
   }
 
-  @media (#{ $phone }) {w
+  @media (#{ $phone }) {
     height: 320px;
+  }
+
+  background-image: url(./files/foodKitchen.jpg);
+  background-repeat: no-repeat;
+
+  text-align: center;
+  
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+
+
+  h2 {
+    font-size: 30px;
+    color: #FFF;
   }
 
   h1.title {
@@ -25,6 +35,5 @@
   p {
     color: #FFF;
   }
-
 
 }

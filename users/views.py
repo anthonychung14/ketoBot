@@ -16,10 +16,11 @@ from .models import UserAuth, UserChoose, UserPlan
 
 @api_view(['GET', 'POST'])
 def userPlan(request):  
-  if request.method == 'POST':            
-    print(request.body, "<<<<<<<<<<<json?")
-    cache.set("userGoal", request.body)
-    return Response(cache.get("userGoal"))
+  if request.method == 'POST':                
+    cache.set("userGoal", request.body)    
+    cache.persist("userGoal")
+    serializer = UserPlanSerializer(cache.get("userGoal"))
+    return Response(serializer.data)
     
     ##save to DB from redis at a later time
     # serializer = UserPlanSerializer(data = request.data)
@@ -31,7 +32,10 @@ def userPlan(request):
 
   elif request.method == 'GET':
     if cache.get("userGoal"):
-      return Response(cache.get("userGoal"))
+      gotUserGoal = cache.get("userGoal")            
+      serializer = UserPlanSerializer(gotUserGoal)
+      return Response(gotUserGoal)
+    return Response("no cache bro")      
 
 def userInfo(request):
   return HttpResponse("Goodbye")

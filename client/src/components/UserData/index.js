@@ -2,23 +2,41 @@ import React, { Component } from 'react';
 
 /* component styles */
 import { styles } from './styles.scss';
+import WizardForm from '../UserForm/wizardForm'
+
 
 export default class UserData extends Component {  
-    constructor(props) {
-      super(props)
-    }
+  constructor(props) {
+    super(props) 
+  }
 
-    componentWillMount() {
-      //since redis lives on Django, you now need to build out a route for it
-      //make GET request that goes on the same URL in action creators
-      //update state with data as JSON
-      //serialize it before you send it
-    }
+  handleClick() {
+    console.log("hi")
+    
+  }
+  
   render() {    
-
+    let userData = this.props.userPlan.userPlan
     return (              
-        <section className={`${styles}`}>
-        <h1>Hello~</h1>
+        <section className={`${styles}`}>        
+        <div> 
+          <h2>Nutrition Goals~</h2>
+          <h3>{userData.calories} calories</h3>        
+          <h4>{userData.protein}g protein</h4>
+          <h4>{userData.fat}g fat</h4>
+          <h4>{userData.carbs}g carbs</h4>
+        </div>
+
+        <div>
+          <h2>Weekly Goals</h2>
+          <h3>Total over {userData.days} days</h3>
+          <h3>{(userData.calories * userData.days).toLocaleString()} calories</h3>        
+          <h4>{userData.protein * userData.days}g protein</h4>
+          <h4>{userData.fat * userData.days}g fat</h4>
+          <h4>{userData.carbs * userData.days}g carbs</h4>
+        </div>
+
+        <button onClick={this.handleClick}>Edit Goals</button>
         </section>
     );
   }

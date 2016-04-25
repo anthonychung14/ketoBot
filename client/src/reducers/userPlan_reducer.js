@@ -1,7 +1,7 @@
 import { REQUEST_PLAN, RECEIVE_PLAN } from '../actions/userPlan'
 
 const initialState = {
-  isFetching: false,
+  isSearching: false,
   userPlan: {}
 }
 

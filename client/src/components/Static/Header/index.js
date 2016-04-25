@@ -21,11 +21,11 @@ export class Header extends Component {
                 <Link to="/dashboard" activeClassName="active">
                   Dashboard
                 </Link>
-                <Link to="/home" activeClassName="active">
-                  Recipe Queue
+                <Link to="/recipes" activeClassName="active">
+                  Explore Recipes 
                 </Link>
-                <Link to="/groceries" activeClassName="active">
-                  Grocery Stack
+                <Link to="/fridge" activeClassName="active">
+                  DigiFridge
                 </Link>
               </nav>
             </div>

@@ -25,13 +25,10 @@ export class TopImage extends Component {
     setParallax(this.refs.parallax, 10);
   };
 
-  render() {
+   render() {
     return (
       <section className={`${styles}`} ref="parallax">
-        <div className="container">
-          <div className="row">
-            <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-              <LoadingOrderAnimation animation="fade-in"
+        <LoadingOrderAnimation animation="fade-in"
                 move="from-bottom-to-top"
                 distance={30}
                 speed={700}
@@ -45,16 +42,13 @@ export class TopImage extends Component {
                 move="from-bottom-to-top"
                 distance={60}
                 speed={700}
-                wait={900}
-              >
-                <p>
-                  Because Science!
-                </p>
+                wait={900}>
+
+                <h2>
+                  because machines
+                </h2>
               </LoadingOrderAnimation>
-            </div>
-          </div>
-        </div>
-      </section>
+        </section>
     );
   }
 }

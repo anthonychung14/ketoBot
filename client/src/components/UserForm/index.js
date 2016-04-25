@@ -6,6 +6,7 @@ import { createDiet } from '../../actions/items'
 /* component styles */
 import { styles } from './styles.scss';
 
+
 class UserForm extends Component {  
   render() {
     const { fields: {calories, fats, carbs, protein}, handleSubmit } = this.props;

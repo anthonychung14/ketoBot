@@ -10,6 +10,7 @@ const rootReducer = combineReducers({
   modalState: modalReducer,
   recipesUser,
   search,
+  userPlan
 });
 
 export default rootReducer;
