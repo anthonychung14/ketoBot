@@ -19,11 +19,6 @@ class Recipe_Nutrition(models.Model):
     net_carb = models.IntegerField(default=0)
     protein = models.IntegerField(default=0)
 
-class Recipe_Directions (models.Model):    
-    r = models.ForeignKey(Recipe, on_delete=models.CASCADE)
-    direction_step = models.CharField(max_length=200)
-    direction_picture = models.CharField(max_length=200)
-
 #Ingredient object in ES => Enough data for NLP, feedback, regressions
 #on certain ingredients?
 class Ingredient (models.Model):

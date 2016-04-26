@@ -24,7 +24,9 @@ def recipe_list(request):
         return Response(serializer.data)
       else:
         latest_recipes = Recipe.objects.order_by('?').exclude(time='Dinner')[:20]
-        cache.set("recipeCache", latest_recipes, timeout=10800)        
+        cache.set("recipeCache", latest_recipes, timeout=10800)
+
+
         serializer = RecipeSerializer(latest_recipes, many=True)                
         return Response(serializer.data)
     
@@ -51,21 +53,22 @@ def recipe_nutrition(request):
 #This is for ElasticSearch
 @api_view(['GET', 'POST'])
 def search(request):
-  # searchData = json.loads(request.body)  
-  # decodedData = json.loads(searchData['data'])
+  searchData = json.loads(request.body)  
+  decodedData = json.loads(searchData['data'])
+
   data = {
     "_source": ["id"],
      "query": {
       "filtered": {
          "query": {
             "match": {
-               "title": 'chicken'
+               "title": decodedData['want']
             }
          },
          "filter": {
             "not": {
                "term": {
-                  "ingredients": 'tomato'
+                  "ingredients": decodedData['noWant']
                }
             }
          },  

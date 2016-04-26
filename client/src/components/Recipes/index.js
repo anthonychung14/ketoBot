@@ -23,10 +23,6 @@ function mapDispatchToProps(dispatch) {
 
 @connect(mapStateToProps, mapDispatchToProps)
 
-//In reality, I think I can do this when I have redis. I can stick all the data I got into redis
-//After choosing one thing to cook, we will save the list of ingredients for purchase
-//We will then pass this off to Numpy to initiate the matrix solver for the rest
-
 export class Recipes extends Component {
   componentWillMount () {
     let boundFetchNutrition = this.props.actions.fetchNutrition 

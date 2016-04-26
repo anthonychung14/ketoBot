@@ -9,19 +9,15 @@ import { styles } from './styles.scss';
 import { Card, CardImage, Heading, Text } from 'rebass'
 
 
-function mapStateToProps(state) {
-  return { 
-    state: state
-  }
-}
 
-function mapDispatchToProps(dispatch) {
-  return { actions: bindActionCreators(actionCreators, dispatch)}
-}
-@connect(mapStateToProps, mapDispatchToProps)
 export class Fridge extends Component {
+   constructor(props) {
+    super(props);
+  }
+
+
   componentWillMount () {
-    
+    //Something to get the fridge items you currently have    
   }
 
   renderCard(element, index) {
@@ -37,7 +33,7 @@ export class Fridge extends Component {
   render() {
     const categories = [ 'Protein' , 'Dairy' , 'Vegetables' , 'Fruit' , 'Spices', 'Carbs' ]
     return (
-      <section className={`${styles}`}>       
+      <section className={`${styles}`}>
         {categories.map((element,index) => this.renderCard(element, index))}
       </section>
     );

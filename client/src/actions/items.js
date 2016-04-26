@@ -21,6 +21,13 @@ export function openModal(element, nutrition) {
   }
 }
 
+export const FORM_MODAL = "FORM_MODAL"
+export function formModal(element, nutrition) {  
+  return {
+    type: FORM_MODAL
+  }
+}
+
 //REQUEST NUTRITIONAL INFO
 export const REQUEST_NUTRITION = "REQUEST_NUTRITION"
 export function requestNutrition(request) {
