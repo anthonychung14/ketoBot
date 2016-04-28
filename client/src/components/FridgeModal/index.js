@@ -6,7 +6,7 @@ import { Modal } from 'react-bootstrap'
 import FridgeWizard from 'components/FridgeForm'
 
 
-export class FridgeModal extends Component {
+export class FridgeModal extends Component {  
   constructor(props) {
     super(props);
   }

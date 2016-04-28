@@ -27,6 +27,9 @@ export class Header extends Component {
                 <Link to="/fridge" activeClassName="active">
                   DigiFridge
                 </Link>
+                <Link to="/planner" activeClassName="active">
+                  Planner
+                </Link>
               </nav>
             </div>
           </div>

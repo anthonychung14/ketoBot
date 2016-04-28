@@ -10,10 +10,10 @@ export const GET_RECIPES = "GET_RECIPES"
 
 //NAV TO MODAL
 export const OPEN_MODAL = "OPEN_MODAL"
-export function openModal(element, nutrition) {  
+export function openModal(element, nutrition, ingreds) {  
   let recipeInfo = {}
   if (element) {
-    recipeInfo = { recipe: element, nutrition }
+    recipeInfo = { recipe: element, nutrition, ingreds }
   }
   return {
     type: OPEN_MODAL,
@@ -39,15 +39,25 @@ export function requestNutrition(request) {
 
 export const RECEIVE_NUTRITION = "RECEIVE_NUTRITION"
 export function receiveNutrition(request, json) {  
-  let newJSON = {};
-  json.forEach((element, index) => {
-     newJSON[element.r] = element
+  let nutriJSON = {};
+  json.nutrition.forEach((element, index) => {
+     nutriJSON[element.r] = element
   })
+
+  let ingredJSON = {};
+  json.ingredients.forEach((element, index) => {     
+     if (ingredJSON[element.r]) {
+        ingredJSON[element.r].push(element)
+     } else {
+        ingredJSON[element.r] = [element]
+     }     
+  })
+
   return {
     type: RECEIVE_NUTRITION,    
     request,
-    nutrition: newJSON,
-    receivedAt: Date.now()
+    nutrition: nutriJSON,
+    ingredients: ingredJSON,
   }
 }
 

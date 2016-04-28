@@ -2,4 +2,21 @@
   button {
     margin-right: 10px;
   }
+
+
+  .modalColumn {
+    display: flex !important;
+    -webkit-flex-direction: row;
+    display: -webkit-flex;
+    flex-direction: row;    
+    flex-wrap: nowrap;
+  }
+
+  .ingredients {
+    width: 40%;
+  }
+  
+  .nutrition {
+    width: 40%;
+  }
 }

@@ -23,14 +23,14 @@ def recipe_list(request):
         serializer = RecipeSerializer(cache.get("recipeCache"), many=True)                
         return Response(serializer.data)
       else:
-        latest_recipes = Recipe.objects.order_by('?')[:20]
-        cache.set("recipeCache", latest_recipes, timeout=10800)
+        latest_recipes = Recipe.objects.order_by('?')[:10]
+        cache.set("recipeCache", latest_recipes, timeout=10)
 
         serializer = RecipeSerializer(latest_recipes, many=True)                
         return Response(serializer.data)
     
     
-    ##TODO: deprecated. You should probably fix this broh
+    ##TODO: THIS CAN BE YOUR STAPLE POST BROH
     elif request.method == 'POST':
       serializer = RecipeSerializer(data=request.data)
       if serializer.is_valid():
@@ -45,10 +45,20 @@ def recipe_nutrition(request):
   # requestedRecipes = 
   # serializer = RecipeNutritionSerializer(requestedRecipes, many=True)        
     splitStrip = filter(None, request.query_params['ids'].strip().split(','))
-    recipeIds = [int(numeric_string) for numeric_string in splitStrip]    
+    recipeIds = [int(numeric_string) for numeric_string in splitStrip]
+
     gotRecipeNutrition = Recipe_Nutrition.objects.filter(r__in=recipeIds)
-    serializer = RecipeNutritionSerializer(gotRecipeNutrition, many=True)
-    return Response(serializer.data)  
+    nutritionSerializer = RecipeNutritionSerializer(gotRecipeNutrition, many=True)
+    
+    gotRecipeIngredients = Ingredient.objects.filter(r__in=recipeIds)    
+    ingredientSerializer = IngredientSerializer(gotRecipeIngredients, many=True)
+    
+    data = {
+      'nutrition': nutritionSerializer.data,
+      'ingredients': ingredientSerializer.data
+    }
+
+    return Response(data)  
 
 
 #This is for ElasticSearch
@@ -83,14 +93,18 @@ def search(request):
 
   gotSearchRecipe = Recipe.objects.filter(pk__in=searchIDs)
   gotSearchNutrition = Recipe_Nutrition.objects.filter(r__in=searchIDs)
+  gotRecipeIngredients = Ingredient.objects.filter(r__in=searchIDs)    
 
   serializerRecipe = RecipeSerializer(gotSearchRecipe, many=True)
   serializerNutrition = RecipeNutritionSerializer(gotSearchNutrition, many=True)
-
+  serializerIngredient = IngredientSerializer(gotRecipeIngredients, many=True)
+    
   data = {
     'searchRecipe': serializerRecipe.data,
-    'searchNutrition': serializerNutrition.data
+    'searchNutrition': serializerNutrition.data,
+    'searchIngredients': serializerIngredient.data
   }
+
   return Response(data)  
     
 

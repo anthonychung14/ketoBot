@@ -10,10 +10,10 @@ import { Card, CardImage, Heading, Text } from 'rebass'
 
 import { RecipeModal } from 'components/RecipeModal'
 
-function mapStateToProps(state) {
+function mapStateToProps(state) {  
   return { 
-    recipes: state.recipesUser.recipes.all,
-    recipeNutrition: state.recipesUser.recipeNutrition, 
+    recipes: state.recipesUser.recipes.all,   
+    recData: state.recipesUser.recData,     
     modalState: state.modalState };
 }
 
@@ -36,8 +36,9 @@ export class Recipes extends Component {
   }
 
   getRecipeInfo (element, index) {        
-    let nutrition = this.props.recipeNutrition.nutrition[element.id] || null
-    this.props.actions.openModal(element, nutrition)    
+    let nutrition = this.props.recData.nutrition[element.id] || null
+    let ingreds = this.props.recData.ingredients[element.id] || null
+    this.props.actions.openModal(element, nutrition, ingreds)    
   }
 
   renderRecipe(element, index) {
