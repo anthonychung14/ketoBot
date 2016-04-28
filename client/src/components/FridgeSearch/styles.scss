@@ -1,0 +1,43 @@
+:local(.styles) {
+  position: relative;
+  padding: 50px 0;
+  border-top: 1px solid #CCC;
+
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  
+  text-align: center
+
+  h2 {
+    margin-bottom: 50px;
+  }
+
+  a {
+    font-size: 12px;
+  }
+
+  p {
+    font-size: 14px;
+    padding: 0 10%;
+  }
+
+  
+
+
+  .card {
+    margin: 5px 5px 5px 5px;  
+    height: 300px;
+    
+    & input {
+      display: none
+    }
+    
+    &:hover input {
+      display: block;
+    }    
+  }
+}

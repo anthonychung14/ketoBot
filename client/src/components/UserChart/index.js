@@ -39,7 +39,7 @@ export default class UserChart extends Component {
         <LineChart
         legend={true}
         data={lineData}
-        width={"100%"}
+        width={500}
         height={500}
         viewBoxObject={{
           x: 0,

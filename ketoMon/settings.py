@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'ketoBot.apps.ketoBotConfig',
     'corsheaders', 
     'users.apps.UsersConfig',
+    'fridge.apps.FridgeConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

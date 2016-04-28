@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import * as actionCreators from '../../actions/items'
+import * as actionCreators from '../../actions/fridgeActions'
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
@@ -8,33 +8,59 @@ import { bindActionCreators } from 'redux'
 import { styles } from './styles.scss';
 import { Card, CardImage, Heading, Text } from 'rebass'
 
+function mapStateToProps(state) {
+  return {
+    fridge: state.fridge.fridgeItems
+  }
+}
 
+function mapDispatchToProps(dispatch) {
+  return {actions: bindActionCreators(actionCreators, dispatch)}
+}
 
+@connect(mapStateToProps, mapDispatchToProps)
 export class Fridge extends Component {
    constructor(props) {
     super(props);
   }
 
-
   componentWillMount () {
-    //Something to get the fridge items you currently have    
+    this.props.actions.fetchFridge()
+    //do ES search
+    .then(response => console.log("responded?"))
   }
 
-  renderCard(element, index) {
-    //on mouseover, turn transparent and give short list of items in fridge
+  handleClick(event) {
+    event.preventDefault();
+    event.currentTarget.style.backgroundColor = '#ccc';  
+    var el = event.target.textContent
+    
+    this.props.actions.addFridgeItem(el)  
+  }
+
+  renderItem(element, index) {
     return (
-      <Card rounded={true} width={200} key={index}>
-        <Heading level={2} size={3}>{element}</Heading>
-        <Text> Some text</Text>          
+      <li key={index} onClick={element => this.handleClick(element)}>{element.name}</li>
+    )
+  }
+
+  renderCard(category, index) {
+    let filtered = this.props.fridge.filter((item) => item.category === category)
+    return (
+      <Card rounded={true} width={175} key={index}>
+        <Heading level={2} size={3}>{category}</Heading>
+        <Text>
+          {filtered.map((element, index) => this.renderItem(element, index))}
+        </Text>          
       </Card>
     )
   }
 
   render() {
-    const categories = [ 'Protein' , 'Dairy' , 'Vegetables' , 'Fruit' , 'Spices', 'Carbs' ]
+    const categories = [ 'Protein', 'Fats', 'Dairy' , 'Vegetables' , 'Spices', 'Carbs' ]
     return (
       <section className={`${styles}`}>
-        {categories.map((element,index) => this.renderCard(element, index))}
+        {categories.map((category,index) => this.renderCard(category, index))}
       </section>
     );
   }

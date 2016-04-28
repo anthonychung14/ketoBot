@@ -31,11 +31,12 @@ def userPlan(request):
     #   return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
   elif request.method == 'GET':
-    if cache.get("userGoal"):
+    if cache.get("userGoal"):      
       gotUserGoal = cache.get("userGoal")            
+      print(gotUserGoal, "this is not the goal we had in mind")
       serializer = UserPlanSerializer(gotUserGoal)
       return Response(gotUserGoal)
-    return Response("no cache bro")      
+  return Response("no cache bro")      
 
 def userInfo(request):
   return HttpResponse("Goodbye")

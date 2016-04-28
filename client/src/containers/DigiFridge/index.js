@@ -6,6 +6,7 @@ import * as actionCreators from '../../actions/items'
 /* components */
 import { Fridge } from 'components/Fridge'
 import { FridgeModal } from 'components/FridgeModal'
+import { FridgeSearch } from 'components/FridgeSearch'
         
 import { styles } from './styles.scss';
 
@@ -30,11 +31,12 @@ export class DigiFridge extends Component {
     return (
       <section className={`${styles}`}>
         <h2 className="fridgeHeader">I am a fridge</h2>
-        <Fridge/>
-          <button onClick={this.props.actions.formModal}>Add to Fridge</button>
+        <Fridge openModal={this.props.actions.formModal}/>
+        <button onClick={this.props.actions.formModal}>Add to Fridge</button>
         <FridgeModal 
           modalState={this.props.modalState}
-          openModal={this.props.actions.formModal}/>        
+          openModal={this.props.actions.formModal}/>
+        <FridgeSearch />
       </section>
     );
   }

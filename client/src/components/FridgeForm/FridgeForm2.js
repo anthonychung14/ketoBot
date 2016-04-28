@@ -2,7 +2,10 @@ import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form'
 import { styles } from './styles.scss';
 
-import { postFridge } from '../../actions/fridgeActions'
+import { postFridge, fetchFridge } from '../../actions/fridgeActions'
+
+//TODO: onsubmit, clear form and allow for next item to be posted
+//TODO: allow user to "refill" based on common items bought
 
 /* component styles */
 export const fields = ["category", "name", "amount", "measurement", "servings", "calories", "fat", "protein", "carbs", "fiber"]
@@ -10,6 +13,9 @@ export const fields = ["category", "name", "amount", "measurement", "servings", 
 class FridgeForm2 extends Component {  
   onSubmit(props) {
     this.props.postFridge(props)
+      .then(() => this.props.fetchFridge())
+    
+    this.props.previousPage()
   }
 
   render() {
@@ -22,26 +28,26 @@ class FridgeForm2 extends Component {
         <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>          
           <div>
             <label>Calories</label>
-            <input type="text" className="form-control" {...calories} />
+            <input type="text" className="form-control" {...calories || ''} />
           </div>
 
           <div>
             <label>Protein</label>
-            <input type="text" className="form-control" {...protein} />
+            <input type="text" className="form-control" {...protein || ''} />
           </div>
 
           <div>
             <label>Fat</label>
-            <input type="text" className="form-control" {...fat} />
+            <input type="text" className="form-control" {...fat || ''} />
           </div>
 
           <div>
             <label>Carbs</label>
-            <input type="text" className="form-control" {...carbs} />
+            <input type="text" className="form-control" {...carbs || ''} />
           </div>
           <div>
             <label>Fiber</label>
-            <input type="text" className="form-control" {...fiber} />
+            <input type="text" className="form-control" {...fiber || ''} />
           </div>
           <div>
           <button type="button" disabled={submitting} onClick={previousPage}>
@@ -70,5 +76,5 @@ FridgeForm2.propTypes = {
 export default reduxForm({
   form: 'fridgeForm',
   fields,
-  destroyOnUnmount: false
-}, null, { postFridge })(FridgeForm2);
+  destroyOnUnmount: true
+}, null, { postFridge, fetchFridge })(FridgeForm2);

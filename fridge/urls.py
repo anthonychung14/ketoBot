@@ -4,5 +4,6 @@ from . import views
 
 urlpatterns = patterns(
   'fridge.views',
-  url(r'^items$', views.fridge, name='fridge')
+  url(r'^items$', views.fridge, name='fridge'),
+  url(r'^search$', views.search, name='search')
 )

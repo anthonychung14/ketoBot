@@ -22,33 +22,34 @@ class FridgeForm1 extends Component {
           <div>
             <select {...category} value={category.value}>
               <option value="Protein">Protein</option>
+              <option value="Fats">Fats</option>
+              <option value="Carbs">Carbs</option>
               <option value="Dairy">Dairy</option>
               <option value="Vegetables">Vegetables</option>
               <option value="Fruit">Fruit</option>
               <option value="Spices">Spices</option>
-              <option value="Carbs">Carbs</option>
             </select>
           </div>
         </div>
 
           <div>
             <label>Name</label>
-            <input type="text" className="form-control" {...name} />
+            <input type="text" className="form-control" {...name || ''} />
           </div>
 
           <div>
-            <label>Amount</label>
-            <input type="text" className="form-control" {...amount} />
+            <label>Amount per serving</label>
+            <input type="text" className="form-control" {...amount || ''} />
           </div>
 
           <div>
             <label>Measurement</label>
-            <input type="text" className="form-control" {...measurement} />
+            <input type="text" className="form-control" {...measurement || ''} />
           </div>
 
           <div>
             <label>Servings</label>
-            <input type="text" className="form-control" {...servings} />
+            <input type="text" className="form-control" {...servings || ''} />
           </div>
           
           <div>

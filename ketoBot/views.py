@@ -23,15 +23,16 @@ def recipe_list(request):
         serializer = RecipeSerializer(cache.get("recipeCache"), many=True)                
         return Response(serializer.data)
       else:
-        latest_recipes = Recipe.objects.order_by('?').exclude(time='Dinner')[:20]
+        latest_recipes = Recipe.objects.order_by('?')[:20]
         cache.set("recipeCache", latest_recipes, timeout=10800)
-
 
         serializer = RecipeSerializer(latest_recipes, many=True)                
         return Response(serializer.data)
     
+    
+    ##TODO: deprecated. You should probably fix this broh
     elif request.method == 'POST':
-      serializer = RecipeSerializer(data=request.DATA)
+      serializer = RecipeSerializer(data=request.data)
       if serializer.is_valid():
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)

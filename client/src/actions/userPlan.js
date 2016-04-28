@@ -59,7 +59,7 @@ export function fetchPlan(request) {
     return fetch(`${baseURL}${userPlan}`, {
       method: 'GET'
     })
-      .then(response => {
+      .then(response => {        
         return response.json()
       })
       .then(json => {

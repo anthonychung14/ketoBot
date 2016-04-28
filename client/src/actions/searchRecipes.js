@@ -5,7 +5,6 @@ const baseURL = "http://localhost:8000"
 const ketoBot = "/ketoBot"
 const recipeSearch = "/recipes/search"
 
-//ELASTICSEARCH
 export const SEARCH_RECIPES = "SEARCH_RECIPES"
 export function searchRecipes(props) {  
   return {
