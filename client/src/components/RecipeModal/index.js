@@ -21,7 +21,12 @@ export class RecipeModal extends Component {
   }
 
 
-  addPlan(event, activeItem) {    
+  addPlan() {    
+    let approvedItem = {
+      nutrition: this.props.modalState.activeItem.nutrition,
+      ingreds: this.props.modalState.activeItem.ingreds
+    }
+    console.log(approvedItem, "I approve")
     this.context.router.push("planner")
   }
 
