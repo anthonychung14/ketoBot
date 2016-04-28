@@ -34,9 +34,18 @@ def fridge(request):
     else:
       return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 @api_view(['GET', 'POST'])
 def search(request):
-  print(request.body, "BODY")
+  queryJSON = json.loads(request.body)
+  #if one long, transform into string
+
+  #if more than two, put an OR between all of them
+
+  queryString = queryJSON
+
+
+  print(queryString, "json")
 
   if request.method == 'POST':
     data = {    

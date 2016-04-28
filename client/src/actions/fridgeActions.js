@@ -16,11 +16,12 @@ export function requestFSearch(request) {
 }
 
 export const RECEIVE_FSEARCH = "RECEIVE_FSEARCH"
-export function receiveFSearch(request, response) {
+export function receiveFSearch(request, json) {
+  console.log(json, "receiveFSearch")
   return {
     type: RECEIVE_FSEARCH,
     request,
-    fridgeSearch: response
+    recipes: json
   }
 }
 

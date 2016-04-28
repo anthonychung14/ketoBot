@@ -10,7 +10,8 @@ import { Card, CardImage, Heading, Text } from 'rebass'
 
 function mapStateToProps(state) {
   return {
-    fridgeSearch: state.fridge.fridgeItems
+    fridgeRecipes: state.fridge.recipes,
+    searchTerms: state.fridge.searchTerms
   }
 }
 
@@ -24,15 +25,25 @@ export class FridgeSearch extends Component {
     super(props);
   }
 
-  componentWillMount () {
-    this.props.actions.fetchFSearch()
+  componentWillMount () {    
+
+  }
+
+  renderSearchRecipe(element, index) {
+    return (
+      <Card rounded={true} width={256} key={index}>
+          <Heading level={2} size={3}>{element.title}</Heading>
+          <Text> {element.time} time! </Text>
+          <input className="modalButton" type="button" value=" Quick Look "/>
+      </Card>
+    )
   }
 
   render() {
+    let searchRecipes = this.props.fridgeRecipes.searchRecipe || []
     return (
-      <section className={`${styles}`}>
-        <h2>This is a thing</h2>
-        
+      <section className={`${styles}`}>        
+        {searchRecipes.map((element, index) => this.renderSearchRecipe(element, index))}        
       </section>
     );
   }

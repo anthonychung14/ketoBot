@@ -30,7 +30,6 @@ export class DigiFridge extends Component {
   render() {
     return (
       <section className={`${styles}`}>
-        <h2 className="fridgeHeader">I am a fridge</h2>
         <Fridge openModal={this.props.actions.formModal}/>
         <button onClick={this.props.actions.formModal}>Add to Fridge</button>
         <FridgeModal 

@@ -10,7 +10,8 @@ import { Card, CardImage, Heading, Text } from 'rebass'
 
 function mapStateToProps(state) {
   return {
-    fridge: state.fridge.fridgeItems
+    fridge: state.fridge.fridgeItems,
+    searchFridge: state.fridge.fridgeSearch
   }
 }
 
@@ -33,8 +34,7 @@ export class Fridge extends Component {
   handleClick(event) {
     event.preventDefault();
     event.currentTarget.style.backgroundColor = '#ccc';  
-    var el = event.target.textContent
-    
+    var el = event.target.textContent    
     this.props.actions.addFridgeItem(el)  
   }
 
@@ -57,7 +57,7 @@ export class Fridge extends Component {
   }
 
   render() {
-    const categories = [ 'Protein', 'Fats', 'Dairy' , 'Vegetables' , 'Spices', 'Carbs' ]
+    const categories = [ 'Protein', 'Fats', 'Dairy' , 'Vegetables' , 'Spices' ]
     return (
       <section className={`${styles}`}>
         {categories.map((category,index) => this.renderCard(category, index))}

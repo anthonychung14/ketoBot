@@ -2,8 +2,8 @@ import { REQUEST_FRIDGE, RECEIVE_FRIDGE, ADD_FRIDGE, START_FSEARCH, RECEIVE_FSEA
 
 const initialState = {
   fridgeItems: [],
-  fridgeSearch: [],
-  fridgeRecipes: [],
+  searchTerms: [],
+  recipes: [],
   isFetching: false,
   isSearching: false
 }
@@ -21,19 +21,18 @@ export function fridgeReducer(state = initialState, action) {
       })
 
 //TODO: Make this a set. Not an array
-    case ADD_FRIDGE:      
+    case ADD_FRIDGE:            
       return Object.assign({}, state, {
-        fridgeSearch: state.fridgeSearch.concat(action.payload)
+        searchTerms: state.searchTerms.concat(action.payload)
       })
     case START_FSEARCH:
       return Object.assign({}, state, {
         isSearching: true
       })
     case RECEIVE_FSEARCH:
-      console.log(action, "ACTION FROM RECEIVE FSEARCH")
       return Object.assign({}, state, {
         isSearching: false,
-        fridgeSearch: state.fridgeRecipes.concat(action.payload)
+        recipes: action.recipes
       })
     default:
       return state;

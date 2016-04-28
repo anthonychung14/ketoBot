@@ -3,7 +3,8 @@ import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
 import rootReducer from '../reducers';
 
-import { fetchRecipes, selectMacros } from '../actions/items'
+import { fetchFSearch } from '../actions/fridgeActions'
+import { fetchRecipes } from '../actions/items'
 
 export default function configureStore(initialState) {
   const logger = createLogger({
@@ -24,6 +25,16 @@ export default function configureStore(initialState) {
     });
   }
 
+  let prevState;
+  store.subscribe(() => {
+    let state = store.getState();
+    if (prevState) {
+      if (state.fridge.searchTerms.length !== prevState.fridge.searchTerms.length) {
+        store.dispatch(fetchFSearch(state.fridge.searchTerms))
+      }
+    }
+    prevState = state 
+  })
   
 //This is what logs everytime
   store.dispatch(fetchRecipes('Anthony')).then(() =>
