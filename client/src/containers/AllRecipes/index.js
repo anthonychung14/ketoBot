@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 /* components */
 import { Recipes } from 'components/Recipes';
 import { Search } from 'components/Search'
+import { StapleWindow } from 'staple/StapleWindow'
         
 import { styles } from './styles.scss';
 
@@ -10,6 +11,7 @@ import { styles } from './styles.scss';
 import Tabs from 'material-ui/lib/tabs/tabs';
 import Tab from 'material-ui/lib/tabs/tab';
 import SwipeableViews from 'react-swipeable-views';
+
 import injectTapEventPlugin from "react-tap-event-plugin";
 injectTapEventPlugin();
 
@@ -52,7 +54,7 @@ export class AllRecipes extends Component {
             <Recipes/>
           </div>
           <div className="tabView">
-            <h2>High Frequency Staples</h2>
+            <StapleWindow />
           </div>          
         </SwipeableViews>
 

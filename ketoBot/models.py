@@ -7,7 +7,8 @@ class Recipe(models.Model):
     title = models.CharField(max_length=200)
     date = models.CharField(max_length=200)
     time = models.CharField(max_length=200)
-    image = models.CharField(max_length=200)    
+    image = models.CharField(max_length=200)
+    staple = models.BooleanField(default=False)    
 
 class Recipe_Nutrition(models.Model):    
     r = models.ForeignKey(Recipe, on_delete=models.CASCADE)

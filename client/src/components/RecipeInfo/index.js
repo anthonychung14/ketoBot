@@ -8,7 +8,6 @@ export class RecipeInfo extends Component {
 
   render() {    
     let recipe = this.props.recipe || {}
-    console.log(recipe, "this is the recipe")
     if (!recipe.nutrition) {
       return (
         <span>No nutritional info here. Choose something else. Or fix your parser you filthy animal</span>

@@ -2,7 +2,8 @@ import { OPEN_MODAL, FORM_MODAL } from '../actions/items'
 
 //if state switches off, clear the "active item state"
 const modalState = {
-  open: false,
+  openForm: false,
+  openDisplay: false,
   activeItem: null
 }
 
@@ -10,12 +11,12 @@ export function modalReducer(state = modalState, action) {
   switch (action.type) {
     case OPEN_MODAL:
       return {
-        open: !state.open,
+        openDisplay: !state.openDisplay,
         activeItem: action.payload
       }
     case FORM_MODAL:
       return {
-        open: !state.open
+        openForm: !state.openForm
       }
     default:
       return state;

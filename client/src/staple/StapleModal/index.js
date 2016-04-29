@@ -3,10 +3,11 @@ import React, { Component } from 'react';
 /* component styles */
 import { styles } from './styles.scss';
 import { Modal } from 'react-bootstrap'
-import FridgeWizard from 'components/FridgeForm'
+
+import StapleForm from '../StapleForm'
 
 
-export class FridgeModal extends Component {  
+export class StapleModal extends Component {  
   constructor(props) {
     super(props);
   }
@@ -16,10 +17,10 @@ export class FridgeModal extends Component {
       return (
        <Modal show={this.props.modalState.openForm} onHide={this.props.openModal}>        
         <Modal.Header>            
-          <h2>Add to Fridge</h2>
+          <h2>Add Staple Meal</h2>
         </Modal.Header>
         <Modal.Body>  
-          <FridgeWizard />
+          <StapleForm fridgeItems={this.props.fridgeItems}/>
         </Modal.Body>
       </Modal>    
     );

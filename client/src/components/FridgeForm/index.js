@@ -41,7 +41,6 @@ class FridgeWizard extends Component {
 }
 
 FridgeWizard.propTypes = {
-  onSubmit: PropTypes.func.isRequired
 }
 
 export default FridgeWizard

@@ -1,0 +1,15 @@
+:local(.styles) {
+  position: relative;
+
+  padding: 50px 0;
+  align-self: center;
+
+  .tool {
+    text-align: center;
+    margin: 30px 0;
+
+    img {
+      width: 80%;
+    }
+  }
+}

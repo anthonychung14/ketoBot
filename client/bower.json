@@ -1,0 +1,22 @@
+{
+  "name": "ketobot",
+  "description": "A superbot for foods",
+  "main": "index.js",
+  "authors": [
+    "Anthony Chung"
+  ],
+  "license": "MIT",
+  "homepage": "github.com/anthonychung14",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "Reactable": "reactable#^0.13.0"
+  }
+}

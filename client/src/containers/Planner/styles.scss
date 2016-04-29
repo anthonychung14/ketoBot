@@ -9,6 +9,7 @@
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
 
   .choices {
     display: -webkit-flex;
@@ -16,7 +17,7 @@
     -webkit-flex-direction: row;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-around;    
   }
 
 }

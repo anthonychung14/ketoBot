@@ -6,6 +6,9 @@ const ketoBot = "/ketoBot"
 const recipes = "/recipes"
 const recipe_nutrition = "/nutrition"
 
+export { fetchFridge } from './fridgeActions'
+
+
 export const GET_RECIPES = "GET_RECIPES"
 
 //NAV TO MODAL
@@ -22,7 +25,7 @@ export function openModal(element, nutrition, ingreds) {
 }
 
 export const FORM_MODAL = "FORM_MODAL"
-export function formModal(element, nutrition) {  
+export function formModal() {  
   return {
     type: FORM_MODAL
   }
@@ -36,6 +39,7 @@ export function addRecPlan(element, router) {
     payload: element
   }
 }
+
 
 // ASYNC //
 

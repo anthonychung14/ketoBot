@@ -74,7 +74,8 @@ export class Planner extends Component {
 
         <div className="total">
           <CalorieCount 
-              recipeNutrition={this.props.chosenRecipe.nutrition}/>
+              recipeNutrition={this.props.chosenRecipe.nutrition}
+              recipeInfo ={this.props.chosenRecipe.recipe}/>
         </div>
       </section>
     );

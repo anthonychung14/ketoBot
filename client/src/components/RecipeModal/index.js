@@ -31,9 +31,9 @@ export class RecipeModal extends Component {
     const activeItem = this.props.modalState.activeItem || []
     const nutrition = activeItem.nutrition
     const ingreds = activeItem.ingreds
-    if (!this.props.modalState.open) { return ( <span/>) }    
+    if (!this.props.modalState.openDisplay) { return ( <span/>) }    
     return (
-       <Modal show={this.props.modalState.open} onHide={this.props.openModal}>        
+       <Modal show={this.props.modalState.openDisplay} onHide={this.props.openModal}>        
         <Modal.Header>
           <h3>{activeItem.recipe.title}</h3>
         </Modal.Header>

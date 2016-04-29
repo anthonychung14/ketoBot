@@ -34,7 +34,7 @@ const common = {
 
   resolve: {
     extensions: ['', '.jsx', '.js', '.json', '.scss'],
-    modulesDirectories: ['node_modules', PATHS.app],
+    modulesDirectories: ['node_modules', PATHS.app, 'bower_components'],
   },
 
   module: {

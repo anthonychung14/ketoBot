@@ -9,10 +9,7 @@ export default class UserData extends Component {
     }
 
     componentWillMount() {
-      //since redis lives on Django, you now need to build out a route for it
-      //make GET request that goes on the same URL in action creators
-      //update state with data as JSON
-      //serialize it before you send it
+      
     }
   render() {    
 
