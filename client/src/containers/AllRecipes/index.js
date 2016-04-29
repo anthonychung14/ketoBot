@@ -30,6 +30,7 @@ export class AllRecipes extends Component {
   render() {
     return (
       <section className={`${styles}`}>
+        <h3>Choose a new recipe for the week</h3>
         <Tabs
           className="tabs"
           onChange={this.handleChange}

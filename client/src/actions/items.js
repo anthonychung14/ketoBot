@@ -28,7 +28,18 @@ export function formModal(element, nutrition) {
   }
 }
 
-//REQUEST NUTRITIONAL INFO
+// ADD TO PLAN (HELD IN STATE UNTIL APPROVED //
+export const ADD_RECPLAN = "ADD_RECPLAN"
+export function addRecPlan(element, router) {
+  return {
+    type: ADD_RECPLAN,
+    payload: element
+  }
+}
+
+// ASYNC //
+
+//GET NUTRITIONAL INFO
 export const REQUEST_NUTRITION = "REQUEST_NUTRITION"
 export function requestNutrition(request) {
   return {
@@ -91,7 +102,6 @@ export function receiveRecipes(request, json) {
     type: RECEIVE_RECIPES,
     request,
     recipes: json,
-    receivedAt: Date.now()
   }
 }
 

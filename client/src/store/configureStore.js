@@ -26,8 +26,9 @@ export default function configureStore(initialState) {
   }
 
   let prevState;
-  store.subscribe(() => {
+  store.subscribe(() => {    
     let state = store.getState();
+    console.log(state, "state in store")
     if (prevState) {
       if (state.fridge.searchTerms.length !== prevState.fridge.searchTerms.length) {
         store.dispatch(fetchFSearch(state.fridge.searchTerms))

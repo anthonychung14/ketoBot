@@ -8,7 +8,7 @@ const initialState = {
   isSearching: false
 }
 
-export function fridgeReducer(state = initialState, action) {
+export function fridge(state = initialState, action) {
   switch(action.type) {
     case REQUEST_FRIDGE:
       return Object.assign({}, state, {

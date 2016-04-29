@@ -17,7 +17,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 @connect(mapStateToProps, mapDispatchToProps)
-
 export default class Search extends Component {
   componentWillMount () {
     
@@ -25,7 +24,7 @@ export default class Search extends Component {
 
   handleClick() {
     console.log("props back", this.props.searchResults)
-    //This should also be capable of searching on its own
+
   }
 
   renderSearch(element, index) {

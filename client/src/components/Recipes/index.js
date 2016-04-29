@@ -61,7 +61,8 @@ export class Recipes extends Component {
         {this.props.recipes.map((element,key) => this.renderRecipe(element,key))}
         <RecipeModal
           modalState ={this.props.modalState}
-          openModal={this.props.actions.openModal}/>      
+          openModal={this.props.actions.openModal}
+          addRecPlan={this.props.actions.addRecPlan}/>      
         </section>
     );
   }
