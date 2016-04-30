@@ -25,7 +25,7 @@ export function openModal(element, nutrition, ingreds) {
 }
 
 export const FORM_MODAL = "FORM_MODAL"
-export function formModal() {  
+export function formModal() {    
   return {
     type: FORM_MODAL
   }

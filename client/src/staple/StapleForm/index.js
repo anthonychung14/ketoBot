@@ -8,86 +8,75 @@ import { createStaple } from '../../actions/createMealPlan'
 import { styles } from './styles.scss';
 
 export const fields = [
-  'ingredients[].macro',
-  
+  'stapleTitle',
+  'ingredient[].name',
+  'ingredient[].servings' 
 ]
 
-class StapleForm extends Component {  
-  
-  componentWillMount() {
-    console.log(this.props.fridgeItems, "did you make it home")
+class StapleForm extends Component {    
+
+  submitStaple(props) {        
     
+    let ingredData = []
+    props.ingredient.forEach(element => {
+      this.props.fridgeItems.forEach(ingred => {
+        if(ingred.name === element.name) {
+          ingredData.push(ingred)
+        }
+      })  
+    })    
+    console.log(ingredData)
+    this.props.closeModal()
+    this.props.createStaple(props)
   }
 
-  renderOptionsFridge(field, label) {
-    return (
-      <select {...field} value={field.value}>
-      {this.props.fridgeItems
-          .filter((element) => element.category === label)
-          .map((item) => <option value= {item.name}>{item.name}</option>)}
-      </select>
-    )
+  generateServings(ingred) {
+    let numArray = [];
+    let value = ingred.value || []
+    let selectedItem = this.props.fridgeItems.filter(element => element.name === value)[0] || {servings:0}
+    for (var i = 1; i <= selectedItem.servings; i++) {      
+        numArray.push(i)      
+    }
+    return numArray
   }
 
   render() {
-    const { fields: { ingredients }, handleSubmit } = this.props;
+    //TODO: DISPLAY CALORIES OF STAPLE AS THEY FILL IN FORM
+
+    const { fields: { stapleTitle, ingredient }, handleSubmit, submitting } = this.props;    
     return (              
         <section className={`${styles}`}>
-        <form onSubmit={handleSubmit(this.props.createStaple)}>          
-          
-          {!ingredients.length && <div>No Ingredients Yet</div>}
-
-          {ingredients.map((ingred, index) => <div key={index}>
-            <label>Ingredient #{index +1}</label>
-             <div>
-              <select {...ingredients.macro}>
-                <option value="Protein">Protein</option>
-                <option value="Fats">Fats</option>
-                <option value="Vegetable">Vegetable</option>
-              </select>
-            </div>
-
+        <form onSubmit={handleSubmit(this.submitStaple.bind(this))}>                    
+          <label>Staple Title</label>
+          <PureInput type="text" placeholder="Name your staple" field={stapleTitle} {...stapleTitle}/>
+          {!ingredient.length && <div>No ingredient yet</div>}
+          {ingredient.map((ingred, index) => <div key={index}>
+            <label>Ingredient #{index +1}</label>                      
+             <select field={ingred.name} {...ingred.name} onUpdate={this.generateServings(ingred.name)}>
+              {this.props.fridgeItems
+                .map((item, index) => {
+                  return <option key={index} value={item.name}>{item.name}</option>})}
+            </select>
+            <select field={ingred.servings} {...ingred.servings}>
+              {this.generateServings(ingred.name).map(i => <option key={i}>{i}</option>)}
+            </select>                                                      
           </div>
-
           )}
-
           <button type="button" onClick={() => {
-            ingredients.addField()    // pushes empty child field onto the end of the array
+            ingredient.addField()    // pushes empty child field onto the end of the array
           }}><i/> Add Ingredient
           </button>
-          
-          
+        <button type="submit" disabled={submitting}>
+            {submitting ? <i/> : <i/>} Submit
+          </button>          
         </form>
         </section>
     );
   }
 }
 
-//connect's first arg is mapState to props, mapDispatch to Props
-//redux: 1 form config, last two etc.
-
 export default reduxForm({
-  form: 'nutritionForm',
+  form: 'stapleForm',
   fields 
 }, null, { createStaple })(StapleForm);
 
-
-// <PureInput type="text" placeholder="Ingredient" field={ingredients.macro}/>
-
-// 'ingredients[].servings',
-// 'title',
-//   'time',
-// <div className="form-group">
-//             <label>Protein</label>
-//               {this.renderOptionsFridge(protein, "Protein")}
-//           </div>
-
-//           <div className="form-group">
-//             <label>Fats</label>
-//               {this.renderOptionsFridge(fats, "Fats")}
-//           </div>
-
-//           <div className="form-group">
-//             <label>Vegetable</label>
-//               {this.renderOptionsFridge(vegetable, "Vegetables")}
-//           </div>

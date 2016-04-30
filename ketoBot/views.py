@@ -29,16 +29,17 @@ def recipe_list(request):
         serializer = RecipeSerializer(latest_recipes, many=True)                
         return Response(serializer.data)
     
-    
-    ##TODO: THIS CAN BE YOUR STAPLE POST BROH
     elif request.method == 'POST':
-      serializer = RecipeSerializer(data=request.data)
-      if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-      else:
-        return Response(
-          serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+      print(request.data, "data babaaaayya")
+      return Response("do it ")
+
+      # serializer = RecipeSerializer(data=request.data)
+      # if serializer.is_valid():
+      #   serializer.save()
+      #   return Response(serializer.data, status=status.HTTP_201_CREATED)
+      # else:
+      #   return Response(
+      #     serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])
 def recipe_nutrition(request):
