@@ -4,7 +4,7 @@ import { Table, Thead, Th, Tr, } from 'Reactable'
 /* component styles */
 import { styles } from './styles.scss';
 
-const macs = {
+const macWeek = {
   Info: "Weekly Need",
   Calories: 1800 *6,
   Protein: 130 *6,
@@ -22,42 +22,43 @@ export class CalorieCount extends Component {
     }
 
   buildRecipeRow(info, nutri) {    
+    //this should map over all recipes that you end up choosing. first off
+    //you shouldn't discriminate between staples and not
+    
+
     let obj = {}
-    obj['Info'] = info.Info
-    obj['Calories'] = nutri.Calories
-    obj['Fat'] = nutri.Fat
-    obj['Carbs'] = nutri.Carbs
-    obj['Protein'] = nutri.Protein
+    obj['Info'] = info.title
+    obj['Calories'] = nutri.calories
+    obj['Fat'] = nutri.fat
+    obj['Carbs'] = nutri.net_carb
+    obj['Protein'] = nutri.protein
     return obj
   }
 
   calcRemaining(nutri) {    
+    if (!this.props.recipeInfo) {
+      nutri = {
+        calories: 0,
+        fat: 0,
+        net_carb: 0,
+        protein: 0
+      }
+    }
     let obj = {}    
     obj['Info'] = "Remaining"
-    obj['Calories'] = macs.Calories - nutri.Calories
-    obj['Fat'] = macs.Fat - nutri.Fat
-    obj['Carbs'] = macs.Carbs - nutri.Carbs
-    obj['Protein'] = macs.Protein - nutri.Protein
+    obj['Calories'] = macWeek.Calories - nutri.calories
+    obj['Fat'] = macWeek.Fat - nutri.fat
+    obj['Carbs'] = macWeek.Carbs - nutri.net_carb
+    obj['Protein'] = macWeek.Protein - nutri.protein
     return obj
   }
   
-  render() {        
-    const none = {
-      Info: "Choose a meal first",
-      Calories: 0, 
-      Fat: 0,
-      Carbs: 0,
-      Protein: 0
-    }
-    let nutri = this.props.recipeNutrition || none    
-    let info = this.props.recipeInfo || none
-
+  render() {            
     return (              
         <section className={`${styles}`}>
         <h4>Calorie Count</h4>        
-
         <Table className="table" data={[
-          macs, this.buildRecipeRow(info, nutri), this.calcRemaining(nutri)]} />      
+          macWeek, this.buildRecipeRow(), this.calcRemaining(nutri)]} />      
         </section>
     );
   }

@@ -22,7 +22,7 @@ export class ChosenRecipe extends Component {
     let recipe = this.props.chosenRecipe.recipe || []
     return (              
         <section className={`${styles}`}>        
-        <RecipeInfo recipe={this.props.chosenRecipe} />
+        <RecipeInfo recipe={this.props.chosenRecipe} />        
         </section>
     );
   }

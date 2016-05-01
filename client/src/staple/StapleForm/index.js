@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { reduxForm, addArrayValue } from 'redux-form'
 import PureInput from './PureInput'
 
-import { createStaple } from '../../actions/createMealPlan'
+import { createStaple, fetchStaples } from '../../actions/createMealPlan'
 
 /* component styles */
 import { styles } from './styles.scss';
@@ -15,8 +15,7 @@ export const fields = [
 
 class StapleForm extends Component {    
 
-  submitStaple(props) {        
-    
+  submitStaple(props) {          
     let ingredData = []
     props.ingredient.forEach(element => {
       this.props.fridgeItems.forEach(ingred => {
@@ -24,10 +23,10 @@ class StapleForm extends Component {
           ingredData.push(ingred)
         }
       })  
-    })    
-    console.log(ingredData)
+    })
+    
     this.props.closeModal()
-    this.props.createStaple(props)
+    this.props.createStaple(props, ingredData).then(() => this.props.fetchStaples())
   }
 
   generateServings(ingred) {
@@ -78,5 +77,5 @@ class StapleForm extends Component {
 export default reduxForm({
   form: 'stapleForm',
   fields 
-}, null, { createStaple })(StapleForm);
+}, null, { createStaple, fetchStaples })(StapleForm);
 

@@ -17,7 +17,7 @@ import { CalorieCount } from '../../planner/CalorieCount'
 
 function mapStateToProps(state) {
   return {     
-    chosenRecipe: state.mealPlan.chosenRecipe
+    chosenRecipes: state.mealPlan.chosenRecipes
   }
 }
 
@@ -32,13 +32,17 @@ export class Planner extends Component {
     this.state={
       slideIndex: 0
     } 
-  }
+  }  
 
   handleChange = (value) => {
     this.setState({
       slideIndex: value,
     });
   };
+
+  componentWillMount() {
+    console.log(this.props.chosenRecipes, "inside the planner container. what do I have?")  
+  }
 
   render() {
     return (
@@ -51,31 +55,24 @@ export class Planner extends Component {
           className="tabs"
           onChange={this.handleChange}
           value={this.state.slideIndex}>
-            <Tab label="Recipe" value={0} />
-            <Tab label="Staples" value={1} />
-            <Tab label="FridgeDB" value={2} />
+            <Tab label="Recipes" value={0} />            
+            <Tab label="Fillers" value={1} />
         </Tabs>
 
         <SwipeableViews
           className="tabView"
           index={this.state.slideIndex}
           onChangeIndex={this.handleChange}>
-          <div className="tabView">
-            <ChosenRecipe chosenRecipe={this.props.chosenRecipe}/>
-          </div>
-          <div className="tabView">
+          <div className="tabView">            
             <ChosenStaples />
-          </div>
+          </div>          
           <div className="tabView">
             <ChosenFridge />
           </div>          
         </SwipeableViews>
         
-
         <div className="total">
-          <CalorieCount 
-              recipeNutrition={this.props.chosenRecipe.nutrition}
-              recipeInfo ={this.props.chosenRecipe.recipe}/>
+          
         </div>
       </section>
     );

@@ -22,7 +22,8 @@ export class StapleModal extends Component {
         <Modal.Body>  
           <StapleForm 
                 fridgeItems={this.props.fridgeItems}
-                closeModal = {this.props.openModal}/>
+                closeModal = {this.props.openModal}
+                fetchFridge={this.props.fetchFridge}/>
         </Modal.Body>
       </Modal>    
     );

@@ -6,6 +6,7 @@ import { userPlan } from './userPlan_reducer';
 import { modalReducer } from './nav_reducer';
 import { fridge } from './fridge_reducer';
 import { mealPlan } from './mealPlan_reducer';
+import { staples } from './staple_reducer';
 
 const rootReducer = combineReducers({
   form: formReducer,
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
   search,
   userPlan,
   fridge,
-  mealPlan
+  mealPlan,
+  staples
 });
 
 export default rootReducer;

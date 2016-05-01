@@ -4,6 +4,7 @@ import fetch from 'isomorphic-fetch'
 const baseURL = "http://localhost:8000"
 const ketoBot = "/ketoBot"
 const recipes = "/recipes"
+
 const recipe_nutrition = "/nutrition"
 
 export { fetchFridge } from './fridgeActions'
@@ -33,9 +34,17 @@ export function formModal() {
 
 // ADD TO PLAN (HELD IN STATE UNTIL APPROVED //
 export const ADD_RECPLAN = "ADD_RECPLAN"
-export function addRecPlan(element, router) {
+export function addRecPlan(element) {
   return {
     type: ADD_RECPLAN,
+    payload: element
+  }
+}
+
+export const ADD_STAPLEPLAN = "ADD_STAPLEPLAN"
+export function addStaplePlan(element) {
+  return {
+    type: ADD_STAPLEPLAN,
     payload: element
   }
 }
@@ -118,3 +127,4 @@ export function fetchRecipes(request) {
     )
   }
 }
+

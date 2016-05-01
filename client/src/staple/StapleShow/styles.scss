@@ -1,6 +1,13 @@
 :local(.styles) {
   position: relative;
 
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+
   padding: 50px 0;
   align-self: center;
 
@@ -11,5 +18,18 @@
     img {
       width: 80%;
     }
+  }
+
+  .card {
+    margin: 5px 5px 5px 5px;  
+    height: 300px;
+    
+    & input {
+      display: none
+    }
+    
+    &:hover input {
+      display: block;
+    }    
   }
 }

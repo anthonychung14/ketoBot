@@ -13,8 +13,32 @@ from rest_framework.decorators import parser_classes
 
 from django.core.cache import cache
 
-from ketoBot.serializers import RecipeSerializer, IngredientSerializer, RecipeNutritionSerializer
-from .models import Recipe, Ingredient, Recipe_Nutrition
+from ketoBot.serializers import RecipeSerializer, IngredientSerializer, RecipeNutritionSerializer, IngredNutritionSerializer
+from .models import Recipe, Ingredient, Recipe_Nutrition, Ingred_Nutrition
+
+@api_view(['GET', 'POST'])
+def staples(request):
+  if request.method == 'GET':
+    #return the list of cards pl0x
+    staples = Recipe.objects.filter(staple=True)    
+    stapleSerializer = RecipeSerializer(staples, many=True)
+
+    stapleID = [int(x['id']) for x in stapleSerializer.data]    
+
+    gotStapleNutrition = Recipe_Nutrition.objects.filter(r__in=stapleID)
+    nutritionSerializer = RecipeNutritionSerializer(gotStapleNutrition, many=True)
+    
+    gotStapleIngredients = Ingredient.objects.filter(r__in=stapleID)    
+    ingredientSerializer = IngredientSerializer(gotStapleIngredients, many=True)
+    
+    data = {
+      'stapleData': stapleSerializer.data,
+      'stapleNutrition': nutritionSerializer.data,
+      'stapleIngredients': ingredientSerializer.data
+    }
+
+    return Response(data)
+        
 
 @api_view(['GET', 'POST'])
 def recipe_list(request):
@@ -23,23 +47,74 @@ def recipe_list(request):
         serializer = RecipeSerializer(cache.get("recipeCache"), many=True)                
         return Response(serializer.data)
       else:
-        latest_recipes = Recipe.objects.order_by('?')[:10]
+        latest_recipes = Recipe.objects.filter(staple=False).order_by('?')[:20]
         cache.set("recipeCache", latest_recipes, timeout=10)
+        serializer = RecipeSerializer(latest_recipes, many=True)        
 
-        serializer = RecipeSerializer(latest_recipes, many=True)                
         return Response(serializer.data)
     
     elif request.method == 'POST':
-      print(request.data, "data babaaaayya")
-      return Response("do it ")
+      #split the data into three parts. each one will have to be serialized and saved
+      rKey = ""
+      def error(serializer):
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+      
+      tripleDecode = json.loads(request.body)
+      recipeData = tripleDecode["recipeData"]
+      recipeNutrition = tripleDecode['nutrition']
+      
+      #This will need to be decoded further
+      recipeIngred = tripleDecode['ingredData']
+      
+      recSerializer = RecipeSerializer(data=recipeData)
+      if recSerializer.is_valid():        
+        saved = recSerializer.save()
+        rKey = saved.id
+      else:
+        error(recSerializer)
 
-      # serializer = RecipeSerializer(data=request.data)
-      # if serializer.is_valid():
-      #   serializer.save()
-      #   return Response(serializer.data, status=status.HTTP_201_CREATED)
-      # else:
-      #   return Response(
-      #     serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+      recipeNutrition['r'] = rKey
+      recNutriSerializer = RecipeNutritionSerializer(data=recipeNutrition)      
+      if recNutriSerializer.is_valid():        
+        recNutriSerializer.save()
+      else:
+        error(recNutriSerializer)
+      
+      # for each item in the recipeIngred array, we need to create a new dictionary      
+      def splitIngreds(obj):
+        recipeIngred = {
+          'r': rKey,
+          'amount':  obj['servings'],
+          'measurement': obj['measurement'],
+          'name': obj['name']
+        }
+        ingredSerializer = IngredientSerializer(data=recipeIngred)        
+        
+        if ingredSerializer.is_valid():
+          savedIngred = ingredSerializer.save()
+          iKey = savedIngred.id
+        else:
+          print("ERROR in INGREDSERIALIZER BROH")
+
+        ingredNutri = {
+          'i': iKey,
+          'calories': obj['calories'],
+          'protein': obj['protein'],
+          'fat': obj['fat'],
+          'net_carb': obj['carbs'] - obj['fiber'],
+          'carb': obj['carbs'],
+          'fiber': obj['fiber']
+        }
+        ingredNutriSerializer = IngredNutritionSerializer(data=ingredNutri)
+
+        if ingredNutriSerializer.is_valid():
+          ingredNutriSerializer.save()
+        else:
+          print("ERROR in ingredNutriSerializer")
+
+      [splitIngreds(x) for x in recipeIngred]      
+
+      return Response(recSerializer.data)
 
 @api_view(['GET'])
 def recipe_nutrition(request):

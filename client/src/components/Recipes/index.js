@@ -27,7 +27,7 @@ export class Recipes extends Component {
   componentWillMount () {
     let boundFetchNutrition = this.props.actions.fetchNutrition 
     this.props.actions.fetchRecipes()
-    .then(function(data) {
+    .then(function(data) {      
       let randomRecipesID = data.recipes.map((element, key) => {
         return element.id
       })      

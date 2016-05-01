@@ -1,16 +1,20 @@
-import { ADD_RECPLAN } from '../actions/items'
+import { ADD_RECPLAN, ADD_STAPLEPLAN } from '../actions/items'
 
 const initialState = {
-  chosenRecipe: {},
-  chosenStaple: {},
+  chosenRecipes: [],
   fridgeFill: []
 }
 
 export function mealPlan(state=initialState, action) {
+  console.log("state with chosenRec", state.chosenRecipes)
   switch(action.type) {
     case ADD_RECPLAN:
       return Object.assign({}, state, {
-        chosenRecipe: action.payload
+        chosenRecipes: state.chosenRecipes.concat(action.payload)
+      })
+    case ADD_STAPLEPLAN:
+      return Object.assign({}, state, {
+        chosenRecipes: state.chosenRecipes.concat(action.payload)
       })
     default:
       return state
