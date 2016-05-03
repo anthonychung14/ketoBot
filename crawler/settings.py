@@ -15,10 +15,15 @@ DATABASE = {
   'database': 'keto'
 }
 
+#Logging Logic
+# from twisted.python import log
+# observer = log.PythonLoggingObserver()
+# observer.start()
+
 # DOWNLOAD_HANDLERS = {'s3': None}
 
-#Django - Scrapy integration
 
+#Django - Scrapy integration
 def setup_django_env(path):
     import imp, os
 
@@ -31,6 +36,7 @@ import sys
 sys.path.append('../ketoMon')
 from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()
+
 
 #Pipeline order + ES integration
 ITEM_PIPELINES = {
@@ -45,7 +51,7 @@ ITEM_PIPELINES = {
 ELASTICSEARCH_SERVER = 'localhost' 
 ELASTICSEARCH_PORT = 9200 
 ELASTICSEARCH_INDEX = 'recipes'
-ELASTICSEARCH_TYPE = 'dinner'
+ELASTICSEARCH_TYPE = 'lunch'
 ELASTICSEARCH_UNIQ_KEY = ''
 ELASTICSEARCH_LOG_LEVEL= logging.DEBUG
 

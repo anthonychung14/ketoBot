@@ -51,6 +51,10 @@ def recipe_list(request):
         cache.set("recipeCache", latest_recipes, timeout=10)
         serializer = RecipeSerializer(latest_recipes, many=True)        
 
+        print(serializer.data[0]['image'])
+        
+
+
         return Response(serializer.data)
     
     elif request.method == 'POST':

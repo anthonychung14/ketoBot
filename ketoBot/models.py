@@ -24,6 +24,7 @@ class Recipe_Nutrition(models.Model):
 #on certain ingredients?
 class Ingredient (models.Model):
     r = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+    rawString = models.CharField(max_length=200)
     amount = models.FloatField(default = 0)
     measurement = models.CharField(max_length=200)
     name = models.CharField(max_length=200)    

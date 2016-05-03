@@ -122,8 +122,8 @@ export function fetchRecipes(request) {
   return function(dispatch) {
     dispatch(requestRecipes(request))    
     return fetch(baseURL+ketoBot+recipes)
-      .then(response => response.json())
-      .then(json => dispatch(receiveRecipes(request, json))
+      .then(response => response.json())          
+      .then(json => dispatch(receiveRecipes(request, json))      
     )
   }
 }

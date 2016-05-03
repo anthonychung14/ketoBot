@@ -1,7 +1,8 @@
-module.exports = (config) => {
+module.exports = function(config){
   config.set({
     basePath: 'src',
     singleRun: true,
+    autoWatch: true,
     frameworks: ['mocha'],
     reporters: ['dots'],
     browsers: ['Chrome'],

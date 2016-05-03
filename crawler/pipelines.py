@@ -1,14 +1,19 @@
+# -*- coding: utf-8 -*- 
+
 import re
 from ketoBot.models import Recipe, Ingredient, Recipe_Nutrition
 from fractions import Fraction
 import pandas as pd
 from crawler.items import RecipeItem, IngredientData, RecipeElastic
+from scrapy.exceptions import DropItem
+
 
 #Saves metadata on recipe to psql
 class RecipePipeline(object):
     def process_item(self, item, spider):        
-        #PSQL save
-        recipe = Recipe(title=item['title'], image=item['images'], date=item['date'], time=item['time'])
+        #PSQL save                
+        baseURL = "https://s3-us-west-1.amazonaws.com/ketobot/"
+        recipe = Recipe(title=item['title'], image=baseURL+item['images'][0]['path'], date=item['date'], time=item['time'])
         recipe.save()
         item['id'] = recipe.id          
         item['pk'] = Recipe.objects.get(id = recipe.id)
@@ -44,20 +49,30 @@ class IngredientPipeline(object):
               if re.compile("[^\W\d]").search(quantity):
                 match = re.compile("[^\W\d]").search(quantity)
                 amount = s[:match.start()]
-                grocery = s[item.start():]
-                if '/' not in amount:
+                grocery = s[item.start():]                                
+                if '/' in amount:                  
+                  def tryAmount(amount):
+                      try:
+                        return round(float(sum(Fraction(s) for s in amount.split())), 2)
+                      except ValueError:
+                        return amount[0]
+                  amount= tryAmount(amount)
+                elif '-' in amount:
+                  amount = float(amount[0])
+                elif '/' not in amount:
                   amount = float(amount)
                 else:
-                  amount = round(float(sum(Fraction(s) for s in amount.split())), 2)
+                  amount = float(amount[0])
                 measure = " ".join(re.findall("[a-zA-Z]+", s[:item.start()]))
-                ingredList.append([amount, measure, grocery])
+                ingredList.append([amount, measure, grocery, s])
+              
               else:
-                ingredList.append([0.0, "", s])
+                ingredList.append([0.0, "", s, s])
 
           if "Totals" not in index and "serving" not in index.lower():
-              #Adding raw ingredient text to ElasticSearch
+              #Adding raw ingredient text to ElasticSearch              
               item['rawIngredients'].append(index)
-              split_on_letter(index)
+              split_on_letter(index)          
 
           # # for s in ingredientColumn:
           #   if "Totals" not in s and "serving" not in s.lower():
@@ -66,8 +81,8 @@ class IngredientPipeline(object):
           #     split_on_letter(s)
             
           for ingred in ingredList:
-             #PSQL save
-             ingred = Ingredient(r=recipeForeignKey, amount=ingred[0], measurement=ingred[1], name=ingred[2])
+             #PSQL save             
+             ingred = Ingredient(r=recipeForeignKey, amount=ingred[0], measurement=ingred[1], name=ingred[2], rawString=ingred[3])
              ingred.save()
              item['ingredients'].append({'amount': ingred.amount, 'measurement': ingred.measurement, 'name': ingred.name})
 
@@ -99,12 +114,14 @@ class RecipeNutritionPipeline(object):
 class ElasticReducer(object):
     def process_item(self, item, spider):
       recipeCopy = item.copy()
-      item = RecipeElastic()      
+      item = RecipeElastic()
+      baseURL = "https://s3-us-west-1.amazonaws.com/ketobot/"        
 
       item['id'] = recipeCopy['id']
       item['title'] = recipeCopy['title']
       item['date'] = recipeCopy['date']
-      item['time'] = recipeCopy['time']      
+      item['time'] = recipeCopy['time']
+      item['image'] = recipeCopy['images'][0]['path']
       item['ingredients'] = recipeCopy['rawIngredients']
       item['recMacros'] = recipeCopy['recMacros']
       return item

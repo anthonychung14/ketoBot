@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 /* component styles */
 import { styles } from './styles.scss';
 
-import { RecipeInfo } from '../../components/RecipeInfo'
+import { RecipeInfo } from '../../RecipeInfo'
 
 export class ChosenRecipe extends Component {  
     constructor(props) {

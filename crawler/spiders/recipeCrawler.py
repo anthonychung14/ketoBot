@@ -13,10 +13,13 @@ import re
 #Creates the item.
 from crawler.items import RecipeItem
 
-class RecipeCrawlerSpider(CrawlSpider):
+class RecipeCrawlerSpider(CrawlSpider):  
   name = 'ruledMeCrawler'
-  allowed_domains = ['ruled.me']
-  start_urls = ['http://www.ruled.me/keto-recipes/dinner/']
+  allowed_domains = ['ruled.me']  
+  start_urls = ['http://www.ruled.me/keto-recipes/lunch/']
+
+  # start_urls= ['http://www.ruled.me/keto-recipes/breakfast/']
+  # start_urls= ['http://www.ruled.me/']
 
   rules = (
       #make this 0-9 when you're ready to get all of it
@@ -36,8 +39,9 @@ class RecipeCrawlerSpider(CrawlSpider):
       soup = BeautifulSoup(html, 'lxml')
 
       recipe = RecipeItem()
-      #Hard-coded for now. consider parsing the url to get lunch
-      recipe['time'] = "Dinner"
+      #Hard-coded for now. consider parsing the url to get lunch       
+
+      recipe['time'] = "Lunch"
       
       #get dataframe from html table.
       table = pd.read_html(html, header=0, index_col=0, flavor="bs4", encoding="utf-8")

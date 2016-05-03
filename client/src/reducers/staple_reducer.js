@@ -1,6 +1,7 @@
 import { REQUEST_STAPLES, RECEIVE_STAPLES } from '../actions/createMealPlan'
 
-const initialState = {
+
+export const initialState = {
   stapleData: [],  
   isFetching: false
 }

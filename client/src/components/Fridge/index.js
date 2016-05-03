@@ -11,7 +11,8 @@ import { Card, CardImage, Heading, Text } from 'rebass'
 function mapStateToProps(state) {
   return {
     fridge: state.fridge.fridgeItems,
-    searchFridge: state.fridge.fridgeSearch
+    searchFridge: state.fridge.fridgeSearch,
+    searchTerms: state.fridge.searchTerms
   }
 }
 
@@ -26,7 +27,7 @@ export class Fridge extends Component {
   }
 
   componentWillMount () {
-    this.props.actions.fetchFridge()
+    this.props.actions.fetchFridge(this.props.searchTerms)
     //do ES search
     .then(response => console.log("responded?"))
   }

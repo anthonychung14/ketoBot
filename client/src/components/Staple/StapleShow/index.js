@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 /* component styles */
 import { styles } from './styles.scss';
 import { Card, CardImage, Heading, Text } from 'rebass'
-import Snackbar from 'material-ui/lib/snackbar';
+import { ButtonToolbar, DropdownButton, MenuItem } from 'react-bootstrap'
 
 import { Table, Thead, Th, Tr, } from 'Reactable'
 
@@ -12,26 +12,11 @@ export class StapleShow extends Component {
     constructor(props) {
       super(props)
       this.state = {
-        open: false,
+        servings: 1
       };
-    }
-    
-    handleTouchTap() {      
-      console.log("trying to open")
-      this.setState({
-        open: true,
-      });
-    };
+    }    
 
-    handleRequestClose() {
-      console.log("trying to close")
-      this.setState({
-        open: false,
-      });
-    };
-
-    submit(element) {      
-      this.handleTouchTap()      
+    submit(element) {            
       this.props.addStaplePlan(element)
     }
 
@@ -54,26 +39,31 @@ export class StapleShow extends Component {
         )
       }
 
+    changeSelect() {
+      
+    }
+
     renderRecipe(element, index) {
       return (
           <Card rounded={true} width={256} key={index}>
             <Heading level={2} size={3}>{element.recipe.title}</Heading>
             {this.renderNutrients(element)}
             <input onClick={this.submit.bind(this, element)} className="modalButton" type="button" value=" Add to Plan " />
+            <select className="modalButton" value={this.state.servings} onChange={this.changeSelect}>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
           </Card>
         )
       }
 
-    render() {    
+    render() {          
       return (              
         <section className={`${styles}`}>
         {this.props.stapleData.map((element,index) => this.renderRecipe(element, index))}
-        <Snackbar
-          open={this.state.open}
-          message="Added to Meal Plan"
-          autoHideDuration={4000}
-          onRequestClose={this.handleRequestClose.bind(this)}
-        />
+        
         </section>
     );
   }

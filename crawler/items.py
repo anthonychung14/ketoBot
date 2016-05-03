@@ -42,10 +42,7 @@ class RecipeElastic(Item):
     
     #Lunch/Dinner/Breakfast/Snack?
     time = Field()
-    
-    #array
-    directions= Field()    
-    
+    image = Field() 
     #array of dictionaries
     ingredients = Field()    
     

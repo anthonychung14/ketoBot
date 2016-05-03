@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
-import { fetchFridge } from '../../actions/fridgeActions'
-import { fetchStaples } from '../../actions/createMealPlan'
-import { formModal, addStaplePlan } from '../../actions/items'
+import { fetchFridge } from '../../../actions/fridgeActions'
+import { fetchStaples } from '../../../actions/createMealPlan'
+import { formModal, addStaplePlan } from '../../../actions/items'
 
 /* component styles */
 import { styles } from './styles.scss';

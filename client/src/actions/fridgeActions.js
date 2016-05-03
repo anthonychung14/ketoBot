@@ -25,7 +25,7 @@ export function receiveFSearch(request, json) {
   }
 }
 
-export function fetchFSearch(request) {
+export function fetchFSearch(request) {  
   return function(dispatch) {
     dispatch(requestFSearch)
     return fetch(`${fridgeSearch}`, {
@@ -36,8 +36,7 @@ export function fetchFSearch(request) {
         body: JSON.stringify(request)
       })
       .then(response => response.json())
-      .then(json => {
-        console.log("JSON ARE YOU HERE", json)
+      .then(json => {        
         dispatch(receiveFSearch(request, json))
       })
   }

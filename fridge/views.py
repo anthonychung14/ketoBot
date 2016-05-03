@@ -40,12 +40,15 @@ def search(request):
   queryJSON = json.loads(request.body)
   #if one long, transform into string
 
-  #if more than two, put an OR between all of them
+  #if more than two, put an OR between all of them  
+  string = ""
+  for x in queryJSON:
+    if len(queryJSON) > 1:
+      string += x + " OR "
+    else: 
+      string += x
 
-  queryString = queryJSON
-
-
-  print(queryString, "json")
+  print(string, "json")
 
   if request.method == 'POST':
     data = {    

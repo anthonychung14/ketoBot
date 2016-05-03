@@ -9,15 +9,18 @@ import Tabs from 'material-ui/lib/tabs/tabs';
 import Tab from 'material-ui/lib/tabs/tab';
 import SwipeableViews from 'react-swipeable-views';
 
-import { ChosenRecipe } from '../../planner/ChosenRecipe'
-import { ChosenFridge } from '../../planner/ChosenFridge'
-import { ChosenStaples } from '../../planner/ChosenStaples'
-import { CalorieCount } from '../../planner/CalorieCount'
+import { ChosenRecipe } from '../../components/planner/ChosenRecipe'
+import { ChosenFridge } from '../../components/planner/ChosenFridge'
+import { ChosenStaples } from '../../components/planner/ChosenStaples'
+import { CalorieCount } from '../../components/planner/CalorieCount'
+
+import { Flex, Box } from 'reflexbox'
 
 
 function mapStateToProps(state) {
   return {     
-    chosenRecipes: state.mealPlan.chosenRecipes
+    chosenRecipes: state.mealPlan.chosenRecipes,
+    fridgeItems: state.fridge.fridgeItems
   }
 }
 
@@ -47,10 +50,6 @@ export class Planner extends Component {
   render() {
     return (
       <section className={`${styles}`}>
-        <div className="title">
-          <h3>Build Plan</h3>
-        </div>
-
         <Tabs
           className="tabs"
           onChange={this.handleChange}
@@ -58,7 +57,9 @@ export class Planner extends Component {
             <Tab label="Recipes" value={0} />            
             <Tab label="Fillers" value={1} />
         </Tabs>
-
+        
+        <Flex align='flex-start'>        
+        <Box>        
         <SwipeableViews
           className="tabView"
           index={this.state.slideIndex}
@@ -67,13 +68,18 @@ export class Planner extends Component {
             <ChosenStaples />
           </div>          
           <div className="tabView">
-            <ChosenFridge />
+            <ChosenFridge fridgeItems={this.props.fridgeItems} />
           </div>          
         </SwipeableViews>
-        
+        </Box>
+
+        <Box>
         <div className="total">
-          
+          <CalorieCount chosenRecipes={this.props.chosenRecipes}/>
         </div>
+        </Box>
+
+        </Flex>
       </section>
     );
   }

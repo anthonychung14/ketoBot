@@ -3,13 +3,17 @@
   "version": "1.0.0",
   "description": "A superbot for foods",
   "main": "index.js",
+  "babel": {
+    "presets": ["es2015"]
+  },
   "scripts": {
     "clean": "rimraf dist",
     "build": "webpack --progress --verbose --colors --display-error-details --config webpack/common.config.js",
     "build:production": "npm run clean && npm run build",
     "lint": "eslint src",
     "start": "node bin/server.js",
-    "test": "karma start"
+    "test": "mocha --require ignore-styles",
+    "test:watch": "npm run test -- --watch"
   },
   "repository": {
     "type": "git",
@@ -31,6 +35,8 @@
     "babel-preset-stage-0": "^6.3.13",
     "bootstrap-loader": "^1.0.5",
     "bootstrap-sass": "^3.3.6",
+    "chai": "^3.5.0",
+    "chai-jquery": "^2.0.0",
     "classnames": "^2.2.3",
     "css-loader": "^0.23.1",
     "eslint": "^1.10.3",
@@ -45,13 +51,11 @@
     "history": "^2.0.0-rc2",
     "imports-loader": "^0.6.5",
     "jasmine-core": "^2.4.1",
-    "karma": "^0.13.19",
-    "karma-chrome-launcher": "^0.2.2",
-    "karma-mocha": "^0.2.1",
-    "karma-webpack": "^1.7.0",
+    "jquery": "^2.2.1",
+    "jsdom": "^8.1.0",
     "less": "^2.5.3",
     "less-loader": "^2.2.2",
-    "mocha": "^2.3.4",
+    "mocha": "^2.4.5",
     "morgan": "^1.6.1",
     "node-sass": "^3.4.2",
     "postcss-import": "^7.1.3",
@@ -86,7 +90,6 @@
     "react-redux": "^4.0.6",
     "react-router": "^2.0.0-rc5",
     "react-tap-event-plugin": "^0.2.2",
-    "redux": "^3.1.4",
-    "redux-promise": "^0.5.3"
+    "redux": "^3.1.4"
   }
 }

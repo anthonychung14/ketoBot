@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { StapleWindow } from '../../staple/StapleWindow'
 
 /* component styles */
 import { styles } from './styles.scss';
@@ -15,7 +16,7 @@ export class ChosenStaples extends Component {
 
     return (              
         <section className={`${styles}`}>
-        <h4>Chosen Staples</h4>
+        <StapleWindow/> 
         </section>
     );
   }

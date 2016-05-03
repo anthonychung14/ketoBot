@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 /* components */
 import { Recipes } from 'components/Recipes';
 import { Search } from 'components/Search'
-import { StapleWindow } from 'staple/StapleWindow'
         
 import { styles } from './styles.scss';
 
@@ -37,10 +36,8 @@ export class AllRecipes extends Component {
           className="tabs"
           onChange={this.handleChange}
           value={this.state.slideIndex}>
-            <Tab label="Search" value={0} />
-            <Tab label="What's new" value={1} />
-            <Tab label="Staples" value={2} />
-            
+            <Tab label="ketoSearch" value={0} />
+            <Tab label="fridgeSearch" value={1} />                        
         </Tabs>
         
         <SwipeableViews
@@ -48,14 +45,11 @@ export class AllRecipes extends Component {
           index={this.state.slideIndex}
           onChangeIndex={this.handleChange}>
           <div className="tabView">
-            <Search />
+            <Search/>
           </div>
           <div className="tabView">
             <Recipes/>
-          </div>
-          <div className="tabView">
-            <StapleWindow />
-          </div>          
+          </div>                    
         </SwipeableViews>
 
       </section>

@@ -6,7 +6,6 @@ const initialState = {
 }
 
 export function mealPlan(state=initialState, action) {
-  console.log("state with chosenRec", state.chosenRecipes)
   switch(action.type) {
     case ADD_RECPLAN:
       return Object.assign({}, state, {
