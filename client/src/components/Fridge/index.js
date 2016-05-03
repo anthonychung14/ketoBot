@@ -48,7 +48,7 @@ export class Fridge extends Component {
   renderCard(category, index) {
     let filtered = this.props.fridge.filter((item) => item.category === category)
     return (
-      <Card rounded={true} width={175} key={index}>
+      <Card rounded={true} width={175} key={index}>      
         <Heading level={2} size={3}>{category}</Heading>
         <Text>
           {filtered.map((element, index) => this.renderItem(element, index))}

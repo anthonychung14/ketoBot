@@ -42,12 +42,10 @@ export class Recipes extends Component {
   }
 
   renderRecipe(element, index) {
-    
-
     let boundRecipeInfo = this.getRecipeInfo.bind(this, element)
     return (
         <Card rounded={true} width={256} key={index}>
-
+        <CardImage src={element.image} />
           <Heading level={2} size={3}>{element.title}</Heading>
           <Text> {element.time} time! </Text>
           <input className="modalButton" type="button" value=" Quick Look " onClick={boundRecipeInfo} />

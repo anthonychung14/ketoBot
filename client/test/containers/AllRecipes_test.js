@@ -1,14 +1,14 @@
 import { expect } from '../test_helper';
-import { Header } from '../../src/components/Static/Header'
+import { Header } from '../../src/components/Recipes'
 import TestUtils from 'react-addons-test-utils';
 import React from 'react/addons';
 
-describe('Header - static behavior test', () => { 
+describe('Recipes - static behavior test', () => { 
   var component;
   var renderedDOM;
 
   beforeEach(() => {      
-      component = TestUtils.renderIntoDocument(<Header initialName="my first test" />);
+      component = TestUtils.renderIntoDocument(<Recipes initialName="my first test" />);
       renderedDOM = () => React.findDOMNode(component);
   });
 
@@ -22,14 +22,3 @@ describe('Header - static behavior test', () => {
   });
 });
 
-
-
-
-//   it("wraps a paragraph with a <div> with a proper class name", function() {
-//     let rootElement = this.renderedDOM();
-
-//     expect(rootElement.tagName).toEqual("DIV");
-//     expect(rootElement.classList.length).toEqual(1);
-//     expect(rootElement.classList[0]).toEqual("greeter");
-//   });
-// });

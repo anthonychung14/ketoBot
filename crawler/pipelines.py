@@ -18,6 +18,7 @@ class RecipePipeline(object):
         item['id'] = recipe.id          
         item['pk'] = Recipe.objects.get(id = recipe.id)
         item['rawIngredients'] = [];
+        item['images'] = baseURL+item['images'][0]['path']
 
         #item = RecipeItem
         return item
@@ -114,14 +115,15 @@ class RecipeNutritionPipeline(object):
 class ElasticReducer(object):
     def process_item(self, item, spider):
       recipeCopy = item.copy()
+      image = recipeCopy['images']
       item = RecipeElastic()
-      baseURL = "https://s3-us-west-1.amazonaws.com/ketobot/"        
+
 
       item['id'] = recipeCopy['id']
       item['title'] = recipeCopy['title']
       item['date'] = recipeCopy['date']
-      item['time'] = recipeCopy['time']
-      item['image'] = recipeCopy['images'][0]['path']
+      item['time'] = recipeCopy['time']      
+      item['imageURL'] = str(image)
       item['ingredients'] = recipeCopy['rawIngredients']
       item['recMacros'] = recipeCopy['recMacros']
       return item

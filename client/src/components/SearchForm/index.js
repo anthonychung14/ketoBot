@@ -17,6 +17,10 @@ class SearchForm extends Component {
     router: PropTypes.object
   }
 
+  componentWillMount() {
+    console.log(this.context, "this is context in search form")
+  }
+
   onSubmit(props) {
     this.props.retrieveSearch(props)    
   }
