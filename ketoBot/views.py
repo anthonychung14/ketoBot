@@ -50,11 +50,7 @@ def recipe_list(request):
         latest_recipes = Recipe.objects.filter(staple=False).order_by('?')[:20]
         cache.set("recipeCache", latest_recipes, timeout=10)
         serializer = RecipeSerializer(latest_recipes, many=True)        
-
-        print(serializer.data[0]['image'])
-        
-
-
+              
         return Response(serializer.data)
     
     elif request.method == 'POST':

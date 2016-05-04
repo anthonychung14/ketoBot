@@ -58,8 +58,10 @@ export class Planner extends Component {
             <Tab label="Fillers" value={1} />
         </Tabs>
         
-        <Flex align='flex-start'>        
-        <Box>        
+        
+        
+        <Flex align='flex-start' className="flexContainer">        
+        <Box className="flexBoxed">        
         <SwipeableViews
           className="tabView"
           index={this.state.slideIndex}
@@ -73,12 +75,11 @@ export class Planner extends Component {
         </SwipeableViews>
         </Box>
 
-        <Box>
-        <div className="total">
-          <CalorieCount chosenRecipes={this.props.chosenRecipes}/>
-        </div>
+        <Box className="flexBoxed">
+          <div className="total">
+            <CalorieCount chosenRecipes={this.props.chosenRecipes}/>
+          </div>
         </Box>
-
         </Flex>
       </section>
     );

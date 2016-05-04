@@ -1,19 +1,22 @@
 import { expect } from '../test_helper';
-import { Header } from '../../src/components/Recipes'
+import { AllRecipes } from '../../src/containers/AllRecipes'
+import { Recipes } from '../../src/components/Recipes';
+import { Search } from '../../src/components/Search'
+
 import TestUtils from 'react-addons-test-utils';
-import React from 'react/addons';
+import React from 'react/addons-{addon}';
 
 describe('Recipes - static behavior test', () => { 
   var component;
   var renderedDOM;
 
   beforeEach(() => {      
-      component = TestUtils.renderIntoDocument(<Recipes initialName="my first test" />);
+      component = TestUtils.renderIntoDocument(<Recipes initialName="my second test" />);
       renderedDOM = () => React.findDOMNode(component);
   });
 
   it('renders children', () => {
-    expect(renderedDOM().children.length).to.equal(1)
+    expect(renderedDOM().children.length).to.equal(3)
   })
 
   it('contains 5 anchor links', () => {

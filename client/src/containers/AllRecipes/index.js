@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
 /* components */
-import { Recipes } from 'components/Recipes';
-import { Search } from 'components/Search'
+import { Recipes } from '../../components/Recipes';
+import { Search } from '../../components/Search'
         
 import { styles } from './styles.scss';
 

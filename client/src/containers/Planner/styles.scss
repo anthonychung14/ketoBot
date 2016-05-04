@@ -2,22 +2,26 @@
 
   padding: 50px 0;
 
-
   display: -webkit-flex;
   display: flex;
   -webkit-flex-direction: column;
   flex-direction: column;
   flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-around;
+  align-items: flex-start;
 
-  .choices {
+  .flexContainer {
     display: -webkit-flex;
     display: flex;
     -webkit-flex-direction: row;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-around;    
+    justify-content: space-between;    
+  }
+
+  .flexBoxed {
+    flex: 0 0 40%;
+
   }
 
 }

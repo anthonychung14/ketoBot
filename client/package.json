@@ -12,8 +12,11 @@
     "build:production": "npm run clean && npm run build",
     "lint": "eslint src",
     "start": "node bin/server.js",
-    "test": "mocha --require ignore-styles",
+    "test": "mocha --compilers js:babel-register \"./test/**/*.js\" --require ignore-styles",
     "test:watch": "npm run test -- --watch"
+  },
+  "babel": {
+    "presets": ["react"]
   },
   "repository": {
     "type": "git",
