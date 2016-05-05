@@ -30,7 +30,7 @@ export function postProcess(request, router) {
     dispatch(postPlan(request))      
     dispatch(retrieveSearch(request))
       .then(() => {
-        router.push('recipe')
+        router.push('recipes')
       })
   }
 }

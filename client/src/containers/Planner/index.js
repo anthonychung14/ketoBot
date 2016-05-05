@@ -11,7 +11,7 @@ import SwipeableViews from 'react-swipeable-views';
 
 import { ChosenRecipe } from '../../components/planner/ChosenRecipe'
 import { ChosenFridge } from '../../components/planner/ChosenFridge'
-import { ChosenStaples } from '../../components/planner/ChosenStaples'
+import { StapleWindow } from '../../components/staple/StapleWindow'
 import { CalorieCount } from '../../components/planner/CalorieCount'
 
 import { Flex, Box } from 'reflexbox'
@@ -43,45 +43,42 @@ export class Planner extends Component {
     });
   };
 
-  componentWillMount() {
-    console.log(this.props.chosenRecipes, "inside the planner container. what do I have?")  
+  renderTab() {
+    return(
+      <Tabs
+        className="tabs"
+        onChange={this.handleChange}
+        value={this.state.slideIndex}>
+          <Tab label="Recipes" value={0} />            
+          <Tab label="Fillers" value={1} />
+        </Tabs>                  
+    )
   }
 
   render() {
-    return (
-      <section className={`${styles}`}>
-        <Tabs
-          className="tabs"
-          onChange={this.handleChange}
-          value={this.state.slideIndex}>
-            <Tab label="Recipes" value={0} />            
-            <Tab label="Fillers" value={1} />
-        </Tabs>
-        
-        
-        
-        <Flex align='flex-start' className="flexContainer">        
-        <Box className="flexBoxed">        
+    return (      
+      <section className={`${styles}`}>              
+        <div className="staples">
+        {this.renderTab()}
         <SwipeableViews
           className="tabView"
           index={this.state.slideIndex}
           onChangeIndex={this.handleChange}>
           <div className="tabView">            
-            <ChosenStaples />
+            <StapleWindow />            
           </div>          
-          <div className="tabView">
+          <div className="tabView">            
             <ChosenFridge fridgeItems={this.props.fridgeItems} />
           </div>          
         </SwipeableViews>
-        </Box>
+        </div>                
 
-        <Box className="flexBoxed">
-          <div className="total">
-            <CalorieCount chosenRecipes={this.props.chosenRecipes}/>
-          </div>
-        </Box>
-        </Flex>
-      </section>
+        <div className="totals">                
+          <CalorieCount
+            chosenRecipes={this.props.chosenRecipes}/>
+        </div>
+             
+      </section>      
     );
   }
 }

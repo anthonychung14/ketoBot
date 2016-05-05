@@ -21,7 +21,6 @@ export function recipes(state = initialState, action) {
   }
 }
 
-
 const nutritionState = {
   isFetching: false,
   nutrition: {},

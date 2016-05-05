@@ -29,6 +29,7 @@ export class Dashboard extends Component {
   }
 
   componentWillMount() {
+    console.log(this.props)
     this.props.actions.fetchPlan()
   }
 

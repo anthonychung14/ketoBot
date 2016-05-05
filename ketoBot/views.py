@@ -60,11 +60,11 @@ def recipe_list(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
       
       tripleDecode = json.loads(request.body)
-      recipeData = tripleDecode["recipeData"]
+      recipeData = tripleDecode["recipe"]
       recipeNutrition = tripleDecode['nutrition']
       
       #This will need to be decoded further
-      recipeIngred = tripleDecode['ingredData']
+      recipeIngred = tripleDecode['ingreds']
       
       recSerializer = RecipeSerializer(data=recipeData)
       if recSerializer.is_valid():        

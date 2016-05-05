@@ -11,7 +11,7 @@ export class ChosenRecipe extends Component {
     }
 
     componentWillMount() {
-      console.log(this.props)
+
     }
   
   renderRecipe() {

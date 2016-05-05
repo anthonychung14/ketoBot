@@ -57,7 +57,6 @@ export class Recipes extends Component {
     return (
       <section className={`${styles}`}>       
         <div className="recipeHeader">
-        <h2>Choose something to cook for the week</h2>
         </div>
         {this.props.recipes.map((element,key) => this.renderRecipe(element,key))}
         <RecipeModal

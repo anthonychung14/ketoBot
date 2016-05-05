@@ -25,10 +25,6 @@ export class FridgeSearch extends Component {
     super(props);
   }
 
-  componentWillMount () {    
-
-  }
-
   renderSearchRecipe(element, index) {
     return (
       <Card rounded={true} width={256} key={index}>

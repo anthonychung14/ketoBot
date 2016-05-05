@@ -30,14 +30,13 @@ export class AllRecipes extends Component {
 
   render() {
     return (
-      <section className={`${styles}`}>
-        <h3>Choose a new recipe for the week</h3>
+      <section className={`${styles}`}>        
         <Tabs
           className="tabs"
           onChange={this.handleChange}
           value={this.state.slideIndex}>
-            <Tab label="ketoSearch" value={0} />
-            <Tab label="fridgeSearch" value={1} />                        
+            <Tab label="ketoSearch" value={0} />                        
+            <Tab label="ketoFridge" value={1} />
         </Tabs>
         
         <SwipeableViews
@@ -45,10 +44,10 @@ export class AllRecipes extends Component {
           index={this.state.slideIndex}
           onChangeIndex={this.handleChange}>
           <div className="tabView">
-            <Search/>
+            <Recipes/>            
           </div>
           <div className="tabView">
-            <Recipes/>
+          <Search/>
           </div>                    
         </SwipeableViews>
 

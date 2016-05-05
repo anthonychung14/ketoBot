@@ -16,6 +16,10 @@ export class StapleShow extends Component {
       };
     }    
 
+    componentWillMount() {
+      console.log(this.props.stapleData)
+    }
+
     submit(element) {            
       this.props.addStaplePlan(element)
     }
@@ -43,7 +47,7 @@ export class StapleShow extends Component {
       
     }
 
-    renderRecipe(element, index) {
+    renderRecipe(element, index) {      
       return (
           <Card rounded={true} width={256} key={index}>
             <Heading level={2} size={3}>{element.recipe.title}</Heading>
@@ -60,10 +64,10 @@ export class StapleShow extends Component {
       }
 
     render() {          
+      console.log(this.props.stapleData)
       return (              
         <section className={`${styles}`}>
-        {this.props.stapleData.map((element,index) => this.renderRecipe(element, index))}
-        
+        {this.props.stapleData.map((element,index) => this.renderRecipe(element, index))}        
         </section>
     );
   }

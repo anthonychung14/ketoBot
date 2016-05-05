@@ -41,20 +41,26 @@ def search(request):
   #if one long, transform into string
 
   #if more than two, put an OR between all of them  
-  string = ""
-  for x in queryJSON:
-    if len(queryJSON) > 1:
-      string += x + " OR "
+  def makeQuery(queryClient):
+    string = ""
+    if len(queryClient) != 0:
+      for x in queryClient[:-1]:
+        if len(queryClient) > 1:
+          string += x + " OR "
+        else: 
+          string += x
+      string  += queryClient[-1]
+      return string
     else: 
-      string += x
+      return string
 
-  print(string, "json")
+  print(makeQuery(queryJSON))
 
   if request.method == 'POST':
     data = {    
      "query": {
         "query_string": {
-          "query": "'ground beef' OR 'coconut oil' OR 'paneer'"
+          "query": makeQuery(queryJSON)
         }
       }
     }

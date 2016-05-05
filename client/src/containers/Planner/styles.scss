@@ -4,24 +4,25 @@
 
   display: -webkit-flex;
   display: flex;
-  -webkit-flex-direction: column;
-  flex-direction: column;
+  -webkit-flex-direction: row;
+  flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: flex-start;
+  
+  .tabView {
+    height: 100vh;    
+  }
 
-  .flexContainer {
+  .staples {
     display: -webkit-flex;
     display: flex;
-    -webkit-flex-direction: row;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;    
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    border-style: solid;    
+    flex-grow: 2;
   }
 
-  .flexBoxed {
-    flex: 0 0 40%;
-
+  .totals {
+    flex-grow: 3;
   }
-
+  
 }

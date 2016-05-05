@@ -10,7 +10,7 @@ export class ChosenFridge extends Component {
     }
     
     componentWillMount() {
-      console.log(this.props)
+
     }
 
   render() {    

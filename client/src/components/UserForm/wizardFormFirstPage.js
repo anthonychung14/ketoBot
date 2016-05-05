@@ -61,9 +61,13 @@ class WizardFormFirstPage extends Component {
           <div>
             <input type="text" placeholder="Carbs" {...carbs}/>
           </div>
-        </div>        
+        </div>     
+
         
         <div>
+        <button type="button" onClick={this.previousPage}>
+            <i/> Previous
+          </button>
           <button type="submit">
             Next <i/>
           </button>

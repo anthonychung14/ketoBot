@@ -58,8 +58,8 @@ export function createStaple(props, ingredData) {
 
   //recipe information
   const finalStaple = {
-    recipeData: recData,
-    ingredData: ingredServings,
+    recipe: recData,
+    ingreds: ingredServings,
     nutrition: stapleNutrition
   }
 
@@ -79,7 +79,7 @@ export function postStaple(finalStaple) {
   })
   return {
     type: POST_STAPLE,
-    payload: request
+    payload: finalStaple
   }
 }
 

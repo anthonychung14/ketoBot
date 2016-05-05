@@ -7,7 +7,6 @@
 
   .tabs {
     flex: 0 0 100%;
-    border-style: solid;
   }
 
   padding: 50px 0;
@@ -15,7 +14,7 @@
   .tabView {
     flex: 0 0 100%;
     margin: 10px;
+    height: 100vh;
     align-self: center;
-    border-style: solid;
   }
 }

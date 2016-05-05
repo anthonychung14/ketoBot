@@ -7,7 +7,6 @@ import pandas as pd
 from crawler.items import RecipeItem, IngredientData, RecipeElastic
 from scrapy.exceptions import DropItem
 
-
 #Saves metadata on recipe to psql
 class RecipePipeline(object):
     def process_item(self, item, spider):        

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { reduxForm, addArrayValue } from 'redux-form'
 import PureInput from './PureInput'
 
-import { createStaple, fetchStaples } from '../../../actions/createMealPlan'
+import { createStaple } from '../../../actions/createMealPlan'
 
 /* component styles */
 import { styles } from './styles.scss';
@@ -25,8 +25,8 @@ class StapleForm extends Component {
       })  
     })
     
-    this.props.closeModal()
-    this.props.createStaple(props, ingredData).then(() => this.props.fetchStaples())
+    this.props.closeModal()    
+    this.props.createStaple(props, ingredData)
   }
 
   generateServings(ingred) {
@@ -77,5 +77,5 @@ class StapleForm extends Component {
 export default reduxForm({
   form: 'stapleForm',
   fields 
-}, null, { createStaple, fetchStaples })(StapleForm);
+}, null, { createStaple })(StapleForm);
 
