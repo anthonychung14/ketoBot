@@ -32,6 +32,13 @@ export function formModal() {
   }
 }
 
+export const STAPLE_MODAL = "STAPLE_MODAL"
+export function stapleModal() {    
+  return {
+    type: STAPLE_MODAL
+  }
+}
+
 // ADD TO PLAN (HELD IN STATE UNTIL APPROVED //
 export const ADD_RECPLAN = "ADD_RECPLAN"
 export function addRecPlan(element) {

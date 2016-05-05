@@ -4,10 +4,9 @@
 
   display: -webkit-flex;
   display: flex;
-  -webkit-flex-direction: row;
-  flex-direction: row;
-  flex-wrap: wrap;
-  
+  -webkit-flex-direction: column;
+  flex-direction: column;
+
   .tabView {
     height: 100vh;    
   }
@@ -17,7 +16,6 @@
     display: flex;
     -webkit-flex-direction: column;
     flex-direction: column;
-    border-style: solid;    
     flex-grow: 2;
   }
 

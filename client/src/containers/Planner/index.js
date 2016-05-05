@@ -11,7 +11,6 @@ import SwipeableViews from 'react-swipeable-views';
 
 import { ChosenRecipe } from '../../components/planner/ChosenRecipe'
 import { ChosenFridge } from '../../components/planner/ChosenFridge'
-import { StapleWindow } from '../../components/staple/StapleWindow'
 import { CalorieCount } from '../../components/planner/CalorieCount'
 
 import { Flex, Box } from 'reflexbox'
@@ -59,13 +58,14 @@ export class Planner extends Component {
     return (      
       <section className={`${styles}`}>              
         <div className="staples">
-        {this.renderTab()}
+        {this.renderTab()}        
         <SwipeableViews
           className="tabView"
           index={this.state.slideIndex}
-          onChangeIndex={this.handleChange}>
+          onChangeIndex={this.handleChange}>          
           <div className="tabView">            
-            <StapleWindow />            
+            <CalorieCount
+            chosenRecipes={this.props.chosenRecipes}/>
           </div>          
           <div className="tabView">            
             <ChosenFridge fridgeItems={this.props.fridgeItems} />
@@ -74,8 +74,7 @@ export class Planner extends Component {
         </div>                
 
         <div className="totals">                
-          <CalorieCount
-            chosenRecipes={this.props.chosenRecipes}/>
+          
         </div>
              
       </section>      

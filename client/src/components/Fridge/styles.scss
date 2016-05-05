@@ -5,15 +5,12 @@
 
   display: -webkit-flex;
   display: flex;
-  -webkit-flex-direction: row;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  flex-wrap: wrap;  
   text-align: center
 
-  h2 {
-    margin-bottom: 50px;
+  h2 {    
   }
 
   a {
@@ -25,9 +22,14 @@
     padding: 0 10%;
   }
 
-  
-
-
+  .fridgeCards {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    flex-wrap: wrap;  
+    justify-content: center;
+  }
   .card {
     margin: 5px 5px 5px 5px;  
     height: 300px;

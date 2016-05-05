@@ -16,9 +16,6 @@ export class StapleShow extends Component {
       };
     }    
 
-    componentWillMount() {
-      console.log(this.props.stapleData)
-    }
 
     submit(element) {            
       this.props.addStaplePlan(element)

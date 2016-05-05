@@ -1,9 +1,10 @@
-import { OPEN_MODAL, FORM_MODAL } from '../actions/items'
+import { OPEN_MODAL, FORM_MODAL, STAPLE_MODAL } from '../actions/items'
 
 //if state switches off, clear the "active item state"
 const modalState = {
   openForm: false,
   openDisplay: false,
+  openStaple: false,
   activeItem: null
 }
 
@@ -17,6 +18,10 @@ export function modalReducer(state = modalState, action) {
     case FORM_MODAL:
       return {
         openForm: !state.openForm
+      }
+    case STAPLE_MODAL:
+      return {
+        openStaple: !state.openStaple
       }
     default:
       return state;
