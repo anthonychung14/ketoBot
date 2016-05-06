@@ -24,7 +24,7 @@ export default class UserData extends Component {
   }
 
   renderUserData(userData) {
-    return (
+    return (      
       <div>
         <div> 
           <h2>Nutrition Goals</h2>

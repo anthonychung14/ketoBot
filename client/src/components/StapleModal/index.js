@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 /* component styles */
 import { styles } from './styles.scss';
 import { Modal } from 'react-bootstrap'
-import StapleForm from '../StapleForm'
+import StapleForm from 'components/StapleForm'
 
 
 export class StapleModal extends Component {  
@@ -20,9 +20,9 @@ export class StapleModal extends Component {
         </Modal.Header>
         <Modal.Body>  
           <StapleForm 
-                fridgeItems={this.props.fridgeItems}
-                closeModal = {this.props.stapleModal}
-                fetchFridge={this.props.fetchFridge}/>
+              fridgeItems={this.props.fridgeItems}
+              closeModal = {this.props.stapleModal}
+              fetchFridge={this.props.fetchFridge}/>
         </Modal.Body>
       </Modal>    
     );

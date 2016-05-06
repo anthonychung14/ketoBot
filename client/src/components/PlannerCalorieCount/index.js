@@ -15,7 +15,7 @@ const macWeek = {
   Carbs: 20 *6
 }
 
-export class CalorieCount extends Component {  
+export class PlannerCalorieCount extends Component {  
     constructor(props) {
       super(props)
     }
@@ -60,7 +60,7 @@ export class CalorieCount extends Component {
   render() {            
     let tableData = this.props.chosenRecipes.map((element, index) => this.buildRecipeRow(element, index))
     let totalPlan = this.calcRemaining()
-    let macs = [].concat(macWeek, tableData, totalPlan)
+    let macs = [].concat(tableData, totalPlan, macWeek)
 
     const percentDone = totalPlan['Calories']/macWeek['Calories']
 

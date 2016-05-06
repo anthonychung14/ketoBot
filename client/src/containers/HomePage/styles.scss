@@ -2,5 +2,13 @@
 
   padding: 50px 0;
   align-self: center;
+
+  
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
   
 }

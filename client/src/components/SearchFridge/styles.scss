@@ -1,0 +1,44 @@
+:local(.styles) {
+  position: relative;  
+
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  text-align: center
+
+  h2 {    
+    text-align: center;
+  }
+
+  a {
+    font-size: 12px;
+  }
+
+  p {
+    font-size: 20px;
+    padding: 0 10%;
+  }
+
+  .fridgeCards {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    flex-wrap: wrap;  
+    justify-content: flex-start;
+  }
+
+  .card {
+    margin: 5px 5px 5px 5px;  
+    height: 300px;
+    
+    & input {
+      display: none
+    }
+    
+    &:hover input {
+      display: block;
+    }    
+  }
+}

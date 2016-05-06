@@ -30,6 +30,7 @@ export default class Search extends Component {
   renderSearch(element, index) {
     return (
       <Card rounded={true} width={256} key={index}>
+        <CardImage src={element.image} />
           <Heading level={2} size={3}>{element.title}</Heading>
           <Text> {element.time} time! </Text>
           <input className="modalButton" type="button" value=" Quick Look " />

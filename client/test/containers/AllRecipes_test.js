@@ -1,17 +1,17 @@
 import { expect } from '../test_helper';
-import { AllRecipes } from '../../src/containers/AllRecipes'
-import { Recipes } from '../../src/components/Recipes';
-import { Search } from '../../src/components/Search'
-
 import TestUtils from 'react-addons-test-utils';
-import React from 'react/addons-{addon}';
+import React from 'react/addons';
 
-describe('Recipes - static behavior test', () => { 
+import { AllRecipes } from '../../src/containers/AllRecipes'
+
+
+
+describe('Container for all recipes - static behavior test', () => { 
   var component;
   var renderedDOM;
 
   beforeEach(() => {      
-      component = TestUtils.renderIntoDocument(<Recipes initialName="my second test" />);
+      component = TestUtils.renderIntoDocument(<AllRecipes initialName="my second test" />);
       renderedDOM = () => React.findDOMNode(component);
   });
 

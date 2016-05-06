@@ -1,5 +1,5 @@
 import { expect } from '../test_helper';
-import { Header } from '../../src/components/Recipes'
+import { Recipes } from '../../src/components/Recipes'
 import TestUtils from 'react-addons-test-utils';
 import React from 'react/addons';
 

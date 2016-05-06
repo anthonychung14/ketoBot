@@ -9,10 +9,12 @@ import { styles } from './styles.scss';
 import { Card, CardImage, Heading, Text } from 'rebass'
 import { Table, Thead, Th, Tr, } from 'Reactable'
 
+import { SearchFridgeResults } from 'components/SearchFridgeResults'
+
 function mapStateToProps(state) {
   return {
     fridge: state.fridge.fridgeItems,
-    searchFridge: state.fridge.fridgeSearch,
+    searchFridge: state.fridge.recipes,
     searchTerms: state.fridge.searchTerms
   }
 }
@@ -22,7 +24,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 @connect(mapStateToProps, mapDispatchToProps)
-export class Fridge extends Component {
+export class SearchFridge extends Component {
    constructor(props) {
     super(props);
   }
@@ -44,32 +46,20 @@ export class Fridge extends Component {
     }
   }
 
-// THIS FEATURE SHOULD BE MOVED TO THE "CREATE/ADD" PLACE. Should not be a "search feature"
-// THINK OF IT LIKE MANAGEMENT
-// You should be able to add staples here based on the foods in your fridge then
-//   <Text>
-//   {filtered.map((element, index) => this.renderItem(element, index))}
-// </Text>
-//   renderItem(element, index) {
-//     return (
-//       <li key={index} onClick={element => this.handleClick(element)}>{element.name}</li>
-//     )
-//   }
-
-  renderRow(element, index) {
-    return {
-      'Servings': element['servings'],
-      'Name': element['name'],
-      'Calories': element['calories']
-    }
-  }
-
+  renderItem(element, index) {
+    return (
+      <li key={index} onClick={element => this.handleClick(element)}>{element.name}</li>
+    )
+  }        
+  
   renderCard(category, index) {
     let filtered = this.props.fridge.filter((item) => item.category === category)
     return (
-      <Card rounded={true} width={"40%"} key={index}>      
-        <Heading level={2} size={3}>{category}</Heading>        
-        <Table className="table" sortable={true} itemsPerPage={3} data={filtered.map((element, index) => this.renderRow(element, index))} />                  
+      <Card className="card" rounded={true} width={250} key={index}>      
+        <Heading level={2} size={2}>{category}</Heading>
+          <Text>
+            {filtered.map((element, index) => this.renderItem(element, index))}
+          </Text>            
       </Card>
     )
   }
@@ -77,12 +67,19 @@ export class Fridge extends Component {
   render() {
     const categories = [ 'Protein', 'Fats', 'Dairy' , 'Vegetables' ]
     return (
+      <div>
+      <h2>Fridge Search</h2>
       <section className={`${styles}`}>
-        <h2>Inventory</h2>
         <div className="fridgeCards">
         {categories.map((category,index) => this.renderCard(category, index))}
         </div>
+        <div className="fridgeResults">
+          <SearchFridgeResults
+          fridgeRecipes={this.props.searchFridge}
+          searchTerms={this.props.searchTerms}/>
+        </div>
       </section>
+      </div>
     );
   }
 }

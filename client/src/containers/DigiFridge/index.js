@@ -1,18 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
-import * as actionCreators from '../../actions/items'
+
+/* actions */ 
+import { formModal, stapleModal, addStaplePlan } from '../../actions/items'
+import { fetchFridge } from '../../actions/fridgeActions'
+import { fetchStaples } from '../../actions/createMealPlan'
 
 /* components */
 import { Fridge } from 'components/Fridge'
 import { FridgeModal } from 'components/FridgeModal'
 import { FridgeSearch } from 'components/FridgeSearch'
+import { StapleWindow } from 'components/StapleWindow'
+import { StapleModal } from 'components/StapleModal'
 
-import { StapleWindow } from '../../components/staple/StapleWindow'
 
-        
+/* styling */      
 import { styles } from './styles.scss';
-
 import Tabs from 'material-ui/lib/tabs/tabs';
 import Tab from 'material-ui/lib/tabs/tab';
 import SwipeableViews from 'react-swipeable-views';
@@ -20,15 +24,21 @@ import SwipeableViews from 'react-swipeable-views';
 
 function mapStateToProps(state) {
   return {     
-    modalState: state.modalState };
+    modalState: state.modalState,
+    fridgeItems: state.fridge.fridgeItems,
+    stapleData: state.staples.stapleData };
 }
 
 function mapDispatchToProps(dispatch) {
-  return { actions: bindActionCreators(actionCreators, dispatch)}
+  const actions = {
+    fetchFridge, fetchStaples, formModal, stapleModal, addStaplePlan }
+  return { actions: bindActionCreators(actions, dispatch)}
 }
 
 @connect(mapStateToProps, mapDispatchToProps)
 export class DigiFridge extends Component {
+  
+
   constructor(props){
     super(props);   
     this.state={
@@ -57,17 +67,28 @@ export class DigiFridge extends Component {
           index={this.state.slideIndex}
           onChangeIndex={this.handleChange}>
         <div className="tabView">            
-          <Fridge openModal={this.props.actions.formModal}/>
+          <Fridge 
+              openModal={this.props.actions.formModal}/>
           <button onClick={this.props.actions.formModal}>Add to Fridge</button>
           <FridgeModal 
             modalState={this.props.modalState}
             openModal={this.props.actions.formModal}/>
         </div>
         <div className='tabView'>
-          <StapleWindow />
+          <StapleWindow 
+              fetchFridge={this.props.actions.fetchFridge}
+              fetchStaples={this.props.actions.fetchStaples}
+              stapleModal={this.props.actions.stapleModal}
+              addStaplePlan={this.props.actions.addStaplePlan} 
+              modalState= {this.props.modalState}
+              fridgeItems={this.props.fridge}
+              stapleData={this.props.stapleData}/>
+          <StapleModal 
+              modalState = {this.props.modalState}
+              stapleModal={this.props.actions.stapleModal} 
+              fridgeItems={this.props.fridgeItems}/>
         </div>
         </SwipeableViews>
-        <FridgeSearch />
       </section>
     );
   }

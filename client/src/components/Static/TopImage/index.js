@@ -29,25 +29,37 @@ export class TopImage extends Component {
     return (
       <section className={`${styles}`} ref="parallax">
         <LoadingOrderAnimation animation="fade-in"
-                move="from-bottom-to-top"
-                distance={30}
-                speed={700}
-                wait={700}
-              >
-                <h1 className="title">
-                  ketoBot
-                </h1>
-              </LoadingOrderAnimation>
-              <LoadingOrderAnimation animation="fade-in"
-                move="from-bottom-to-top"
-                distance={60}
-                speed={700}
-                wait={900}>
+          move="from-bottom-to-top"
+          distance={30}
+          speed={700}
+          wait={700}>
+        <h1 className="title">
+          ketoBot
+        </h1>
+        </LoadingOrderAnimation>
+        <LoadingOrderAnimation animation="fade-in"
+          move="from-bottom-to-top"
+          distance={60}
+          speed={700}
+          wait={900}>
+          <h2>
+            because machines
+          </h2>
+          </LoadingOrderAnimation>
 
-                <h2>
-                  because machines
-                </h2>
-              </LoadingOrderAnimation>
+        <LoadingOrderAnimation animation="fade-in"
+          move="from-bottom-to-top"
+          distance={100}
+          speed={700}
+          wait={900}>
+        <div className="box1">
+            <h1>I am a box</h1>
+        </div>
+
+        <div className="box1">
+            <h3>I am also a box</h3>
+        </div>
+        </LoadingOrderAnimation>
         </section>
     );
   }

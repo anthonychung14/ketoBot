@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 
 /* components */
-import { Recipes } from '../../components/Recipes';
-import { Search } from '../../components/Search'
+import { Recipes } from 'components/Recipes';
+import { Search } from 'components/Search'
+import { SearchFridge } from 'components/SearchFridge'
+import { SearchFridgeResults } from 'components/SearchFridge'
         
 import { styles } from './styles.scss';
 
@@ -34,9 +36,10 @@ export class AllRecipes extends Component {
         <Tabs
           className="tabs"
           onChange={this.handleChange}
-          value={this.state.slideIndex}>
-            <Tab label="ketoSearch" value={0} />                        
-            <Tab label="ketoFridge" value={1} />
+          value={this.state.slideIndex}>            
+            <Tab label="ketoNew" value={0} />                        
+            <Tab label="ketoSearch" value={1} />
+            <Tab label="ketoFridge" value={2} />                        
         </Tabs>
         
         <SwipeableViews
@@ -47,8 +50,11 @@ export class AllRecipes extends Component {
             <Recipes/>            
           </div>
           <div className="tabView">
-          <Search/>
-          </div>                    
+            <Search/>
+          </div>
+          <div className='tabView'>                     
+            <SearchFridge/>
+          </div>
         </SwipeableViews>
 
       </section>

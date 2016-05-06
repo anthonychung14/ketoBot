@@ -3,26 +3,25 @@ import React, { Component } from 'react';
 /* component styles */
 import { styles } from './styles.scss';
 
-import { RecipeInfo } from '../../RecipeInfo'
+import { RecipeInfo } from 'components/RecipeInfo'
 
-export class ChosenRecipe extends Component {  
+export class PlannerFill extends Component {  
     constructor(props) {
       super(props)
     }
 
     componentWillMount() {
-
+      
     }
   
-  renderRecipe() {
+    renderRecipe() {
 
-  }
+    }
 
-  render() {    
-    let recipe = this.props.chosenRecipe.recipe || []
+  render() {        
     return (              
         <section className={`${styles}`}>        
-        <RecipeInfo recipe={this.props.chosenRecipe} />        
+        <RecipeInfo recipe={this.props.chosenRecipes} />        
         </section>
     );
   }

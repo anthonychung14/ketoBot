@@ -9,17 +9,16 @@ import Tabs from 'material-ui/lib/tabs/tabs';
 import Tab from 'material-ui/lib/tabs/tab';
 import SwipeableViews from 'react-swipeable-views';
 
-import { ChosenRecipe } from '../../components/planner/ChosenRecipe'
-import { ChosenFridge } from '../../components/planner/ChosenFridge'
-import { CalorieCount } from '../../components/planner/CalorieCount'
-
 import { Flex, Box } from 'reflexbox'
+
+import { PlannerTabView } from '../../components/PlannerTabView'
 
 
 function mapStateToProps(state) {
   return {     
     chosenRecipes: state.mealPlan.chosenRecipes,
-    fridgeItems: state.fridge.fridgeItems
+    fridgeItems: state.fridge.fridgeItems,
+    staples: state.staples.stapleData
   }
 }
 
@@ -64,11 +63,10 @@ export class Planner extends Component {
           index={this.state.slideIndex}
           onChangeIndex={this.handleChange}>          
           <div className="tabView">            
-            <CalorieCount
-            chosenRecipes={this.props.chosenRecipes}/>
+            <PlannerTabView chosenRecipes={this.props.chosenRecipes} />
           </div>          
           <div className="tabView">            
-            <ChosenFridge fridgeItems={this.props.fridgeItems} />
+            <h3>the master ketoBot here </h3>
           </div>          
         </SwipeableViews>
         </div>                

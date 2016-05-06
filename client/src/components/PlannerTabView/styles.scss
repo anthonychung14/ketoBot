@@ -1,0 +1,15 @@
+:local(.styles) {
+  position: relative;
+
+  padding: 50px 0;
+  align-self: center;
+
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  justify-content: space-around;
+
+  
+}
+
