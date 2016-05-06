@@ -5,7 +5,6 @@ import { styles } from './styles.scss';
 import { Modal } from 'react-bootstrap'
 import StapleForm from 'components/StapleForm'
 
-
 export class StapleModal extends Component {  
   constructor(props) {
     super(props);

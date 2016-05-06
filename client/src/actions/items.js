@@ -49,13 +49,12 @@ export function addRecPlan(element) {
 }
 
 export const ADD_STAPLEPLAN = "ADD_STAPLEPLAN"
-export function addStaplePlan(element) {  
+export function addStaplePlan(element, servings) {    
   return {
     type: ADD_STAPLEPLAN,
     payload: element
   }
 }
-
 
 // ASYNC //
 
