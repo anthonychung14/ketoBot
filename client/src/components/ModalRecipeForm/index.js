@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { reduxForm, addArrayValue } from 'redux-form'
 
 import { addStaplePlan } from '../../actions/items'
@@ -8,9 +8,14 @@ export const fields = [
 ]
 
 class ModalRecipeForm extends Component {
+  static contextTypes = {
+    router: PropTypes.object
+  }
+
   submitFoodForm(servings) {    
     this.props.hideModal()
     this.props.addStaplePlan(this.props.recipe, servings)
+    this.context.router.push('planner')
   }
 
   render() {

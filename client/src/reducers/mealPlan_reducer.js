@@ -11,14 +11,15 @@ export function mealPlan(state=initialState, action) {
   switch(action.type) {
     case ADD_RECPLAN:      
       return Object.assign({}, state, {
-        chosenRecipes: state.chosenRecipes.concat(action.payload)        
+        chosenRecipes: state.chosenRecipes.concat(action.payload),
+        servingMap: 1        
       })
     case ADD_STAPLEPLAN:      
       var pickedRecipe = action.payload
       var recipeInfo = pickedRecipe.recipe
       return Object.assign({}, state, {
         chosenRecipes: state.chosenRecipes.concat(pickedRecipe),
-        servingMap: {}
+        servingMap: action.payload.servings
       })
     default:
       return state

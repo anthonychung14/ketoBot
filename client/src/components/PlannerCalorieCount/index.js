@@ -7,12 +7,13 @@ import { Flex, Box } from 'reflexbox'
 /* component styles */
 import { styles } from './styles.scss';
 
+// pass down the data from userGoals
 const macWeek = {
   Info: <strong>Weekly Reqs</strong>,
-  Calories: 1800 *6,
-  Protein: 130 *6,
-  Fat: 150 *6,
-  Carbs: 20 *6
+  Calories: 1800 * 6,
+  Protein: 130 * 6,
+  Fat: 150 * 6,
+  Carbs: 20 * 6
 }
 
 export class PlannerCalorieCount extends Component {  
@@ -25,13 +26,16 @@ export class PlannerCalorieCount extends Component {
     }
 
   buildRecipeRow(element, index) {    
-    let nutri = element.nutrition
+    let nutri = element.recipe.nutrition
+    let servings = element['servings'].recipeServings
+    //The times equals seems to have mutated the original data
     return Object.assign({}, {      
-      Info: element.recipe.title,
-      Calories: nutri.calories,
-      Fat: nutri.fat,
-      Protein: nutri.protein,
-      Carbs: nutri.net_carb
+      Info: element.recipe.recipe.title,
+      Servings: servings,
+      Calories: nutri.calories * servings,
+      Fat: nutri.fat * servings,
+      Protein: nutri.protein * servings,
+      Carbs: nutri.net_carb * servings
     })
   }
 
@@ -46,7 +50,7 @@ export class PlannerCalorieCount extends Component {
     }
 
     let total = this.props.chosenRecipes.reduce((prev, curr) => {
-      const nutri = curr.nutrition
+      const nutri = curr.recipe.nutrition      
       prev['Calories'] += nutri['calories']
       prev['Fat'] += nutri['fat']
       prev['Protein'] += nutri['protein']

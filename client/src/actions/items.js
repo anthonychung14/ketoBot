@@ -49,10 +49,19 @@ export function addRecPlan(element) {
 }
 
 export const ADD_STAPLEPLAN = "ADD_STAPLEPLAN"
-export function addStaplePlan(element, servings) {    
+export function addStaplePlan(element, chosenServings) {    
+  //get state => servingMap
+  // var servingsMap = store.getState()
+
+  //reconstruct servingMap based on totals
+
+  var addedRecipe = Object.assign({}, {
+    recipe: element,
+    servings: chosenServings
+  })
   return {
     type: ADD_STAPLEPLAN,
-    payload: element
+    payload: addedRecipe
   }
 }
 

@@ -38,7 +38,14 @@ def staples(request):
     }
 
     return Response(data)
-        
+
+#Caching opportunities
+
+#1. cache the results of database
+#2. LRU cache of the most recently used items in your staples
+#3. Recommended items to buy for the fridge
+#4. Figure out how to cascade delete the recipes that are faulty (no ingredient data)        
+#5. Don't render amount/servings on the front-end, pass in the string itself
 
 @api_view(['GET', 'POST'])
 def recipe_list(request):
@@ -48,7 +55,7 @@ def recipe_list(request):
         return Response(serializer.data)
       else:
         latest_recipes = Recipe.objects.filter(staple=False).order_by('?')[:20]
-        cache.set("recipeCache", latest_recipes, timeout=10)
+        cache.set("recipeCache", latest_recipes, timeout=1800)
         serializer = RecipeSerializer(latest_recipes, many=True)        
               
         return Response(serializer.data)
