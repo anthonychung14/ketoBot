@@ -31,6 +31,7 @@
   .card {
     margin: 5px 5px 5px 5px;  
     height: 300px;
+    background-color:white;
     
     & input {
       display: none
@@ -43,6 +44,5 @@
   img.cardImage {
     max-height: 170px;
     width: auto;
-
-  }
+  }  
 }
