@@ -12,10 +12,9 @@ class ModalRecipeForm extends Component {
     router: PropTypes.object
   }
 
-  submitFoodForm(servings) {    
+  submitFoodForm(servings) {        
+    this.props.addStaplePlan(this.props.recipe, servings.recipeServings)
     this.props.hideModal()
-    this.props.addStaplePlan(this.props.recipe, servings)
-    this.context.router.push('planner')
   }
 
   render() {
@@ -33,8 +32,9 @@ class ModalRecipeForm extends Component {
       </select>
 
       <button type="submit" disabled={submitting}>
-            {submitting ? <i/> : <i/>} Submit
-          </button>          
+        {submitting ? <i/> : <i/>} Add and continue
+      </button>         
+
       </form>
     )
   }

@@ -58,7 +58,7 @@ def recipe_list(request):
         cache.set("recipeCache", latest_recipes, timeout=1800)
         serializer = RecipeSerializer(latest_recipes, many=True)        
               
-        return Response(serializer.data)
+      return Response(serializer.data)
     
     elif request.method == 'POST':
       #split the data into three parts. each one will have to be serialized and saved
@@ -93,8 +93,10 @@ def recipe_list(request):
           'r': rKey,
           'amount':  obj['servings'],
           'measurement': obj['measurement'],
-          'name': obj['name']
+          'name': obj['name'],          
         }
+
+        print(recipeIngred)
         ingredSerializer = IngredientSerializer(data=recipeIngred)        
         
         if ingredSerializer.is_valid():
@@ -135,6 +137,7 @@ def recipe_nutrition(request):
     
     gotRecipeIngredients = Ingredient.objects.filter(r__in=recipeIds)    
     ingredientSerializer = IngredientSerializer(gotRecipeIngredients, many=True)
+    print(ingredientSerializer.data)
     
     data = {
       'nutrition': nutritionSerializer.data,
@@ -142,7 +145,6 @@ def recipe_nutrition(request):
     }
 
     return Response(data)  
-
 
 #This is for ElasticSearch
 @api_view(['GET', 'POST'])

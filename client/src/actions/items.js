@@ -9,7 +9,6 @@ const recipe_nutrition = "/nutrition"
 
 export { fetchFridge } from './fridgeActions'
 
-
 export const GET_RECIPES = "GET_RECIPES"
 
 //NAV TO MODAL
@@ -54,6 +53,7 @@ export function addStaplePlan(element, chosenServings) {
   // var servingsMap = store.getState()
 
   //reconstruct servingMap based on totals
+  console.log(chosenServings, "action from added to plan")
 
   var addedRecipe = Object.assign({}, {
     recipe: element,
@@ -91,7 +91,7 @@ export function receiveNutrition(request, json) {
         ingredJSON[element.r] = [element]
      }     
   })
-
+  
   return {
     type: RECEIVE_NUTRITION,    
     request,

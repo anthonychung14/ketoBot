@@ -7,7 +7,6 @@ import { bindActionCreators } from 'redux'
 /* component styles */
 import { styles } from './styles.scss';
 import { Card, CardImage, Heading, Text } from 'rebass'
-
 import { RecipeModal } from 'components/RecipeModal'
 
 function mapStateToProps(state) {  
@@ -20,8 +19,6 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return { actions: bindActionCreators(actionCreators, dispatch)}
 }
-
-@connect(mapStateToProps, mapDispatchToProps)
 
 export class Recipes extends Component {
   componentWillMount () {
@@ -62,8 +59,10 @@ export class Recipes extends Component {
         <RecipeModal
           modalState ={this.props.modalState}
           openModal={this.props.actions.openModal}
-          addRecPlan={this.props.actions.addRecPlan}/>      
+          addStaplePlan={this.props.actions.addStaplePlan}/>      
         </section>
     );
   }
-}          
+}    
+
+export default connect(mapStateToProps, mapDispatchToProps)(Recipes);

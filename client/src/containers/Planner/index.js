@@ -47,8 +47,8 @@ export class Planner extends Component {
         className="tabs"
         onChange={this.handleChange}
         value={this.state.slideIndex}>
-          <Tab label="Recipes" value={0} />            
-          <Tab label="Fillers" value={1} />
+          <Tab label="Current" value={0} />            
+          <Tab label="ketoMagic" value={1} />
         </Tabs>                  
     )
   }

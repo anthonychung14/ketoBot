@@ -23,7 +23,8 @@ export class RecipeModal extends Component {
       ingreds: this.props.modalState.activeItem.ingreds
     }
     
-    this.props.addRecPlan(approvedItem)    
+    this.props.addStaplePlan(approvedItem, 1)    
+    this.props.openModal()
     this.context.router.push('planner')
   }
 
@@ -35,7 +36,7 @@ export class RecipeModal extends Component {
     return (
        <Modal show={this.props.modalState.openDisplay} onHide={this.props.openModal}>        
         <Modal.Header>
-          <h3>{activeItem.recipe.title}</h3>
+          <h3>Add to Meal Plan</h3>
         </Modal.Header>
         <Modal.Body>                      
             <RecipeInfo recipe={this.props.modalState.activeItem} />          

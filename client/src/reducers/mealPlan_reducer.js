@@ -16,10 +16,14 @@ export function mealPlan(state=initialState, action) {
       })
     case ADD_STAPLEPLAN:      
       var pickedRecipe = action.payload
-      var recipeInfo = pickedRecipe.recipe
+      var recipeInfo = pickedRecipe.recipe      
+      var recipeId = recipeInfo.recipe["id"]
+      var newMap = Object.assign({}, state.servingMap)
+      newMap[recipeId] = action.payload.servings
+      
       return Object.assign({}, state, {
         chosenRecipes: state.chosenRecipes.concat(pickedRecipe),
-        servingMap: action.payload.servings
+        servingMap: newMap
       })
     default:
       return state

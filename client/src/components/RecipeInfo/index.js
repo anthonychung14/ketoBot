@@ -6,7 +6,7 @@ export class RecipeInfo extends Component {
     super(props);    
   }
 
-  render() {    
+  render() {        
     let recipe = this.props.recipe || {}
     if (!recipe.nutrition) {
       return (
@@ -15,7 +15,6 @@ export class RecipeInfo extends Component {
     } else
     return (
       <div>
-      <h4>This week, you are cooking...</h4>
       <h3>{recipe.recipe.title}</h3>
       <h4>Nutritional Information</h4>
       <ul>
@@ -29,7 +28,7 @@ export class RecipeInfo extends Component {
         <ul>
           {recipe.ingreds.map(element => {
             return (
-              <li key={element.name}>{element.amount + " " +element.measurement+ " " +element.name}</li>
+              <li key={element.name}>{element.rawString}</li>
             )}
           )}
         </ul>

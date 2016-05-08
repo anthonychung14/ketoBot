@@ -1,3 +1,4 @@
+--require ignore-styles
 --require ./test/test_helper.js
 --require ./test/dom.js 
 --recursive

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 /* components */
-import { Recipes } from 'components/Recipes';
+import Recipes from 'components/Recipes';
 import { Search } from 'components/Search'
 import { SearchFridge } from 'components/SearchFridge'
 import { SearchFridgeResults } from 'components/SearchFridge'

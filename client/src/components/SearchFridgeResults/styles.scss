@@ -25,9 +25,6 @@
     padding: 0 10%;
   }
 
-  
-
-
   .card {
     margin: 5px 5px 5px 5px;  
     height: 300px;
@@ -39,5 +36,9 @@
     &:hover input {
       display: block;
     }    
+  }
+  img.cardImage {
+    max-height: 170px;
+    width: auto;
   }
 }

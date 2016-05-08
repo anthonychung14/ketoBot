@@ -27,7 +27,8 @@ function mapStateToProps(state) {
     modalState: state.modalState,
     fridgeItems: state.fridge.fridgeItems,
     stapleData: state.staples.stapleData,
-    modalStaple: state.modalStaple
+    modalStaple: state.modalStaple,
+    chosenRecipes: state.mealPlan
   };
 }
 
@@ -67,21 +68,13 @@ export class DigiFridge extends Component {
           className="tabs"
           onChange={this.handleChange}
           value={this.state.slideIndex}>
-          <Tab label="Fridge" value={0} />            
-          <Tab label="Staples" value={1} />
+          <Tab label="Staples" value={0} />            
+          <Tab label="Fridge" value={1} />
         </Tabs>                  
         <SwipeableViews
           className="tabView"
           index={this.state.slideIndex}
           onChangeIndex={this.handleChange}>
-        <div className="tabView">            
-          <Fridge 
-              openModal={this.props.actions.formModal}/>
-          <button onClick={this.props.actions.formModal}>Add to Fridge</button>
-          <FridgeModal 
-            modalState={this.props.modalState}
-            openModal={this.props.actions.formModal}/>
-        </div>
         <div className='tabView'>
           <StapleWindow 
               fetchFridge={this.props.actions.fetchFridge}
@@ -99,9 +92,19 @@ export class DigiFridge extends Component {
               stapleModal={this.props.actions.stapleModal} 
               fridgeItems={this.props.fridgeItems}/>
           <ModalStaplePlan 
+              className="modalStaplePlan"
               modalPlan={this.props.modalStaple.modalState}
               modalProps={this.props.modalStaple.modalProps}
-              hideModal={this.props.actions.hidePlanModal}/>          
+              hideModal={this.props.actions.hidePlanModal}
+              chosenRecipes={this.props.chosenRecipes}/>          
+        </div>
+        <div className="tabView">            
+          <Fridge 
+              openModal={this.props.actions.formModal}/>
+          <button onClick={this.props.actions.formModal}>Add to Fridge</button>
+          <FridgeModal 
+            modalState={this.props.modalState}
+            openModal={this.props.actions.formModal}/>
         </div>
         </SwipeableViews>
       </section>
