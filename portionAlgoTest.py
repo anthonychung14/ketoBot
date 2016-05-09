@@ -24,8 +24,7 @@ def makeCombos(arr):
   return (sum([map(list, combinations(arr, i)) for i in range(len(arr) + 1)], []))
 
 #TEST #1 - you are outputting all possible combos
-arr = [1,2,3,4]
-print(len(makeCombos(arr)))
+#print(len(makeCombos(arr)))
 
 #Format the data within each of these combos
 def makeComboDictionary(arr):
@@ -82,7 +81,6 @@ def generateComboMatrix(arrDicts):
       comboMap.append(indexMap)            
     
     totalCombos.append(comboMatrix)  
-  print(totalCombos, "hoopla")
   return totalCombos
 
 def generateComboMap(arrDicts):
@@ -100,45 +98,37 @@ def generateComboMap(arrDicts):
     
     totalCombos.append(comboMap)  
   return totalCombos
-
-
     
   #construct new pro/fat/carb matrices with the matrices you have
-
 
   #feed them into num pee
   #returns a new array of dictionaries with the same keys, but values within each array are integer servings
 
-generateComboMatrix(makeComboDictionary(nutri.data[0:4]), 0)
+macroMatrix = generateComboMatrix(makeComboDictionary(nutri.data))
 
-#This will be created for every combination
+def testMatrix(matrix, target):
+  A = np.array((matrix[0], matrix[1], matrix[2]))
+  b = np.array(target)
 
+  try:
+    approx = np.around(np.linalg.lstsq(A,b)[0])
+    if all(i >= 0 for i in approx):
+      return approx
+    else:
+      return "n/a - negative"
+  except Exception, e:
+    return "n/a"    
 
-#This will create the set of matrices to plug into numpy
-#Input, the set of ordered dicts
+testTarget = [120,150,25]
 
+def testAllCombos(matrix, target):
+  allSolutions = []
+  for x in matrix:
+    allSolutions.append(testMatrix(x, target))
+  return allSolutions
 
-#Example of how to solve/test each combination
-pro = [4,5]
-fat = [1,2]
-carb = [3,6]
+# print(len(testAllCombos(macroMatrix, testTarget)) == len(makeComboDictionary(nutri.data)))
+#extend this array with the totalCombos map, find all combinations for which a solution is possible
 
-A = np.array((pro, fat, carb))
-b = np.array([22,7,21])
-
-#this will round. necessary for returning approximate solution
-# print(np.linalg.lstsq(A, b))
-
-#Finds A solution, but not integer solutions
-
-
-
-# arr = [1,2,3]
-
-
-
-
-
-
-
+print(makeComboDictionary(nutri.data))
 
