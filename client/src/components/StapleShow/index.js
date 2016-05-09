@@ -41,7 +41,7 @@ export class StapleShow extends Component {
         
         return (        
           <div>                                
-            <Table className="table" data = {this.renderIngreds(element)}/>
+            <Table className="table" data ={this.renderIngreds(element)}/>
             <input onClick={this.submit.bind(this, element)} className="modalButton" type="button" value=" Add to Plan " />                        
             <Table className="table" data={[
               {
@@ -54,10 +54,6 @@ export class StapleShow extends Component {
           </div>        
         )
       }
-
-    changeSelect() {
-      
-    }
 
     renderRecipe(element, index) {      
       return (
