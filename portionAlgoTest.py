@@ -5,29 +5,38 @@ import django
 django.setup()
 
 import numpy as np
+import pprint
+pp = pprint.PrettyPrinter(indent=0)
 from itertools import combinations
+from sympy import Matrix, solve_linear_system_LU, solve_linear_system
 
 from ketoBot.models import Recipe, Recipe_Nutrition
 from ketoBot.serializers import RecipeSerializer, RecipeNutritionSerializer
 
+from fridge.models import FridgeItem
+from fridge.serializers import FridgeItemSerializer
+
 #Grab necessary items
 staples = Recipe.objects.filter(staple=True)
 stapleSerializer = RecipeSerializer(staples, many=True)
-
 stapleID = [int(x['id']) for x in stapleSerializer.data]    
 gotStapleNutrition = Recipe_Nutrition.objects.filter(r__in=stapleID)
-
 nutri = RecipeNutritionSerializer(gotStapleNutrition, many=True)
+
+fridgeItems = FridgeItem.objects.all()
+fridgeSerial = FridgeItemSerializer(fridgeItems, many=True)
 
 #Generate all combos
 def makeCombos(arr):
-  return (sum([map(list, combinations(arr, i)) for i in range(len(arr) + 1)], []))
+  # return (sum([map(list, combinations(arr, i)) for i in range(len(arr) + 1)], []))
+  return (sum([map(list, combinations(arr, 3))], []))
 
 #TEST #1 - you are outputting all possible combos
 #print(len(makeCombos(arr)))
 
 #Format the data within each of these combos
-def makeComboDictionary(arr):
+#For STAPLES. not fridge items
+def makeComboDictionary(arr):  
   finalResult = []
   for i, combo in enumerate(makeCombos(arr)):
     #transform data into usable matrix form
@@ -41,13 +50,17 @@ def makeComboDictionary(arr):
       mPro = []
       mFat = []
       mCarb = []
-      for key, value in staple.iteritems():
+      for key, value in staple.iteritems():        
         if key == "protein":
           mPro.append(value)
         elif key == "fat":
           mFat.append(value)
+        elif key == "carbs":
+          mCarb.append(value)
         elif key == "net_carb":
           mCarb.append(value)
+        elif key == "id":
+          id = value
         elif key == "r":
           id = value
       combinationResult.append({id: mPro + mFat + mCarb})
@@ -104,31 +117,56 @@ def generateComboMap(arrDicts):
   #feed them into num pee
   #returns a new array of dictionaries with the same keys, but values within each array are integer servings
 
-macroMatrix = generateComboMatrix(makeComboDictionary(nutri.data))
+# print(makeComboDictionary(fridgeSerial.data))
+macroMatrix = generateComboMatrix(makeComboDictionary(fridgeSerial.data))
 
 def testMatrix(matrix, target):
   A = np.array((matrix[0], matrix[1], matrix[2]))
   b = np.array(target)
 
   try:
-    approx = np.around(np.linalg.lstsq(A,b)[0])
+    approx = np.linalg.solve(A,b)    
     if all(i >= 0 for i in approx):
       return approx
     else:
-      return "n/a - negative"
+      return 
   except Exception, e:
-    return "n/a"    
+    return
 
-testTarget = [120,150,25]
+
+####### ATTEMPTED WITH SYMPY
+from sympy.abc import x,y,z
+def testMatrixSympy(matrix, target):    
+  if not matrix:
+    print("matrix empty")    
+  else:        
+    matrix[0].append(target[0])
+    matrix[1].append(target[1])
+    matrix[2].append(target[2])    
+        
+    A = Matrix(([matrix[0], matrix[1], matrix[2]]))
+    result = solve_linear_system(A, x,y,z)
+    return result;    
+    # return result;    
+
+
+testTarget = [715,733,106]
+#This will eventually have to be gotten from the front-end's leftover mealplan section
 
 def testAllCombos(matrix, target):
   allSolutions = []
   for x in matrix:
     allSolutions.append(testMatrix(x, target))
+  filter(np.any(None), allSolutions)
+  pp.pprint(allSolutions)
   return allSolutions
 
-# print(len(testAllCombos(macroMatrix, testTarget)) == len(makeComboDictionary(nutri.data)))
+  
+
+testAllCombos(macroMatrix, testTarget)
+# print(makeComboDictionary(nutri.data)[11])
+
 #extend this array with the totalCombos map, find all combinations for which a solution is possible
 
-print(makeComboDictionary(nutri.data))
+# print(makeComboDictionary(nutri.data))
 

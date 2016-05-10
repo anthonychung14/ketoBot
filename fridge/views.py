@@ -54,7 +54,6 @@ def search(request):
     else: 
       return string
 
-  print(makeQuery(queryJSON))
 
   if request.method == 'POST':
     data = {    
