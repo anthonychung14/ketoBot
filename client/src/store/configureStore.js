@@ -5,6 +5,7 @@ import rootReducer from '../reducers';
 
 import { fetchFSearch } from '../actions/fridgeActions'
 import { fetchRecipes } from '../actions/items'
+import { fetchPlan } from '../actions/userPlan'
 
 export default function configureStore(initialState) {
   const logger = createLogger({
@@ -37,9 +38,9 @@ export default function configureStore(initialState) {
   })
   
 //This is what logs everytime
-  store.dispatch(fetchRecipes('Anthony')).then(() =>
-    console.log(store.getState())
-  )
+  store.dispatch(fetchRecipes('Anthony'))
+  .then(() => store.dispatch(fetchPlan()))
+  .then(() => console.log(store.getState()))
 
   return store;
 }

@@ -157,7 +157,6 @@ def testAllCombos(matrix, target):
   allSolutions = []
   for x in matrix:
     allSolutions.append(testMatrix(x, target))
-  filter(np.any(None), allSolutions)
   pp.pprint(allSolutions)
   return allSolutions
 

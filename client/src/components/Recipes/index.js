@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import * as actionCreators from '../../actions/items'
+import { openModal } from '../../actions/modalActions'
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
@@ -13,10 +14,12 @@ function mapStateToProps(state) {
   return { 
     recipes: state.recipesUser.recipes.all,   
     recData: state.recipesUser.recData,     
-    modalState: state.modalState };
+    modalState: state.modalState 
+  };
 }
 
 function mapDispatchToProps(dispatch) {
+  actionCreators.openModal = openModal  
   return { actions: bindActionCreators(actionCreators, dispatch)}
 }
 

@@ -1,7 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import { reduxForm } from 'redux-form'
+import { Link } from 'react-router'
+import { postProcess } from '../../actions/userPlan'
 
-export const fields = [ 'days', 'meals', 'freeCal' ]
+export const fields = [ 'calories', 'fat', 'protein', 'carbs', 'days', 'meals', 'freeCal' ]
 const validate = values => {
   const errors = {}
   if (!values.days) {
@@ -14,13 +16,22 @@ const validate = values => {
 }
 
 class WizardFormSecondPage extends Component {
+  static contextTypes = {
+    router: PropTypes.object
+  }
+
+  onSubmit(props) {
+    this.props.postProcess(props, this.context.router)    
+  }
+
   render() {
     const {
       fields: { days, meals, freeCal },
       handleSubmit,
-      previousPage
+      previousPage,
+      submitting
     } = this.props
-    return (<form onSubmit={handleSubmit}>
+    return (<form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
         <div>
           <label>How many days are we planning?</label>
           <div>
@@ -44,8 +55,8 @@ class WizardFormSecondPage extends Component {
           <button type="button" onClick={previousPage}>
             <i/> Previous
           </button>
-          <button type="submit">
-            Next <i/>
+          <button type="submit" disabled={submitting}>
+            {submitting ? <i/> : <i/>} Finish
           </button>
         </div>
       </form>
@@ -56,7 +67,8 @@ class WizardFormSecondPage extends Component {
 WizardFormSecondPage.propTypes = {
   fields: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  previousPage: PropTypes.func.isRequired
+  previousPage: PropTypes.func.isRequired,
+  submitting: PropTypes.bool.isRequired
 }
 
 export default reduxForm({
@@ -64,6 +76,6 @@ export default reduxForm({
   fields,                      // <------ only fields on this page
   destroyOnUnmount: false,     // <------ preserve form data
                        // <------ only validates the fields on this page
-})(WizardFormSecondPage)
+}, null, { postProcess })(WizardFormSecondPage)
 
 // {days.touched && days.error && <div>{days.error}</div>}

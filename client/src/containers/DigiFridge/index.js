@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 
 /* actions */ 
-import { formModal, stapleModal, addStaplePlan } from '../../actions/items'
+import { addStaplePlan, addAndCalc } from '../../actions/items'
 import { fetchFridge } from '../../actions/fridgeActions'
 import { fetchStaples } from '../../actions/createMealPlan'
-import { addPlanModal, hidePlanModal } from '../../actions/modalActions'
+import { addPlanModal, hidePlanModal, formModal, stapleModal } from '../../actions/modalActions'
 
 /* components */
 import { Fridge } from 'components/Fridge'
@@ -40,7 +40,8 @@ function mapDispatchToProps(dispatch) {
     stapleModal, 
     addStaplePlan,
     addPlanModal,    
-    hidePlanModal
+    hidePlanModal,
+    addAndCalc
     }
   return { actions: bindActionCreators(actions, dispatch)}
 }

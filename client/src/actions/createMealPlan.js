@@ -5,7 +5,37 @@ import moment from 'moment'
 const baseURL = "http://localhost:8000"
 const ketoBot = "/ketoBot/recipes"
 const staples = "/ketoBot/staples"
+const userAlgo = "/fridge/staples"
 import { formModal } from './items'
+
+//The magic backend algorithm
+export const REQUEST_ALGO = "REQUEST_ALGO"
+export function requestAlgo(request) {
+  return {
+    type: REQUEST_ALGO,
+    payload: request
+  }
+}
+
+export function sendForAlgo(chosenRecArray) {
+  return function(dispatch) {
+    dispatch(requestAlgo(request))
+    return fetch(baseURL+userAlgo)
+      .then(response => response.json())
+      .then(json => dispatch(receiveAlgo(request, json))
+    )
+  }
+}
+
+export const RECEIVE_ALGO = "RECEIVE_ALGO"
+export function receiveAlgo(request) {
+  //Do some fancy stuff to process the data you get back
+  return {
+    type: RECEIVE_ALGO,    
+    algoMeal: algoMeal
+  }
+}
+
 
 export function createStaple(props, ingredData) {       
   //Convenience hash

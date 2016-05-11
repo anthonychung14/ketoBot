@@ -73,22 +73,20 @@ export class PlannerCalorieCount extends Component {
     let totalPlan = this.calcTotal()
     let remainingMacs = this.calcRemain(totalPlan)
     let macs = [].concat(tableData,totalPlan, remainingMacs, macWeek)
-
     const percentDone = totalPlan['Calories']/macWeek['Calories']
-
     return (              
         <section className={`${styles}`}>
         <Box p={2}>
           <Flex align='center'>
             <Box px={2}>
-              <Table className="table" data={macs}/>
+              <Table className="table" data={this.macs}/>
             </Box>
             <Box px={2}>
               <Donut
-            color="primary"
-            size={150}
-            strokeWidth={28}
-            value={percentDone}/>      
+                color="primary"
+                size={150}
+                strokeWidth={28}
+                value={this.percentDone}/>      
             </Box>
 
           </Flex>

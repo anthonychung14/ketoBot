@@ -96,7 +96,6 @@ def recipe_list(request):
           'name': obj['name'],          
         }
 
-        print(recipeIngred)
         ingredSerializer = IngredientSerializer(data=recipeIngred)        
         
         if ingredSerializer.is_valid():
@@ -137,7 +136,6 @@ def recipe_nutrition(request):
     
     gotRecipeIngredients = Ingredient.objects.filter(r__in=recipeIds)    
     ingredientSerializer = IngredientSerializer(gotRecipeIngredients, many=True)
-    print(ingredientSerializer.data)
     
     data = {
       'nutrition': nutritionSerializer.data,
@@ -158,13 +156,13 @@ def search(request):
       "filtered": {
          "query": {
             "match": {
-               "title": decodedData['want']
+               "title": decodedData.get('want', '') or ''
             }
          },
          "filter": {
             "not": {
                "term": {
-                  "ingredients": decodedData['noWant']
+                  "ingredients": decodedData.get('noWant', '') or ''
                }
             }
          },  

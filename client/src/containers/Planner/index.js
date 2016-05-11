@@ -17,6 +17,7 @@ import { PlannerTabView } from '../../components/PlannerTabView'
 function mapStateToProps(state) {
   return {     
     chosenRecipes: state.mealPlan.chosenRecipes,
+    remainingCalories: state.mealPlan.remainingMacs,
     fridgeItems: state.fridge.fridgeItems,
     staples: state.staples.stapleData
   }
@@ -63,7 +64,9 @@ export class Planner extends Component {
           index={this.state.slideIndex}
           onChangeIndex={this.handleChange}>          
           <div className="tabView">            
-            <PlannerTabView chosenRecipes={this.props.chosenRecipes} />
+            <PlannerTabView 
+              chosenRecipes={this.props.chosenRecipes} 
+              remainingCalories={this.props.remainingCalories}/>
           </div>          
           <div className="tabView">            
             <h3>the master ketoBot here </h3>

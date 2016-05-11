@@ -4,7 +4,7 @@ import { Link } from 'react-router'
 
 import { postProcess } from '../../actions/userPlan'
 
-export const fields = [ 'calories', 'fat', 'protein', 'carbs', 'days', 'meals', 'freeCal', 'want', 'noWant' ]
+export const fields = [ 'calories', 'fat', 'protein', 'carbs', 'days', 'meals', 'freeCal']
 // ^^ All fields on last form
 
 const validate = values => {

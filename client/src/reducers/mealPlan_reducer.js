@@ -14,6 +14,7 @@ export function mealPlan(state=initialState, action) {
         chosenRecipes: state.chosenRecipes.concat(action.payload),
         servingMap: 1        
       })
+      
     case ADD_STAPLEPLAN:      
       var pickedRecipe = action.payload
       var recipeInfo = pickedRecipe.recipe      

@@ -63,7 +63,10 @@ export function fetchPlan(request) {
         return response.json()
       })
       .then(json => {
-        let parsed = JSON.parse(json)
+        let parsed = JSON.parse(json)        
+        for (var key in parsed) {
+          parsed[key] = Number(parsed[key])
+        }
         dispatch(receivePlan(request, parsed))
     })
   }

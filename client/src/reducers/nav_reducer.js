@@ -1,4 +1,4 @@
-import { OPEN_MODAL, FORM_MODAL, STAPLE_MODAL } from '../actions/items'
+import { OPEN_MODAL, FORM_MODAL, STAPLE_MODAL } from '../actions/modalActions'
 
 //if state switches off, clear the "active item state"
 const modalState = {

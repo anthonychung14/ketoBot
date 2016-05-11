@@ -11,50 +11,28 @@ export { fetchFridge } from './fridgeActions'
 
 export const GET_RECIPES = "GET_RECIPES"
 
-//NAV TO MODAL
-export const OPEN_MODAL = "OPEN_MODAL"
-export function openModal(element, nutrition, ingreds) {  
-  let recipeInfo = {}
-  if (element) {
-    recipeInfo = { recipe: element, nutrition, ingreds }
-  }
+
+export const CALC_REMAIN = "CALC_REMAIN"
+export function calcRemain(recipesArray) {
   return {
-    type: OPEN_MODAL,
-    payload: recipeInfo
+    type: CALC_REMAIN,
+    payload: newAmount
   }
 }
 
-export const FORM_MODAL = "FORM_MODAL"
-export function formModal() {    
-  return {
-    type: FORM_MODAL
-  }
-}
+export function addAndCalc() {
+  return function(dispatch, getState) {
+    // dispatch(addStaplePlan())
+    let chosenRecs = getState().mealPlan
+    let userPlan = getState().userPlan.userPlan
 
-export const STAPLE_MODAL = "STAPLE_MODAL"
-export function stapleModal() {    
-  return {
-    type: STAPLE_MODAL
-  }
-}
-
-// ADD TO PLAN (HELD IN STATE UNTIL APPROVED //
-export const ADD_RECPLAN = "ADD_RECPLAN"
-export function addRecPlan(element) {
-  return {
-    type: ADD_RECPLAN,
-    payload: element
-  }
+    console.log(chosenRecs, userPlan, "DO THESE WORK")
+    // dispatch(calcRemain(mealPlan))
+  }  
 }
 
 export const ADD_STAPLEPLAN = "ADD_STAPLEPLAN"
-export function addStaplePlan(element, chosenServings) {    
-  //get state => servingMap
-  // var servingsMap = store.getState()
-
-  //reconstruct servingMap based on totals
-  console.log(chosenServings, "action from added to plan")
-
+export function addStaplePlan(element, chosenServings) {      
   var addedRecipe = Object.assign({}, {
     recipe: element,
     servings: chosenServings
