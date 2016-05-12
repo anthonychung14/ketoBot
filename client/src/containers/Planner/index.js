@@ -73,7 +73,6 @@ export class Planner extends Component {
           </div>          
         </SwipeableViews>
         </div>                
-
         <div className="totals">                
           
         </div>

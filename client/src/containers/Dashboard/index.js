@@ -6,10 +6,17 @@ import { styles } from './styles.scss';
 
 /* components */
 import UserForm from 'components/UserForm';
+import UserFoods from 'components/UserFoods';
 import UserData from 'components/UserData';
 import UserChart from 'components/UserChart'
 import HomePage from 'containers/HomePage'
 import WizardForm from 'components/UserForm/wizardForm';
+
+
+/* Swipe Views */
+import Tabs from 'material-ui/lib/tabs/tabs';
+import Tab from 'material-ui/lib/tabs/tab';
+import SwipeableViews from 'react-swipeable-views';
         
 
 function mapStateToProps(state) {
@@ -25,8 +32,17 @@ function mapDispatchToProps(dispatch) {
 @connect(mapStateToProps, mapDispatchToProps)
 export class Dashboard extends Component {
   constructor(props){
-    super(props);    
+    super(props);
+    this.state={
+      slideIndex: 0
+    }    
   }
+
+  handleChange = (value) => {
+    this.setState({
+      slideIndex: value,
+    });
+  };
 
   componentWillMount() {
     console.log(this.props)
@@ -36,8 +52,23 @@ export class Dashboard extends Component {
   render() {
     return (
       <section className={`${styles}`}>        
-        <UserData userPlan={this.props.userPlan}/>
-        <UserChart />
+        <Tabs
+          className="tabs"
+          onChange={this.handleChange}
+          value={this.state.slideIndex}>            
+            <Tab label="Meal Plan" value={0} />                        
+            <Tab label="Physical Goals" value={1} />            
+        </Tabs>
+        <SwipeableViews
+          className="tabView"
+          index={this.state.slideIndex}
+          onChangeIndex={this.handleChange}>
+          <div className="userData">
+            <UserData userPlan={this.props.userPlan}/>
+            <UserChart />
+            <UserFoods />
+          </div>
+        </SwipeableViews>
       </section>
     );
   }

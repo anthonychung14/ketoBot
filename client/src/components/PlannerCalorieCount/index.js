@@ -78,8 +78,8 @@ export class PlannerCalorieCount extends Component {
         <section className={`${styles}`}>
         <Box p={2}>
           <Flex align='center'>
-            <Box px={2}>
-              <Table className="table" data={this.macs}/>
+            <Box px={2}>              
+            <Table className="table" data={macs}/>
             </Box>
             <Box px={2}>
               <Donut
@@ -88,7 +88,6 @@ export class PlannerCalorieCount extends Component {
                 strokeWidth={28}
                 value={this.percentDone}/>      
             </Box>
-
           </Flex>
         </Box>         
         </section>

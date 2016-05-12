@@ -1,16 +1,17 @@
 :local(.styles) {
-  display: -webkit-flex;
-  display: flex;
-  -webkit-flex-direction: row;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
 
   .tabs {
     flex: 0 0 100%;
     border-style: solid;
   }
 
+  .userData {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    justify-content: space-around;
+  }
   padding: 50px 0;
   
 }
