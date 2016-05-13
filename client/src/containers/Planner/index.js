@@ -12,6 +12,7 @@ import SwipeableViews from 'react-swipeable-views';
 import { Flex, Box } from 'reflexbox'
 
 import { PlannerTabView } from '../../components/PlannerTabView'
+import { KetoMagicView } from '../../components/KetoMagicView'
 
 
 function mapStateToProps(state) {
@@ -69,7 +70,7 @@ export class Planner extends Component {
               remainingCalories={this.props.remainingCalories}/>
           </div>          
           <div className="tabView">            
-            <h3>the master ketoBot here </h3>
+            <KetoMagicView />
           </div>          
         </SwipeableViews>
         </div>                

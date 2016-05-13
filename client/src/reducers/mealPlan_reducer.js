@@ -7,14 +7,13 @@ const initialState = {
 }
 
 export function mealPlan(state=initialState, action) {
-  console.log("adding stapleplan", action.type)
   switch(action.type) {
     case ADD_RECPLAN:      
       return Object.assign({}, state, {
         chosenRecipes: state.chosenRecipes.concat(action.payload),
         servingMap: 1        
       })
-      
+
     case ADD_STAPLEPLAN:      
       var pickedRecipe = action.payload
       var recipeInfo = pickedRecipe.recipe      

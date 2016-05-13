@@ -78,7 +78,7 @@ export class Fridge extends Component {
     const categories = [ 'Protein', 'Fats', 'Dairy' , 'Vegetables' ]
     return (
       <section className={`${styles}`}>
-        <h2>Inventory</h2>
+        <h2>Inventories</h2>
         <div className="fridgeCards">
         {categories.map((category,index) => this.renderCard(category, index))}
         </div>

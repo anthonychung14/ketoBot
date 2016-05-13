@@ -29,7 +29,7 @@ export class Search extends Component {
     return (
       <section className={`${styles}`}>
         <div>
-          <h3>Search for something</h3>
+          <h3>Search for something!</h3>
           <SearchForm />
           <SearchResults />
         </div>

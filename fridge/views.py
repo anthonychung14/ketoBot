@@ -20,6 +20,25 @@ from ketoBot.serializers import RecipeSerializer, RecipeNutritionSerializer
 from fridge.serializers import FridgeItemSerializer
 
 @api_view(['GET', 'POST'])
+def portionAlgo(request):
+  if request.method == 'POST':    
+    #call the portion algo here, pass it the userData(target)
+
+    response = [{'a': 1, 'b': 2}, {'a': 1, 'b': 2}, {'a': 1, 'b': 2}]
+    return Response(response)
+
+
+@api_view(['GET', 'POST'])
+def mealPlanMagic(request):
+  if request.method == 'GET':
+    #Reach into the DB and go get it
+
+
+  elif request.method == 'POST':
+    ##get data, serialize, and then post it son
+
+
+@api_view(['GET', 'POST'])
 def fridge(request):
   if request.method == 'GET':    
     allItems = FridgeItem.objects.all()

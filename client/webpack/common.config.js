@@ -10,7 +10,6 @@ const BundleTracker = require('webpack-bundle-tracker')
 require('babel-polyfill').default;
 
 const TARGET = process.env.npm_lifecycle_event;
-
 const PATHS = {
   app: path.join(__dirname, '../src'),
   build: path.join(__dirname, '../dist'),

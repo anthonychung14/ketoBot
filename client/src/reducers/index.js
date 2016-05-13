@@ -10,12 +10,14 @@ import { modalStaple } from './modal_reducer';
 import { fridge } from './fridge_reducer';
 import { mealPlan } from './mealPlan_reducer';
 import { staples } from './staple_reducer';
+import { ketoMealPlan } from './ketoMealPlan_reducer'
 
 const rootReducer = combineReducers({
   form: formReducer,
   modalStaple,
   modalState: modalReducer,
   recipesUser,
+  ketoMealPlan,
   search,
   userPlan,
   fridge,

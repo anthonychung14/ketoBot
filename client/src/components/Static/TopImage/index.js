@@ -53,7 +53,7 @@ export class TopImage extends Component {
           speed={700}
           wait={900}>
         <div className="box1">
-            <h1>I am a box</h1>
+            <h1>I am a box!!</h1>
         </div>
 
         <div className="box1">
