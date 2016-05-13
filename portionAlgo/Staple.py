@@ -3,8 +3,10 @@ class Staple:
     self.macros = macro['baseMacros']
     self.totals = macro['totalMacros']    
     self.servings = 1
+    self.calcTotals()
 
   def calcTotals(self):
+    self.totals = dict((k, 0) for k in self.totals)
     for x in self.totals:
       self.totals[x] += self.macros[x] * self.servings
     return self.totals
@@ -16,3 +18,10 @@ class Staple:
   def decrement(self):
     self.servings -= 1
     self.calcTotals()
+
+
+
+
+
+
+

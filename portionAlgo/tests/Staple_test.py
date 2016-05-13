@@ -32,38 +32,28 @@ class StapleTest(unittest.TestCase):
         assert_equal(self.combo.servings, 1)
         assert_not_equal(2, "Incorrect Value")
 
-    # def test_totalMacros(self):        
-    #     assert_equal(self.combo.totals['protein'], 0)
-    #     assert_equal(self.combo.totals['fat'], 0)
-    #     assert_equal(self.combo.totals['carbs'], 0)
+    def test_totalMacros(self):        
+        assert_equal(self.combo.totals['protein'], 10)
+        assert_equal(self.combo.totals['fat'], 12)
+        assert_equal(self.combo.totals['carbs'], 15)
 
-    # def test_adjustServings(self):
-    #     self.combo.servings += 1
-    #     self.combo.calcTotals()
-    #     assert_equal(self.combo.totals['protein'], 20)
-    #     assert_equal(self.combo.totals['fat'], 24)
-    #     assert_equal(self.combo.totals['carbs'], 30)
 
-    # def test_incrementServings(self):
-    #     self.combo.increment()
-    #     assert_equal(self.combo.servings, 2)
+    def test_incrementServings(self):
+        self.combo.increment()
+        assert_equal(self.combo.servings, 2)
 
-    # def test_decrementServings(self):
-    #     self.combo.decrement()
-    #     assert_equal(self.combo.servings, 0)
+    def test_decrementServings(self):
+        self.combo.decrement()
+        assert_equal(self.combo.servings, 0)
 
-    # def test_incrementAndCalc(self):
-    #     self.combo.increment()
-    #     assert_equal(self.combo.totals['protein'], 20)
-    #     assert_equal(self.combo.totals['fat'], 24)
-    #     assert_equal(self.combo.totals['carbs'], 30)
+    def test_incrementAndCalc(self):
+        self.combo.increment()
+        assert_equal(self.combo.totals['protein'], 20)
+        assert_equal(self.combo.totals['fat'], 24)
+        assert_equal(self.combo.totals['carbs'], 30)
 
-    # def test_decrementAndCalc(self):
-    #     self.combo.decrement()
-    #     assert_equal(self.combo.totals['protein'], 0)
-    #     assert_equal(self.combo.totals['fat'], 0)
-    #     assert_equal(self.combo.totals['carbs'], 0)
-
-    # def test_findsConflict(self):
-    #     self.findConflict()
-    #     assert_equal(self.findConflict())
+    def test_decrementAndCalc(self):
+        self.combo.decrement()
+        assert_equal(self.combo.totals['protein'], 0)
+        assert_equal(self.combo.totals['fat'], 0)
+        assert_equal(self.combo.totals['carbs'], 0)

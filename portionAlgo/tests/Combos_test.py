@@ -11,14 +11,14 @@ from nose.tools import assert_not_equal
 from nose.tools import assert_raises
 from nose.tools import raises
 
-class ComboTest(unittest.TestCase):
-    def setUp(self):       
-        testTarget = {
-            'protein': 120,
-            'fat': 150,
-            'carbs': 50
-        }
+testTarget = {
+    'protein': 100,
+    'fat': 100,
+    'carbs': 100
+}
 
+class ComboTest(unittest.TestCase):
+    def setUp(self):               
         macroDict = { 
           'id': 1,
           'baseMacros': {
@@ -86,6 +86,53 @@ class ComboTest(unittest.TestCase):
         assert_equal(self.combo.totals['fat'], 0)
         assert_equal(self.combo.totals['carbs'], 0)
 
-    # def test_findsConflict(self):
-    #     self.findConflict()
-    #     assert_equal(self.findConflict())
+    def test_findDiff(self):        
+        self.combo.findDiff(testTarget)
+        assert_equal(self.combo.diff['protein'], 98)
+        assert_equal(self.combo.diff['fat'], 96)
+        assert_equal(self.combo.diff['carbs'], 94)
+
+    def test_incAllCheckDiff(self):
+        self.combo.incrementAll()
+        self.combo.findDiff(testTarget)
+        assert_equal(self.combo.diff['protein'], 96)
+        assert_equal(self.combo.diff['fat'], 92)
+        assert_equal(self.combo.diff['carbs'], 88)
+
+    def test_findConflict(self):
+        targetConflict = {
+            'protein': 0,
+            'fat': 0,
+            'carbs': 0 
+        }
+        assert_equal(self.combo.findConflict(targetConflict), True)        
+    
+    def test_adjustConflict(self):
+        targetConflict = {
+            'protein': 0,
+            'fat': 0,
+            'carbs': 0 
+        }
+        self.combo.adjustConflict(targetConflict)
+        assert_equal(self.combo.totals['protein'], 0)
+        assert_equal(self.combo.totals['fat'], 0)
+        assert_equal(self.combo.totals['carbs'], 0)
+
+    def test_adjustUpAndBackDown(self):
+        targetConflict = {
+            'protein': 6,
+            'fat': 10,
+            'carbs': 18 
+        }
+        self.combo.incrementAll()
+        self.combo.incrementAll()
+        self.combo.adjustConflict(targetConflict)
+
+        assert_equal(self.combo.totals['protein'], 4)
+        assert_equal(self.combo.totals['fat'], 8)
+        assert_equal(self.combo.totals['carbs'], 12)
+        
+
+
+
+
