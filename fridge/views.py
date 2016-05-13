@@ -32,10 +32,12 @@ def portionAlgo(request):
 def mealPlanMagic(request):
   if request.method == 'GET':
     #Reach into the DB and go get it
+    print("hi")
 
 
   elif request.method == 'POST':
     ##get data, serialize, and then post it son
+    print("bye")
 
 
 @api_view(['GET', 'POST'])
