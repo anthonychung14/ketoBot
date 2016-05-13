@@ -13,7 +13,7 @@ from nose.tools import assert_not_equal
 from nose.tools import assert_raises
 from nose.tools import raises
 
-class EasySolutionTest(unittest.TestCase):
+class SolutionTest_ComboFit(unittest.TestCase):
     def setUp(self):
         staple1 = Staple(macroDict)
         staple2 = Staple(macroDict2)
@@ -23,7 +23,7 @@ class EasySolutionTest(unittest.TestCase):
 
     def test_incrementEasySol(self):        
         for staple in self.combo.staples:                         
-            assert_equal(staple.servings, 2)
+            assert_equal(staple.servings, 4)
 
     def test_returnsTheRightNumericalSolution(self):        
         totals = self.combo.totals
