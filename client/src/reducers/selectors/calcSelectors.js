@@ -3,6 +3,9 @@ import { createSelector } from 'reselect';
 const mealPlan = (state) => state.mealPlan
 const userMacros = (state) => state.userPlan
 
+const fridgeFillers = (state) => state.mealPlan.fridgeFill
+const fridgeMap = (state) => state.mealPlan.fridgeServings
+
 const startMacros = {
   protein: 0,
   fat: 0,
@@ -10,8 +13,20 @@ const startMacros = {
   calories: 0
 }
 
+export const calcFillerSelector = createSelector(
+  fridgeFillers, fridgeMap, (food, servings) => {
+    food.reduce((acc, recipe) => {
+      acc['Protein'] += recipe.protein * servings[recipe.id]
+      acc['Fat'] += recipe.fat * servings[recipe.id]
+      acc['Carbs'] += (recipe.carbs - recipe.fiber) * servings[recipe.id]
+      acc['Calories'] += recipe.calories * servings[recipe.id]
+      return acc
+    }, {})
+  }
+)
+
 export const calcTotalSelector = createSelector(  
-  mealPlan, recipes => {    
+  mealPlan, calcFillerSelector, (recipes, filler) => {    
     let newMacros = Object.assign({}, startMacros)
     recipes.chosenRecipes.reduce((acc, recipe) => {    
       for (var key in startMacros) {

@@ -2,8 +2,16 @@ import React, { Component } from 'react';
 
 /* component styles */
 import { styles } from './styles.scss';
-import { Card, Heading, ButtonCircle } from 'rebass'
 import { Table, Thead, Th, Tr, } from 'Reactable'
+import { Card, Heading, ButtonCircle } from 'rebass'
+
+import AddFillForm from 'components/PlannerAddFillForm'
+
+ const initialFormValue = {
+  initialValues: {
+    fillerServings: 1
+  }
+}
 
 export class PlannerFill extends Component {  
   constructor(props) {
@@ -15,7 +23,7 @@ export class PlannerFill extends Component {
       'Available': element.servings,
       'Calories': element.calories,
       'Protein': element.protein,
-      'Fat': element.fat,
+      'Fat': element.fat,      
       'Carbs': element.carbs - element.fiber,
     })
 
@@ -23,6 +31,7 @@ export class PlannerFill extends Component {
       <Card rounded={true} width={350} key={key}>
         <Heading level={2} size={3}>{element.name}</Heading>
         <Table className='table' data={[nutrientTable]} />
+        <AddFillForm {...initialFormValue} filler={element} form={element.name}/>          
       </Card>
     )
   }

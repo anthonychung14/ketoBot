@@ -1,4 +1,7 @@
 :local(.styles) {  
-
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
   
 }

@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { reduxForm, addArrayValue } from 'redux-form'
+import { reduxForm } from 'redux-form'
 
 import { addStaplePlan } from '../../actions/items'
 

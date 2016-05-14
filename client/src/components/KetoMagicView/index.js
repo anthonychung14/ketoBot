@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux'
 import * as actionCreators from '../../actions/ketoMagicMealActions'
         
 import { styles } from './styles.scss';
-import { KetoMagicUser } from 'components/KetoMagicUser'
 
 function mapStateToProps(state) {
   return {     
@@ -35,8 +34,10 @@ export class KetoMagicView extends Component {
           <button className="">Yes I approve!</button>
           <button className="">Show me another</button>
 
-          <KetoMagicUser sendForAlgo={this.sendForAlgo.bind(this)} />
+          
       </section>      
     );
   }
 }
+
+// <KetoMagicUser sendForAlgo={this.sendForAlgo.bind(this)} />

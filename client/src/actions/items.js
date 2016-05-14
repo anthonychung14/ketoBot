@@ -9,28 +9,6 @@ const recipe_nutrition = "/nutrition"
 
 export { fetchFridge } from './fridgeActions'
 
-export const GET_RECIPES = "GET_RECIPES"
-
-
-export const CALC_REMAIN = "CALC_REMAIN"
-export function calcRemain(recipesArray) {
-  return {
-    type: CALC_REMAIN,
-    payload: newAmount
-  }
-}
-
-export function addAndCalc() {
-  return function(dispatch, getState) {
-    // dispatch(addStaplePlan())
-    let chosenRecs = getState().mealPlan
-    let userPlan = getState().userPlan.userPlan
-
-    console.log(chosenRecs, userPlan, "DO THESE WORK")
-    // dispatch(calcRemain(mealPlan))
-  }  
-}
-
 export const ADD_STAPLEPLAN = "ADD_STAPLEPLAN"
 export function addStaplePlan(element, chosenServings) {        
   var addedRecipe = Object.assign({}, {
@@ -43,8 +21,20 @@ export function addStaplePlan(element, chosenServings) {
   }
 }
 
-// ASYNC //
+export const ADD_FILLERPLAN = "ADD_FILLERPLAN"
+export function addFillerPlan(element, chosenServings) {        
+  var addedFiller = Object.assign({}, {
+    recipe: element,
+    servings: chosenServings
+  })
+  return {
+    type: ADD_FILLERPLAN,
+    payload: addedFiller
+  }
+}
 
+
+// ASYNC //
 //GET NUTRITIONAL INFO
 export const REQUEST_NUTRITION = "REQUEST_NUTRITION"
 export function requestNutrition(request) {

@@ -1,10 +1,10 @@
 :local(.styles) {
-  position: relative;  
-
+  align-self: center;
   display: -webkit-flex;
   display: flex;
-  -webkit-flex-direction: column;
-  flex-direction: column;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  justify-content: space-around;
 
   .actions {
     display: -webkit-flex;
@@ -12,5 +12,6 @@
     -webkit-flex-direction: row;
     flex-direction: row;
     justify-content: space-between
-  }  
+  }
+
 }

@@ -1,9 +1,10 @@
-import { ADD_RECPLAN, ADD_STAPLEPLAN } from '../actions/items'
+import { ADD_RECPLAN, ADD_STAPLEPLAN, ADD_FILLERPLAN } from '../actions/items'
 import { HIDE_PLAN_MODAL } from '../actions/modalActions'
 
 const initialState = {
   chosenRecipes: [],
   fridgeFill: [],
+  fridgeServings: {},
   servingMap: {}
 }
 
@@ -26,6 +27,16 @@ export function mealPlan(state=initialState, action) {
         chosenRecipes: recipes,
         servingMap: newMap
       })    
+
+    case ADD_FILLERPLAN:      
+      var recipe = action.payload.recipe
+      var newMap = Object.assign({}, state.fridgeServings)
+      newMap[recipe.id] = Number(action.payload.servings)
+
+      return Object.assign({}, state, {
+        fridgeFill: state.fridgeFill.concat(recipe),
+        fridgeServings: newMap
+      })
 
     case ADD_STAPLEPLAN:      
       var pickedRecipe = action.payload
