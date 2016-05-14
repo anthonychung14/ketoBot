@@ -54,7 +54,7 @@ def recipe_list(request):
         serializer = RecipeSerializer(cache.get("recipeCache"), many=True)                
         return Response(serializer.data)
       else:
-        latest_recipes = Recipe.objects.filter(staple=False).order_by('?')[:20]
+        latest_recipes = Recipe.objects.filter(staple=False).order_by('?')[:40]
         cache.set("recipeCache", latest_recipes, timeout=1800)
         serializer = RecipeSerializer(latest_recipes, many=True)        
               

@@ -3,8 +3,8 @@
   padding: 50px 0;
   height: 100vh;
 
-  h2 {
-    margin-bottom: 50px;
+  h2.heading {
+    margin-bottom: 30px;
   }
 
   a {
@@ -12,7 +12,7 @@
   }
 
   p {
-    font-size: 14px;
+    font-size: 16px;
     padding: 0 10%;
   }
 
@@ -28,21 +28,28 @@
     text-align: center;
   }
 
+  .cardText {    
+  }
+
   .card {
     margin: 5px 5px 5px 5px;  
-    height: 300px;
-    background-color:white;
-    
-    & input {
-      display: none
-    }
-    
-    &:hover input {
-      display: block;
-    }    
+    height: 375px;
+    background-color: white;    
+        
   }
+
+  .Text{
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items:center;
+  }
+
   img.cardImage {
-    max-height: 170px;
+    height: 200px;
     width: auto;
   }  
 }

@@ -9,6 +9,7 @@ import { bindActionCreators } from 'redux'
 import { styles } from './styles.scss';
 import { Card, CardImage, Heading, Text } from 'rebass'
 import { RecipeModal } from 'components/RecipeModal'
+import { Button } from 'react-bootstrap'
 
 function mapStateToProps(state) {  
   return { 
@@ -31,7 +32,7 @@ export class Recipes extends Component {
       let randomRecipesID = data.recipes.map((element, key) => {
         return element.id
       })      
-      boundFetchNutrition(randomRecipesID)
+      boundFetchNutrition(randomRecipesID)      
     })
   }
 
@@ -44,21 +45,30 @@ export class Recipes extends Component {
   renderRecipe(element, index) {
     let boundRecipeInfo = this.getRecipeInfo.bind(this, element)
     return (
-        <Card rounded={true} width={256} key={index}>
+        <Card rounded={true} width={250} key={index}>
         <CardImage src={element.image} />
-          <Heading level={2} size={3}>{element.title}</Heading>
-          <Text> {element.time} time! </Text>
-          <input className="modalButton" type="button" value=" Quick Look " onClick={boundRecipeInfo} />
+        <Heading level={2} size={3}>{element.title}</Heading>
+          <Text>
+            <div className="cardText">            
+            <Button bsStyle="info" className="modalButton" onClick={boundRecipeInfo}>Quick Look</Button>
+            <Button bsStyle="success" className="modalButton" onClick={boundRecipeInfo}>Quick Look</Button>
+            <Button bsStyle="danger" className="modalButton" onClick={boundRecipeInfo}>Quick Look</Button>
+            </div>
+          </Text>
         </Card>
     )
   }
 
   render() {
+    console.log(this.props)
     return (
       <section className={`${styles}`}>       
         <div className="recipeHeader">
         </div>
-        {this.props.recipes.map((element,key) => this.renderRecipe(element,key))}
+        {this.props.recipes
+          .filter((element,key) => this.props.recData.nutrition[element.id])
+          .map((element,key) => this.renderRecipe(element,key))
+          }
         <RecipeModal
           modalState ={this.props.modalState}
           openModal={this.props.actions.openModal}

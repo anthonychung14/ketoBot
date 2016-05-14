@@ -11,7 +11,10 @@ import SearchResults from 'components/SearchResults'
 import { styles } from './styles.scss';
 
 function mapStateToProps(state) {
-  return { searchResults: state.search.searchResults };
+  return { 
+    searchResults: state.search.searchResults,
+    recData: state.recipesUser.recData
+  };
 }
 
 function mapDispatchToProps(dispatch) {
@@ -31,7 +34,8 @@ export class Search extends Component {
         <div>
           <h3>Search for something!</h3>
           <SearchForm />
-          <SearchResults />
+          <SearchResults 
+            recData={this.props.recData}/>
         </div>
         
         
