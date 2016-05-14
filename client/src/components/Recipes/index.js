@@ -49,11 +49,9 @@ export class Recipes extends Component {
         <CardImage src={element.image} />
         <Heading level={2} size={3}>{element.title}</Heading>
           <Text>
-            <div className="cardText">            
             <Button bsStyle="info" className="modalButton" onClick={boundRecipeInfo}>Quick Look</Button>
             <Button bsStyle="success" className="modalButton" onClick={boundRecipeInfo}>Quick Look</Button>
-            <Button bsStyle="danger" className="modalButton" onClick={boundRecipeInfo}>Quick Look</Button>
-            </div>
+            <Button bsStyle="danger" className="modalButton" onClick={boundRecipeInfo}>Quick Look</Button>            
           </Text>
         </Card>
     )

@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import { calcTotalSelector, calcRemaining } from '../../reducers/selectors/calcSelectors'
+
 import { Table, Thead, Th, Tr, } from 'Reactable'
 import { Donut } from 'rebass'
 
@@ -16,6 +20,18 @@ const macWeek = {
   Carbs: 20*6
 }
 
+function mapStateToProps(state) {
+  return {
+    totals: calcTotalSelector(state),
+    // remaining: calcRemaining(state)
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return { dispatch }
+}
+
+@connect(mapStateToProps, mapDispatchToProps)
 export class PlannerCalorieCount extends Component {  
     constructor(props) {
       super(props)
@@ -41,47 +57,24 @@ export class PlannerCalorieCount extends Component {
     })
   }
 
-  calcTotal() {    
-    //MacWeek minus a sum of chosenRecipes
+  calcRemain(total) {
     let start = {
-      'Info': <strong>Total</strong>,
+      'Info': <strong>Remaining</strong>,
       'Calories': 0,
       'Fat': 0,
       'Protein': 0,
       'Carbs': 0
-    }
-
-    let total = this.props.chosenRecipes.reduce((prev, curr) => {      
-      const nutri = curr.recipe.nutrition            
-      prev['Calories'] += nutri['calories'] * curr.servings
-      prev['Fat'] += nutri['fat'] * curr.servings
-      prev['Protein'] += nutri['protein'] * curr.servings
-      prev['Carbs'] += nutri['net_carb'] * curr.servings
-      return prev
-    }, start)
-
-    return total
-  }
-
-  calcRemain(total) {
-    let start = {
-      'Info': <strong>Remaining</strong>,
-      'Calories': macWeek['Calories'] - total['Calories'],
-      'Fat': macWeek['Fat'] - total['Fat'],
-      'Protein': macWeek['Protein'] - total['Protein'],
-      'Carbs': macWeek['Carbs'] - total['Carbs'],
     }
     return start
   }
   
   render() {            
     let tableData = this.props.chosenRecipes.map((element, index) => this.buildRecipeRow(element, index))
-    
+    console.log(this.props.remaining, "did it")
     //These values do not update
-    let totalPlan = this.calcTotal()
-    let remainingMacs = this.calcRemain(totalPlan)
-    let macs = [].concat(tableData,totalPlan, remainingMacs, macWeek)
-    let percentDone = totalPlan['Calories']/macWeek['Calories']
+    // let remainingMacs = this.calcRemain(totalPlan)
+    let macs = [].concat(tableData, this.props.totals, macWeek)
+    // let percentDone = totalPlan['Calories']/macWeek['Calories']
     //////////
     
     return (              
