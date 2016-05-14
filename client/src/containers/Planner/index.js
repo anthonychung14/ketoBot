@@ -67,7 +67,9 @@ export class Planner extends Component {
           <div className="tabView">            
             <PlannerTabView 
               chosenRecipes={this.props.chosenRecipes} 
-              servingMap={this.props.servingMap}/>
+              servingMap={this.props.servingMap}
+              fridgeItems={this.props.fridgeItems}
+              staples={this.props.staples} />
           </div>          
           <div className="tabView">            
             <KetoMagicView />

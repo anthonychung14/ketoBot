@@ -39,7 +39,7 @@ export const calcRemaining = createSelector(
     totals['Carbs'] = macros.userPlan['carbs'] - chosenTotals['Carbs']
     totals['Fat'] = macros.userPlan['fat'] - chosenTotals['Fat']
     totals['Calories'] = macros.userPlan['calories'] - chosenTotals['Calories']
-    totals['Info'] = 'Daily Remaining'
+    totals['Info'] = 'Remaining'
     return totals
   }
 )

@@ -11,15 +11,6 @@ import { Flex, Box } from 'reflexbox'
 /* component styles */
 import { styles } from './styles.scss';
 
-// pass down the data from userGoals
-const macWeek = {
-  Info: <strong>Weekly Reqs</strong>,
-  Calories: 1800 * 6,
-  Protein: 130 *6 ,
-  Fat: 150 *6,
-  Carbs: 20*6
-}
-
 function mapStateToProps(state) {
   return {
     totals: calcTotalSelector(state),
@@ -72,7 +63,7 @@ export class PlannerCalorieCount extends Component {
   
   render() {            
     let tableData = this.props.chosenRecipes.map((element, index) => this.buildRecipeRow(element, index))
-    let macs = [].concat(tableData, this.props.totals, this.props.remaining, macWeek)    
+    let macs = [].concat(tableData, this.props.totals, this.props.remaining)    
     
     return (              
         <section className={`${styles}`}>
@@ -80,10 +71,7 @@ export class PlannerCalorieCount extends Component {
           <Flex align='center'>
             <Box px={2}>              
             <Table className="table" data={macs}/>
-            </Box>
-            <Box px={2}>
-              {this.findCal()}              
-            </Box>
+            </Box>            
           </Flex>
         </Box>         
         </section>

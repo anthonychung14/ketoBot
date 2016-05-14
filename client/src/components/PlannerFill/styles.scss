@@ -1,8 +1,9 @@
 :local(.styles) {
-  position: relative;
+  position: relative;  
 
-  padding: 50px 0;
-
-  
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
   
 }
