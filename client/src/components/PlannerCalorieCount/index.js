@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { calcTotalSelector, calcRemaining } from '../../reducers/selectors/calcSelectors'
+import { calcTotalSelector, calcRemaining, calcPercent } from '../../reducers/selectors/calcSelectors'
 
 import { Table, Thead, Th, Tr, } from 'Reactable'
 import { Donut } from 'rebass'
@@ -23,7 +23,8 @@ const macWeek = {
 function mapStateToProps(state) {
   return {
     totals: calcTotalSelector(state),
-    // remaining: calcRemaining(state)
+    remaining: calcRemaining(state),
+    percentCal: calcPercent(state)
   }
 }
 
@@ -37,16 +38,11 @@ export class PlannerCalorieCount extends Component {
       super(props)
     }
 
-  componentWillMount() {
-
-
-  }
-
   buildRecipeRow(element, index) {    
     let nutri = element.recipe.nutrition
     let serveMap = this.props.servingMap    
     let servings = serveMap[element.recipe.recipe.id]
-    //The times equals seems to have mutated the original data
+    
     return Object.assign({}, {      
       Info: element.recipe.recipe.title,
       Servings: servings,
@@ -57,25 +53,26 @@ export class PlannerCalorieCount extends Component {
     })
   }
 
-  calcRemain(total) {
-    let start = {
-      'Info': <strong>Remaining</strong>,
-      'Calories': 0,
-      'Fat': 0,
-      'Protein': 0,
-      'Carbs': 0
+  findCal() {
+    console.log(this.props.percentCal)
+    if (this.props.percentCal < 1) {
+      return (
+        <Donut
+          color="primary"
+          size={150}
+          strokeWidth={28}
+          value={this.props.percentCal}/>
+      )
+    } else {
+      return (
+        <span>Too high! </span>
+      )
     }
-    return start
   }
   
   render() {            
     let tableData = this.props.chosenRecipes.map((element, index) => this.buildRecipeRow(element, index))
-    console.log(this.props.remaining, "did it")
-    //These values do not update
-    // let remainingMacs = this.calcRemain(totalPlan)
-    let macs = [].concat(tableData, this.props.totals, macWeek)
-    // let percentDone = totalPlan['Calories']/macWeek['Calories']
-    //////////
+    let macs = [].concat(tableData, this.props.totals, this.props.remaining, macWeek)    
     
     return (              
         <section className={`${styles}`}>
@@ -85,11 +82,7 @@ export class PlannerCalorieCount extends Component {
             <Table className="table" data={macs}/>
             </Box>
             <Box px={2}>
-              <Donut
-                color="primary"
-                size={150}
-                strokeWidth={28}
-                value={this.percentDone}/>      
+              {this.findCal()}              
             </Box>
           </Flex>
         </Box>         

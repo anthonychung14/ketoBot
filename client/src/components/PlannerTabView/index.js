@@ -12,11 +12,13 @@ export class PlannerTabView extends Component {
     }
     
   render() {    
+    console.log(this.props, "chosen")
     return (              
         <section className={`${styles}`}>
           <PlannerFill />
           <PlannerCalorieCount 
-              chosenRecipes={this.props.chosenRecipes} />
+              chosenRecipes={this.props.chosenRecipes}
+              servingMap={this.props.servingMap} />
         </section>
     );
   }

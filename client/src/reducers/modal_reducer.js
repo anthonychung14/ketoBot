@@ -1,4 +1,4 @@
-import { ADD_PLAN_MODAL, HIDE_PLAN_MODAL } from '../actions/modalActions'
+import { ADD_PLAN_MODAL, HIDE_PLAN_MODAL, CLOSE_PLAN_MODAL } from '../actions/modalActions'
 
 const initialState = {
   modalState: false,
@@ -13,6 +13,8 @@ export function modalStaple(state=initialState, action) {
         modalProps: action.payload
       }
     case HIDE_PLAN_MODAL:
+      return initialState
+    case CLOSE_PLAN_MODAL:
       return initialState
     default:
       return state

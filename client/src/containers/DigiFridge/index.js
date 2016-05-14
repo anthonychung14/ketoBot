@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 
 /* actions */ 
-import { addStaplePlan, addAndCalc } from '../../actions/items'
+import { addStaplePlan } from '../../actions/items'
 import { fetchFridge } from '../../actions/fridgeActions'
 import { fetchStaples } from '../../actions/createMealPlan'
-import { addPlanModal, hidePlanModal, formModal, stapleModal } from '../../actions/modalActions'
+import { addPlanModal, hidePlanModal, formModal, stapleModal, closePlanModal } from '../../actions/modalActions'
 
 /* components */
 import { Fridge } from 'components/Fridge'
@@ -41,7 +41,7 @@ function mapDispatchToProps(dispatch) {
     addStaplePlan,
     addPlanModal,    
     hidePlanModal,
-    addAndCalc
+    closePlanModal
     }
   return { actions: bindActionCreators(actions, dispatch)}
 }
@@ -97,6 +97,7 @@ export class DigiFridge extends Component {
               modalPlan={this.props.modalStaple.modalState}
               modalProps={this.props.modalStaple.modalProps}
               hideModal={this.props.actions.hidePlanModal}
+              closeModal={this.props.actions.closePlanModal}
               chosenRecipes={this.props.chosenRecipes}/>          
         </div>
         <div className="tabView">            

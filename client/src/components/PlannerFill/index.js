@@ -21,7 +21,7 @@ export class PlannerFill extends Component {
   render() {        
     return (              
         <section className={`${styles}`}>        
-        <RecipeInfo recipe={this.props.chosenRecipes} />        
+          <h3>Here you have cards to suggest fridge Items to fill in the rest</h3>        
         </section>
     );
   }

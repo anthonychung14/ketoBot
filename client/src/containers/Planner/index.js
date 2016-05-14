@@ -18,7 +18,7 @@ import { KetoMagicView } from '../../components/KetoMagicView'
 function mapStateToProps(state) {
   return {     
     chosenRecipes: state.mealPlan.chosenRecipes,
-    remainingCalories: state.mealPlan.remainingMacs,
+    servingMap: state.mealPlan.servingMap,
     fridgeItems: state.fridge.fridgeItems,
     staples: state.staples.stapleData
   }
@@ -67,7 +67,7 @@ export class Planner extends Component {
           <div className="tabView">            
             <PlannerTabView 
               chosenRecipes={this.props.chosenRecipes} 
-              remainingCalories={this.props.remainingCalories}/>
+              servingMap={this.props.servingMap}/>
           </div>          
           <div className="tabView">            
             <KetoMagicView />

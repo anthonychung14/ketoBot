@@ -39,3 +39,10 @@ export function hidePlanModal() {
     type: HIDE_PLAN_MODAL    
   }
 }
+
+export const CLOSE_PLAN_MODAL = "CLOSE_PLAN_MODAL"
+export function closePlanModal() {
+  return {
+    type: CLOSE_PLAN_MODAL
+  }
+}

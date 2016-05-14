@@ -14,8 +14,7 @@ class ModalRecipeForm extends Component {
 
   submitFoodForm(servings) {        
     this.props.addStaplePlan(this.props.recipe, servings.recipeServings)
-    //THIS WILL BE A PROBLEM
-    this.props.hideModal()
+    this.props.closeModal()
   }
 
   handleChange(value){

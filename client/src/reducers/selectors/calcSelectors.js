@@ -10,34 +10,45 @@ const startMacros = {
   calories: 0
 }
 
-export const calcTotalSelector = createSelector(
-  mealPlan, recipes => recipes.chosenRecipes.reduce((acc, recipe) => {    
-    for (var key in startMacros) {
-      acc[key] += recipe.recipe.nutrition[key] * recipes.servingMap[recipe.recipe.recipe.id]
+export const calcTotalSelector = createSelector(  
+  mealPlan, recipes => {    
+    let newMacros = Object.assign({}, startMacros)
+    recipes.chosenRecipes.reduce((acc, recipe) => {    
+      for (var key in startMacros) {
+        acc[key] += recipe.recipe.nutrition[key] * recipes.servingMap[recipe.recipe.recipe.id]
+      }
+      return acc;
+    }, newMacros)
+
+    let processedMacros = {
+      'Info': 'Totals',
+      'Protein': newMacros.protein,
+      'Carbs': newMacros.net_carb,
+      'Fat': newMacros.fat,
+      'Calories': newMacros.calories
     }
-    return acc;
-  }, startMacros)
+    return processedMacros
+  }
 )
 
-
-// //TURNING CARB INTO NETCARB
-// export const calcRemaining = createSelector(  
-//   userMacros, calcTotalSelector, (macros, chosenTotals) => 
-//     Object.keys(chosenTotals).reduce((acc, key) => {     
-//       if (key === 'net_carb') {
-//         acc['carbs'] = macros.userPlan['carbs'] - chosenTotals.net_carb
-//         console.log("carb")
-//       } else {
-//         acc[key] = macros.userPlan[key] - chosenTotals[key]        
-//       }
-//       return acc      
-//     }, {})
-// )
+export const calcRemaining = createSelector(  
+  userMacros, calcTotalSelector, (macros, chosenTotals) => {
+    //take chosenMacros and subtract all of the userMacros from it
+    let totals = Object.assign({}, chosenTotals)
+    totals['Protein'] = macros.userPlan['protein'] - chosenTotals['Protein']
+    totals['Carbs'] = macros.userPlan['carbs'] - chosenTotals['Carbs']
+    totals['Fat'] = macros.userPlan['fat'] - chosenTotals['Fat']
+    totals['Calories'] = macros.userPlan['calories'] - chosenTotals['Calories']
+    totals['Info'] = 'Daily Remaining'
+    return totals
+  }
+)
   
 
 export const calcPercent = createSelector(
-
-
+  calcTotalSelector, userMacros, (calcTotal, userMacs) => {
+    return calcTotal.Calories/userMacs.userPlan.calories
+  }
 )
 
   //   Object.assign({}, macros, {

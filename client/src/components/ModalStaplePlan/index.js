@@ -27,7 +27,8 @@ export class ModalStaplePlan extends Component {
         <ModalRecipeForm
           {...initialServings}
           recipe={staple}          
-          hideModal={this.props.hideModal}/>        
+          hideModal={this.props.hideModal}
+          closeModal={this.props.closeModal}/>        
         <PlannerCalorieCount 
             chosenRecipes={this.props.chosenRecipes.chosenRecipes}
             servingMap={this.props.chosenRecipes.servingMap}/>
