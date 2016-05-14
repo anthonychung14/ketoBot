@@ -21,9 +21,15 @@ export class PlannerCalorieCount extends Component {
       super(props)
     }
 
+  componentWillMount() {
+
+
+  }
+
   buildRecipeRow(element, index) {    
     let nutri = element.recipe.nutrition
-    let servings = element['servings']
+    let serveMap = this.props.servingMap    
+    let servings = serveMap[element.recipe.recipe.id]
     //The times equals seems to have mutated the original data
     return Object.assign({}, {      
       Info: element.recipe.recipe.title,
@@ -70,10 +76,14 @@ export class PlannerCalorieCount extends Component {
   
   render() {            
     let tableData = this.props.chosenRecipes.map((element, index) => this.buildRecipeRow(element, index))
+    
+    //These values do not update
     let totalPlan = this.calcTotal()
     let remainingMacs = this.calcRemain(totalPlan)
     let macs = [].concat(tableData,totalPlan, remainingMacs, macWeek)
-    const percentDone = totalPlan['Calories']/macWeek['Calories']
+    let percentDone = totalPlan['Calories']/macWeek['Calories']
+    //////////
+    
     return (              
         <section className={`${styles}`}>
         <Box p={2}>

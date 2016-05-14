@@ -36,7 +36,7 @@ class SolutionTest_ComboFit(unittest.TestCase):
             assert_equal(diff[macro], 0)
 
     def test_returnsStaplesObject(self):
-        assert_equal(len(FindSolution(self.combo, testTarget)), 2)
+        assert_equal(len(FindSolution(self.combo, testTarget).staples), 2)
 
 
                 

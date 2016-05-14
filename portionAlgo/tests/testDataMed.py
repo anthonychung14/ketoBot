@@ -1,7 +1,17 @@
-#Easy mode -> returns 2 servings per
+#Med mode -> returns 2 servings per
 
 testTarget = {
   'protein': 34,
+  'fat': 23,
+  'carbs': 20
+}
+
+
+#Return the best possible in combinations
+#Measure best possible by keeping a running tab on "diff"
+#Goal is to get diff closest to 0
+testTarget2 = {
+  'protein': 36,
   'fat': 23,
   'carbs': 20
 }

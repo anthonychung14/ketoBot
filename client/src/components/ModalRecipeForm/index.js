@@ -14,13 +14,20 @@ class ModalRecipeForm extends Component {
 
   submitFoodForm(servings) {        
     this.props.addStaplePlan(this.props.recipe, servings.recipeServings)
+    //THIS WILL BE A PROBLEM
     this.props.hideModal()
+  }
+
+  handleChange(value){
+    this.props.addStaplePlan(this.props.recipe, value)
   }
 
   render() {
     const { fields: {recipeServings }, handleSubmit, submitting } = this.props
     return (
-      <form onSubmit={handleSubmit(this.submitFoodForm.bind(this))}>
+      <form onChange={(event) => {
+        this.handleChange(event.target.value)
+      }} onSubmit={handleSubmit(this.submitFoodForm.bind(this))}>
       <label>How many servings?</label>
       <select field={recipeServings} {...recipeServings}>
         <option>1</option>

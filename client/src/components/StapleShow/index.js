@@ -21,8 +21,7 @@ export class StapleShow extends Component {
     }    
 
     submit(element) {            
-      // this.props.addStaplePlan(element)
-      // this.context.router.push('planner')
+      this.props.addStaplePlan(element, 1)
       this.props.addPlanModal(element)
     }
 

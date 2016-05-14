@@ -9,6 +9,7 @@ export class ModalStaplePlan extends Component {
   constructor(props) {
     super(props);
   }
+
   render() {    
     if (!this.props.modalPlan) { return ( <span/>) }
     var staple = this.props.modalProps
@@ -28,7 +29,8 @@ export class ModalStaplePlan extends Component {
           recipe={staple}          
           hideModal={this.props.hideModal}/>        
         <PlannerCalorieCount 
-              chosenRecipes={this.props.chosenRecipes.chosenRecipes}/>
+            chosenRecipes={this.props.chosenRecipes.chosenRecipes}
+            servingMap={this.props.chosenRecipes.servingMap}/>
       </Modal.Body>
     </Modal>  
     )

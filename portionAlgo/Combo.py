@@ -32,6 +32,7 @@ class Combo:
     self.calcTotals()
 
   def findDiff(self, target):
+    self.diff = {}
     for macro in self.totals:
       self.diff[macro] = target[macro] - self.totals[macro]
     return self.diff

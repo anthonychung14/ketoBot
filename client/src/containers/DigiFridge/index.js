@@ -28,7 +28,7 @@ function mapStateToProps(state) {
     fridgeItems: state.fridge.fridgeItems,
     stapleData: state.staples.stapleData,
     modalStaple: state.modalStaple,
-    chosenRecipes: state.mealPlan
+    chosenRecipes: state.mealPlan    
   };
 }
 

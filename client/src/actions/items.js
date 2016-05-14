@@ -32,7 +32,7 @@ export function addAndCalc() {
 }
 
 export const ADD_STAPLEPLAN = "ADD_STAPLEPLAN"
-export function addStaplePlan(element, chosenServings) {      
+export function addStaplePlan(element, chosenServings) {        
   var addedRecipe = Object.assign({}, {
     recipe: element,
     servings: chosenServings
