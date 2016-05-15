@@ -14,6 +14,7 @@
   .card {
     margin: 5px 5px 5px 5px;  
     height: 300px;
+    border: 1px solid #1A237E !important; 
     background-color: white;      
     display: -webkit-flex;
     display: flex;
@@ -22,12 +23,10 @@
   }
 
   Table {
-    max-height: 150;
+    max-height: 100;
   }
 
   .addPlan {    
-    align-self: center;
-
+    margin-top: auto;
   }
-  
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Colors from 'material-ui/lib/styles/colors';
-
+import { PlannerActionBar } from 'components/PlannerActionBar'
 import { calcTotalSelector, calcRemaining, calcPercentCal, calcPercentPro, calcPercentFat, calcPercentCarb } from '../../reducers/selectors/calcSelectors'
 
 import { Table, Thead, Th, Tr, } from 'Reactable'
@@ -90,8 +90,10 @@ export class PlannerCalorieCount extends Component {
               <div>
               <h4>Carbs: <span className="percent">{Math.floor(this.props.percentCarbs*100)}%</span></h4>
               
-              <Line percent={this.props.percentCarbs*100} strokeWidth="2" strokeColor={Colors.cyan700}/>
-              </div>
+              <Line percent={this.props.percentCarbs*100} strokeWidth="2" strokeColor={Colors.cyan700}/>            
+            </div>
+            <PlannerActionBar />       
+              
             </div>
         </section>
     );

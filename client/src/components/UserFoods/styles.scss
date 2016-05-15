@@ -1,11 +1,12 @@
 :local(.styles) {
   position: relative;
-  border-style: solid;    
-
+  border: 1px solid #00BCD4;
+  margin: 50 20 20 20;
+  padding: 20 20 20 20;    
+  
   display: -webkit-flex;
   display: flex;
   -webkit-flex-direction: column;
-  flex-direction: column;
-  justify-content: space-around;
+  flex-direction: column;  
   
 }

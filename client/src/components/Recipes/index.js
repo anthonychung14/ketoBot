@@ -92,8 +92,8 @@ export class Recipes extends Component {
     return (
       <section className={`${styles}`}>       
         <div className="filter">
-          <h2>Hi</h2>
-          <h3>Filter will be here</h3>
+          <h2>Filter</h2>
+          <h5>Choose your recipe</h5>
         </div>
 
         <div className="recipes">

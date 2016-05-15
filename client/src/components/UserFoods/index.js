@@ -14,13 +14,11 @@ export default class UserFoods extends Component {
   render() {    
     return (              
         <section className={`${styles}`}>
-        <h1>History of orders</h1>
+        <h3>History of orders</h3>
         <div>
-        <h2>Rank order of food</h2>
+        <h3>Rank order of food</h3>
 
         </div>
-
-
         </section>
     );
   }

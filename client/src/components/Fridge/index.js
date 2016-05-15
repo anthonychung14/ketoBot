@@ -71,7 +71,7 @@ export class Fridge extends Component {
     return (
       <Card rounded={true} width={"40%"} key={index}>      
         <Heading level={2} size={3}>{category}</Heading>        
-        <Table className="table" sortable={true} itemsPerPage={3} data={filtered.map((element, index) => this.renderRow(element, index))} />                  
+        <Table className="table" sortable={true} itemsPerPage={4} data={filtered.map((element, index) => this.renderRow(element, index))} />                  
       </Card>
     )
   }
