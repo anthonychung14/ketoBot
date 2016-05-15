@@ -24,7 +24,6 @@ from ketoBot.serializers import RecipeSerializer, RecipeNutritionSerializer
 from fridge.serializers import FridgeItemSerializer
 from portionAlgo.FindSolution import FindTenSols
 
-
 @api_view(['GET', 'POST'])
 def portionAlgo(request):
   if request.method == 'POST':        

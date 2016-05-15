@@ -1,6 +1,6 @@
 :local(.styles) {
   position: relative;  
-  border: 1px solid #CCC;  
+  border: 1px solid #00BCD4;  
   padding: 20 40 20 40;
   margin: 10 10 10 10;
 
@@ -24,6 +24,8 @@
   .card {
     padding: 20 20 20 20;
     background-color: white;
+    border: 1px solid #1A237E !important; 
+    text-align: center;   
 
   }  
 }

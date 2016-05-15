@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Colors from 'material-ui/lib/styles/colors';
 
 import { calcTotalSelector, calcRemaining, calcPercentCal, calcPercentPro, calcPercentFat, calcPercentCarb } from '../../reducers/selectors/calcSelectors'
 
@@ -69,24 +70,28 @@ export class PlannerCalorieCount extends Component {
         <section className={`${styles}`}>
             <h3>Meal Plan</h3>
             <Table className="table" data={macs}/>          
-            <div>
-            <h4>Calories</h4>
-            <Line percent={this.props.percentCal*100} strokeWidth="4" strokeColor="#66ff66"/>
-            </div>
             
-            <div>
-            <h4>Protein</h4>
-            <Line percent={this.props.percentPro*100} strokeWidth="4" strokeColor="#66ff66"/>
-            </div>
-            
-            <div>
-            <h4>Fat</h4>
-            <Line percent={this.props.percentFat*100} strokeWidth="4" strokeColor="#66ff66"/>
-            </div>
-            
-            <div>
-            <h4>Carbs</h4>
-            <Line percent={this.props.percentCarbs*100} strokeWidth="4" strokeColor="#66ff66"/>
+            <div className="progressBar">
+              <div>
+              <h4>Calories: <span className="percent">{Math.floor(this.props.percentCal*100)}%</span></h4>
+              <Line percent={this.props.percentCal*100} strokeWidth="2" strokeColor={Colors.cyan700}/>
+              </div>
+              
+              <div>
+              <h4>Protein: <span className="percent">{Math.floor(this.props.percentPro*100)}%</span></h4>              
+              <Line percent={this.props.percentPro*100} strokeWidth="2" strokeColor={Colors.cyan700}/>
+              </div>
+              
+              <div>
+              <h4>Fat: <span className="percent">{Math.floor(this.props.percentFat*100)}%</span></h4>
+              <Line percent={this.props.percentFat*100} strokeWidth="2" strokeColor={Colors.cyan700}/>
+              </div>
+              
+              <div>
+              <h4>Carbs: <span className="percent">{Math.floor(this.props.percentCarbs*100)}%</span></h4>
+              
+              <Line percent={this.props.percentCarbs*100} strokeWidth="2" strokeColor={Colors.cyan700}/>
+              </div>
             </div>
         </section>
     );
