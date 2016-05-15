@@ -6,7 +6,7 @@ sys.path.append(path)
 from portionAlgo.Combo import Combo
 from portionAlgo.Staple import Staple
 
-from .testDataHard import fridgeCombos, fridgeData, testTarget
+from .testDataHard import fridgeCombos, fridgeData, testTarget, testTargetMaster
 from portionAlgo.FindSolution import FindSolution, IterateStaples, ConvertCombo, FindTenSols
 
 from nose.tools import assert_equal
@@ -38,4 +38,7 @@ class SolutionTest_LiveData(unittest.TestCase):
   def test_operatesOnCombosToFind10(self):
     fridgeCombos.next()
     assert_equal(len(FindTenSols(fridgeData, testTarget)), 10)
+
+  def test_operatesOnTestMaster(self):    
+    assert_equal(len(FindTenSols(fridgeData, testTargetMaster)), 10)
 

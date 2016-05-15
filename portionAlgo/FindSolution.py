@@ -1,16 +1,14 @@
 from portionAlgo.Combo import Combo
 from portionAlgo.Staple import Staple
-
 from copy import deepcopy
 from itertools import combinations
-
 
 def FindTenSols(data, target):
   results = []
   comboGen = ComboGenerator(data)
   comboGen.next()
   
-  while len(results) < 10:
+  while len(results) < 5:
     if not comboGen.next():
       break;
     Combo = ConvertCombo(comboGen.next())
@@ -21,8 +19,6 @@ def FindTenSols(data, target):
     if totalDiff < 10:
       results.append(solution)  
   
-  for result in results:
-    print (result.totals, result.diff, "yo")
   return results
 
 def ComboGenerator(arr):  
@@ -73,7 +69,7 @@ def IterateStaples(combo, target):
         combo.calcTotals()                
         combo.findDiff(target)
         combo.adjustConflict(target)
-        bestDiffs.append(deepcopy(combo))                                                
+        bestDiffs.append(deepcopy(combo))                                                      
             
       #Optimal solution            
       else:        

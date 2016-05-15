@@ -1,6 +1,10 @@
 import requests
 import json
 
+import sys
+path = "/Users/ACKeepingitCoo/Desktop/ketoBot/portionAlgo"
+sys.path.append(path)
+
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse
 from django.http import Http404
@@ -18,14 +22,31 @@ from ketoBot.models import Recipe, Recipe_Nutrition
 from ketoBot.serializers import RecipeSerializer, RecipeNutritionSerializer
 
 from fridge.serializers import FridgeItemSerializer
+from portionAlgo.FindSolution import FindTenSols
+
 
 @api_view(['GET', 'POST'])
 def portionAlgo(request):
-  if request.method == 'POST':    
-    #call the portion algo here, pass it the userData(target)
+  if request.method == 'POST':        
+    print(request.body)
+    remaining = json.loads(request.body)
+    target = {
+      'protein': remaining['Protein'],
+      'fat': remaining['Fat'],
+      'carbs': remaining['Carbs']
+    }
+    
+    fridgeItems = FridgeItem.objects.all()
+    fridgeSerial = FridgeItemSerializer(fridgeItems, many=True)
+    result = FindTenSols(fridgeSerial.data, target)
 
-    response = [{'a': 1, 'b': 2}, {'a': 1, 'b': 2}, {'a': 1, 'b': 2}]
-    return Response(response)
+    for i, combo in enumerate(result):
+      print (combo.totals, combo.diff, "combo data")
+      for staple in combo.staples:
+        print ("combo", i, "serving data", staple.servings)
+    
+    # response = json.dumps(result)
+    return Response("hooray")
 
 
 @api_view(['GET', 'POST'])

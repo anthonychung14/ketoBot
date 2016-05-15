@@ -30,9 +30,8 @@ export class KetoMagicView extends Component {
     return (      
       <section className={`${styles}`}>                              
           <h3>Directions!</h3>                                
-          <button onClick={this.props.sendForAlgo}>Press The Button</button>
-          <button className="">Yes I approve!</button>
-          <button className="">Show me another</button>
+          <h4>One day, the algo will be grown up enough to handle all your macros</h4>
+          <h4>Till then, please go and choose some staples/fillers before letting the robot work</h4>
 
           
       </section>      

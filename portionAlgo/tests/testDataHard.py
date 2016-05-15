@@ -36,5 +36,12 @@ testTarget = {
   'carbs': 21
 }
 
+testTargetMaster = {
+  'protein': 75,
+  'fat': 55,
+  'carbs': 30   
+
+}
+
 
 

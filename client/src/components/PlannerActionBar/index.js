@@ -1,45 +1,46 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-import { calcTotalSelector, calcRemaining, calcPercentCal, calcPercentPro, calcPercentFat, calcPercentCarb } from '../../reducers/selectors/calcSelectors'
+import { calcRemaining } from '../../reducers/selectors/calcSelectors'
+import * as actionCreators from '../../actions/ketoMagicMealActions'
 
 import { Table, Thead, Th, Tr, } from 'Reactable'
-let Line = require('rc-progress').Line;
-
-import { Flex, Box } from 'reflexbox'
 
 /* component styles */
 import { styles } from './styles.scss';
 
 function mapStateToProps(state) {
-  return {
-    totals: calcTotalSelector(state),
+  return {    
     remaining: calcRemaining(state),
-    percentCal: calcPercentCal(state),
-    percentPro: calcPercentPro(state),
-    percentCarbs: calcPercentCarb(state),
-    percentFat: calcPercentFat(state)
+    userData: state.userPlan.userPlan,
+    mealPlanArray: state.ketoMealPlan.mealPlanArray    
   }
 }
 
 function mapDispatchToProps(dispatch) {
-  return { dispatch }
+  return { actions: bindActionCreators(actionCreators, dispatch)}
 }
 
 @connect(mapStateToProps, mapDispatchToProps)
 export class PlannerActionBar extends Component {  
-    constructor(props) {
+  constructor(props) {
       super(props)
     }
 
+
+  activateBot() {
+    console.log("the bot has been activated")
+    this.props.actions.sendForAlgo(this.props.remaining)
+    //display some funky animation while we wait
+  
+  }
 
   render() {                    
     return (              
         <section className={`${styles}`}>
             <h3>Action</h3>   
-            <button onClick={this.props.sendForAlgo}>Press The Button</button>
-            <button className="">Yes I approve!</button>
-            <button className="">Show me another</button>         
+            <button onClick={this.activateBot.bind(this)}>Press The Button</button>            
         </section>
     );
   }
