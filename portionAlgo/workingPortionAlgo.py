@@ -7,7 +7,6 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "ketoMon.settings")
 import django
 django.setup()
 
-import numpy as np
 from itertools import combinations
 
 from ketoBot.models import Recipe, Recipe_Nutrition
@@ -21,6 +20,7 @@ staples = Recipe.objects.filter(staple=True)
 stapleSerializer = RecipeSerializer(staples, many=True)
 stapleID = [int(x['id']) for x in stapleSerializer.data]    
 gotStapleNutrition = Recipe_Nutrition.objects.filter(r__in=stapleID)
+
 nutri = RecipeNutritionSerializer(gotStapleNutrition, many=True)
 
 fridgeItems = FridgeItem.objects.all()

@@ -6,14 +6,13 @@ testTarget = {
   'carbs': 20
 }
 
-
 #Return the best possible in combinations
 #Measure best possible by keeping a running tab on "diff"
 #Goal is to get diff closest to 0
 testTarget2 = {
-  'protein': 36,
-  'fat': 23,
-  'carbs': 20
+  'protein': 120,
+  'fat': 74,
+  'carbs': 50
 }
 
 macroDict = { 
