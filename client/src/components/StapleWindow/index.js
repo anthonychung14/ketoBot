@@ -30,7 +30,7 @@ export class StapleWindow extends Component {
             name="compose"
             width="2em"/>
         </ButtonCircle>
-        <h5>Add Staple</h5>
+        <h5>Add to Staple</h5>
        <StapleShow
             stapleData = {this.props.stapleData}
             addStaplePlan={this.props.addStaplePlan}

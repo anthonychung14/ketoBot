@@ -1,7 +1,6 @@
 :local(.styles) {
   position: relative;
-
-  padding: 50px 0;
+  
   align-self: center;
 
   display: -webkit-flex;
@@ -10,6 +9,12 @@
   flex-direction: row;
   justify-content: space-around;
 
+  .secondColumn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+  }
   
 }
 

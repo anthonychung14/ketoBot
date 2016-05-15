@@ -33,6 +33,14 @@ export function addFillerPlan(element, chosenServings) {
   }
 }
 
+export const SUBTRACT_FILLERPLAN = "SUBTRACT_FILLERPLAN"
+export function subtractFillerPlan(element) {          
+  return {
+    type: SUBTRACT_FILLERPLAN,
+    payload: element
+  }
+}
+
 
 // ASYNC //
 //GET NUTRITIONAL INFO

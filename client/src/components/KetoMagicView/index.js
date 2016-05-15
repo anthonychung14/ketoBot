@@ -29,8 +29,8 @@ export class KetoMagicView extends Component {
   render() {
     return (      
       <section className={`${styles}`}>                              
-          <h3>Directions</h3>                                
-          <button onClick={this.props.sendForAlgo} className="">Press The Button</button>
+          <h3>Directions!</h3>                                
+          <button onClick={this.props.sendForAlgo}>Press The Button</button>
           <button className="">Yes I approve!</button>
           <button className="">Show me another</button>
 

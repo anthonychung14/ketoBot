@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import { PlannerFill } from 'components/PlannerFill'
 import { PlannerCalorieCount } from 'components/PlannerCalorieCount'
+import { PlannerActionBar } from 'components/PlannerActionBar'
 
 /* component styles */
 import { styles } from './styles.scss';
@@ -16,12 +17,13 @@ export class PlannerTabView extends Component {
         <section className={`${styles}`}>
           <PlannerFill 
               fridgeItems={this.props.fridgeItems}
-              staples={this.props.staples}/>
+              staples={this.props.staples}/>          
           <PlannerCalorieCount 
               chosenRecipes={this.props.chosenRecipes}              
               servingMap={this.props.servingMap} 
               fridgeFill={this.props.fridgeFill}
-              fridgeServings={this.props.fridgeServings}/>
+              fridgeServings={this.props.fridgeServings}/>             
+          <PlannerActionBar />       
         </section>
     );
   }

@@ -4,14 +4,8 @@
   display: flex;
   -webkit-flex-direction: row;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
 
-  .actions {
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-direction: row;
-    flex-direction: row;
-    justify-content: space-between
-  }
+  
 
 }

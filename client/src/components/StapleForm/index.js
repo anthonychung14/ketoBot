@@ -39,8 +39,6 @@ class StapleForm extends Component {
   }
 
   render() {
-    //TODO: DISPLAY CALORIES OF STAPLE AS THEY FILL IN FORM
-
     const { fields: { stapleTitle, ingredient }, handleSubmit, submitting } = this.props;    
     return (              
         <section className={`${styles}`}>

@@ -1,4 +1,4 @@
-import { ADD_RECPLAN, ADD_STAPLEPLAN, ADD_FILLERPLAN } from '../actions/items'
+import { ADD_RECPLAN, ADD_STAPLEPLAN, ADD_FILLERPLAN, SUBTRACT_FILLERPLAN } from '../actions/items'
 import { HIDE_PLAN_MODAL } from '../actions/modalActions'
 
 const initialState = {
@@ -26,8 +26,28 @@ export function mealPlan(state=initialState, action) {
       return Object.assign({}, state, {
         chosenRecipes: recipes,
         servingMap: newMap
-      })    
+      })
+      
+    case SUBTRACT_FILLERPLAN:
+      console.log(action.payload, "payload")
+      var recipeOut = action.payload
+      var fridgeCopy = state.fridgeFill.slice()
+      var indexRecipe = fridgeCopy.indexOf(recipeOut)      
+      var servings = state.fridgeServings[recipeOut.id]
 
+      var servingMap = Object.assign({}, state.fridgeServings, {
+        [recipeOut.id]:  servings - 1      
+      })
+
+      if (servingMap[recipeOut.id] === 0){
+        fridgeCopy.splice(indexRecipe, 1)  
+        delete servingMap[recipeOut.id]
+      }
+      
+      return Object.assign({}, state, {
+        fridgeFill: fridgeCopy,
+        fridgeServings: servingMap
+      })
     case ADD_FILLERPLAN:      
       var recipe = action.payload.recipe
       var servings = Number(action.payload.servings)
@@ -35,7 +55,6 @@ export function mealPlan(state=initialState, action) {
       var newMap;
       
       if (state.fridgeServings[id]) {
-        console.log(state.fridgeServings[id], "this should be 1 or whatever")
         newMap = Object.assign({}, state.fridgeServings, {
           [id]: state.fridgeServings[id] + servings
         })
@@ -54,8 +73,6 @@ export function mealPlan(state=initialState, action) {
           fridgeServings: newMap
         })
       }
-
-      
 
     case ADD_STAPLEPLAN:      
       var pickedRecipe = action.payload
@@ -78,7 +95,4 @@ export function mealPlan(state=initialState, action) {
     default:
       return state
   }
-}
-        // servingMap: Object.assign({}, state.servingMap, {
-        //   recipeInfo.id: servingMap
-        // })
+}        
