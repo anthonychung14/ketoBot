@@ -5,7 +5,7 @@ sys.path.append(path)
 
 from portionAlgo.Combo import Combo
 from portionAlgo.Staple import Staple
-from portionAlgo.FindSolution import FindSolution, IterateStaples, IterateFoods
+from portionAlgo.FindSolution import FindSolution, IterateStaples
 from .testDataMed import testTarget, testTarget2, macroDict, macroDict2, macroDict3
 
 from nose.tools import assert_equal

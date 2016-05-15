@@ -30,6 +30,11 @@ def makeComboGenerator(arr):
 fridgeCombos = makeComboGenerator(fridgeSerial.data)
 fridgeData = fridgeSerial.data
 
+testTarget = {
+  'protein': 24,
+  'fat': 36,
+  'carbs': 21
+}
 
 
 
