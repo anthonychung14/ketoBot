@@ -21,7 +21,6 @@ class AddFillForm extends Component {
   }
 
   render() {
-    console.log(this.props)
     const { fields: { fillerServings }, handleSubmit, submitting } = this.props
     return (
       <form onChange={(event) => {

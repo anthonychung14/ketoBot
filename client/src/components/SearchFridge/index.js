@@ -68,10 +68,10 @@ export class SearchFridge extends Component {
     const categories = [ 'Protein', 'Fats', 'Dairy' , 'Vegetables' ]
     return (
       <div>
-      <h2>Fridge Search</h2>
+      <h2>Search Fridge</h2>
       <section className={`${styles}`}>
         <div className="fridgeCards">
-        {categories.map((category,index) => this.renderCard(category, index))}
+          {categories.map((category,index) => this.renderCard(category, index))}
         </div>
         <div className="fridgeResults">
           <SearchFridgeResults

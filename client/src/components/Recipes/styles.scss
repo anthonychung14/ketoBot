@@ -1,55 +1,61 @@
 :local(.styles) {
   position: relative;
-  padding: 50px 0;
   height: 100vh;
 
   h2.heading {
     margin-bottom: 30px;
-  }
-
-  a {
-    font-size: 12px;
-  }
-
-  p {
-    font-size: 16px;
-    padding: 0 10%;
+    height: 70;
   }
 
   display: -webkit-flex;
   display: flex;
   -webkit-flex-direction: row;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: row;  
+  text-align:center;   
 
-  .recipeHeader {
-    flex: 0 0 100%;
-    text-align: center;
+  .filter {
+    border-right: 1px solid #CCC;
+    margin: 40 100 40 40;
+    padding: 40 100 40 40;
+    display: -webkit-flex;
+
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    flex-wrap: wrap;
   }
 
-  .cardText {    
-  }
-
-  .card {
-    margin: 5px 5px 5px 5px;  
-    height: 375px;
-    background-color: white;    
-        
-  }
-
-  .Text{
+  .recipes {    
     display: -webkit-flex;
     display: flex;
     -webkit-flex-direction: row;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
-    align-items:center;
+    justify-content: center;
+
+  }
+  
+  .card {
+    margin: 5px 5px 5px 5px;  
+    height: 370px;
+    background-color: white;  
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column; 
   }
 
-  img.cardImage {
-    height: 200px;
+  .actions {
+    margin: 20 20 20 20;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row; 
+    justify-content: space-between;
+  }
+
+  img.cardimage {
+    height: 225px !important;
     width: auto;
   }  
 }

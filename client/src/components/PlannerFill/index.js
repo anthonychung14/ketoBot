@@ -21,14 +21,14 @@ export class PlannerFill extends Component {
   renderCard(element, key){
     let nutrientTable = Object.assign({}, {
       'Available': element.servings,
-      'Calories': element.calories,
       'Protein': element.protein,
-      'Fat': element.fat,      
       'Carbs': element.carbs - element.fiber,
+      'Fat': element.fat,      
+      'Calories': element.calories,
     })
 
     return (
-      <Card rounded={true} width={350} key={key}>
+      <Card rounded={true} width={400} key={key}>
         <Heading level={2} size={3}>{element.name}</Heading>
         <Table className='table' data={[nutrientTable]} />
         <AddFillForm {...initialFormValue} filler={element} form={element.name}/>          

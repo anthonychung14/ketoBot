@@ -1,10 +1,17 @@
 :local(.styles) {
   position: relative;  
+  border: 1px solid #CCC;  
+  padding: 20 40 20 40;
+  margin: 10 10 10 10;
 
   display: -webkit-flex;
   display: flex;
   -webkit-flex-direction: column;
   flex-direction: column;
+
+  h3 {
+    text-align:center;
+  }
 
   .actions {
     display: -webkit-flex;
@@ -12,5 +19,11 @@
     -webkit-flex-direction: row;
     flex-direction: row;
     justify-content: space-between
+  }
+
+  .card {
+    padding: 20 20 20 20;
+    background-color: white;
+
   }  
 }

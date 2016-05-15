@@ -1,45 +1,18 @@
 :local(.styles) {
   position: relative;
-  padding: 50px 0;
-  border-top: 1px solid #CCC;
+  padding: 35px 0;
 
   display: -webkit-flex;
   display: flex;
-  -webkit-flex-direction: column;
-  flex-direction: column;
-  flex-wrap: wrap;  
-  text-align: center
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  text-align: center;
 
-  h2 {    
-  }
-
-  a {
-    font-size: 12px;
-  }
-
-  p {
-    font-size: 14px;
-    padding: 0 10%;
-  }
-
-  .fridgeCards {
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-direction: row;
-    flex-direction: row;
-    flex-wrap: wrap;  
-    justify-content: center;
-  }
   .card {
     margin: 5px 5px 5px 5px;  
     height: 300px;
-    
-    & input {
-      display: none
-    }
-    
-    &:hover input {
-      display: block;
-    }    
+    background-color: white;    
   }
 }

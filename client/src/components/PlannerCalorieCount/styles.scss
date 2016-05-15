@@ -1,7 +1,21 @@
 :local(.styles) {  
+  border: 1px solid #CCC;  
+  padding: 20 40 20 40;
+  margin: 10 10 10 10;
+
   display: -webkit-flex;
   display: flex;
   -webkit-flex-direction: column;
   flex-direction: column;
+  width: 40%;
+
+  h3 {
+    text-align:center;
+  }
+
+  padding: 10 10 10 10;
+  margin: 10 10 10 10;
+
+  border-style: solid;
   
 }

@@ -1,18 +1,19 @@
 :local(.styles) {
   position: relative;
-  padding: 50px 0;
-  border-top: 1px solid #CCC;
 
-  h2 {
-    margin-bottom: 50px;
-  }
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  text-align: center;
 
-  a {
-    font-size: 12px;
+  .searchColumn {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    flex-wrap: wrap;  
+    justify-content: flex-start;
   }
-
-  p {
-    font-size: 14px;
-    padding: 0 10%;
-  }
+  
 }

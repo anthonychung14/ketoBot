@@ -2,11 +2,9 @@ import React, { Component, PropTypes } from 'react';
 
 /* component styles */
 import { styles } from './styles.scss';
-import { Card, CardImage, Heading, Text } from 'rebass'
-import { ButtonToolbar, DropdownButton, MenuItem } from 'react-bootstrap'
-
-import { Table, Thead, Th, Tr, } from 'Reactable'
-
+import { Card, CardImage, Heading, Text, ButtonCircle } from 'rebass'
+import { Table } from 'Reactable'
+import Icon from 'react-geomicons'
 
 export class StapleShow extends Component {  
     static contextTypes = {
@@ -28,28 +26,16 @@ export class StapleShow extends Component {
     renderIngreds(element) {      
       return element.ingreds.map(ingred => {          
         return Object.assign({
-          Amount: ingred.amount + " servings" ,
+          Servings: ingred.amount,
           Name: ingred.name
         })
       })
     }
 
-
-    renderNutrients(element, index) {
-        const nutri = element.nutrition                        
-        
+    renderNutrients(element, index) {        
         return (        
           <div>                                
-            <Table className="table" data ={this.renderIngreds(element)}/>
-            <input onClick={this.submit.bind(this, element)} className="modalButton" type="button" value=" Add to Plan " />                        
-            <Table className="table" data={[
-              {
-                "Total Cal": nutri.calories,
-                Protein: nutri.protein,
-                Fat: nutri.fat,
-                Carbs: nutri.net_carb
-              }
-              ]}/>                        
+            <Table className="table" data ={this.renderIngreds(element)}/>            
           </div>        
         )
       }
@@ -59,6 +45,17 @@ export class StapleShow extends Component {
           <Card rounded={true} width={300} key={index}>
             <Heading level={2} size={3}>{element.recipe.title}</Heading>
             {this.renderNutrients(element)}
+            
+            <div className="addPlan">
+              <ButtonCircle onClick={this.submit.bind(this, element)}title="Add">
+              <Icon
+                fill="currentColor"
+                height="2em"
+                name="check"
+                width="2em"/>
+              </ButtonCircle>
+              <h5>Add to Plan</h5>
+            </div>                   
           </Card>
         )
       }

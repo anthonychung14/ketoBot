@@ -3,7 +3,10 @@ import React, { Component } from 'react';
 /* component styles */
 import { styles } from './styles.scss';
 import { StapleShow } from 'components/StapleShow'
-import { ModalStaplePlan }from 'components/ModalStaplePlan'
+import { ModalStaplePlan } from 'components/ModalStaplePlan'
+import { ButtonCircle } from 'rebass'
+import Icon from 'react-geomicons'
+
 
 
 export class StapleWindow extends Component {
@@ -20,7 +23,14 @@ export class StapleWindow extends Component {
     return (
      <div>
        <h2>Weekly staples</h2>
-       <button onClick={this.props.stapleModal}>Add staple meal </button>       
+       <ButtonCircle onClick={this.props.stapleModal} title="addStaple">
+          <Icon
+            fill="currentColor"
+            height="2em"
+            name="compose"
+            width="2em"/>
+        </ButtonCircle>
+        <h5>Add Staple</h5>
        <StapleShow
             stapleData = {this.props.stapleData}
             addStaplePlan={this.props.addStaplePlan}

@@ -18,8 +18,10 @@ export class PlannerTabView extends Component {
               fridgeItems={this.props.fridgeItems}
               staples={this.props.staples}/>
           <PlannerCalorieCount 
-              chosenRecipes={this.props.chosenRecipes}
-              servingMap={this.props.servingMap} />
+              chosenRecipes={this.props.chosenRecipes}              
+              servingMap={this.props.servingMap} 
+              fridgeFill={this.props.fridgeFill}
+              fridgeServings={this.props.fridgeServings}/>
         </section>
     );
   }

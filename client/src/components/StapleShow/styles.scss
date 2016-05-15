@@ -1,7 +1,7 @@
 :local(.styles) {
   
   height: 100vh;
-
+  position: relative;
   display: -webkit-flex;
   display: flex;
   -webkit-flex-direction: row;
@@ -9,37 +9,25 @@
   flex-wrap: wrap;
   justify-content: center;
 
-  padding: 50px 0;
-  align-self: center;
-
-  .tool {
-    text-align: center;
-    margin: 30px 0;
-
-    img {
-      width: 80%;
-    }
-  }
+  padding: 50px 0;  
 
   .card {
     margin: 5px 5px 5px 5px;  
     height: 300px;
-    background-color: white;
-    
-    & input {
-      display: none
-    }
-    
-    &:hover input {
-      display: block;      
-    }
-
-    & select {
-      display: none
-    }
-    
-    &:hover select {
-      display: block;
-    }
+    background-color: white;      
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;    
   }
+
+  Table {
+    max-height: 150;
+  }
+
+  .addPlan {    
+    align-self: center;
+
+  }
+  
 }

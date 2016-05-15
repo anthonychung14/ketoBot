@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import { reduxForm } from 'redux-form'
 import { Link } from 'react-router'
+import Icon from 'react-geomicons'
+import { ButtonCircle } from 'rebass'
 
 import { retrieveSearch } from '../../actions/searchRecipes'
 
@@ -29,24 +31,28 @@ class SearchForm extends Component {
       } = this.props
 
     return (
-      <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+      <form className="searchColumn" onSubmit={handleSubmit(this.onSubmit.bind(this))}>
         <div>
-          <label>Something you'd love</label>
+          <label>Love</label>
           <div>
             <input type="text" {...want} value={want.value}/>
           </div>
         </div>
       
         <div>
-          <label>Something you aren't feeling</label>
+          <label>Not feeling</label>
           <div>
             <input type="text" {...noWant} value={noWant.value}/>
           </div>
         </div>
         <div>          
-          <button type="submit" disabled={submitting}>
-            {submitting ? <i/> : <i/>} Finish
-          </button>
+          <ButtonCircle type="submit" disabled={submitting} title="Search">
+          <Icon
+            fill="currentColor"
+            height="2em"
+            name="search"
+            width="2em"/>
+          </ButtonCircle>          
         </div>
       </form>
     )

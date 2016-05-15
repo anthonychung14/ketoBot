@@ -11,15 +11,6 @@
     text-align: center;
   }
 
-  a {
-    font-size: 12px;
-  }
-
-  p {
-    font-size: 20px;
-    padding: 0 10%;
-  }
-
   .fridgeCards {
     display: -webkit-flex;
     display: flex;
@@ -27,18 +18,6 @@
     flex-direction: column;
     flex-wrap: wrap;  
     justify-content: flex-start;
-  }
-
-  .card {
-    margin: 5px 5px 5px 5px;  
-    height: 300px;
-    
-    & input {
-      display: none
-    }
-    
-    &:hover input {
-      display: block;
-    }    
+    background-color: white;
   }
 }

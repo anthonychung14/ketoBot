@@ -24,16 +24,16 @@ function mapDispatchToProps(dispatch) {
 @connect(mapStateToProps, mapDispatchToProps)
 
 export class Search extends Component {
-  componentWillMount () {
-    
-  }
-
+  
   render() {
     return (
-      <section className={`${styles}`}>
-        <div>
-          <h3>Search for something!</h3>
-          <SearchForm />
+      <section className={`${styles}`}>        
+        <div className="searchColumn">        
+          <h2>Search</h2>
+          <SearchForm/>
+        </div>
+        
+        <div classNme="searchResults">
           <SearchResults 
             recData={this.props.recData}/>
         </div>

@@ -1,8 +1,7 @@
 :local(.styles) {
   position: relative;
-  padding: 50px 0;
-  border-top: 1px solid #CCC;
-
+  padding: 10 10 10 50;
+  
   display: -webkit-flex;
   display: flex;
   -webkit-flex-direction: row;
@@ -10,35 +9,35 @@
   flex-wrap: wrap;
   justify-content: center;
   
-  text-align: center
+  text-align: center;
 
-  h2 {
-    margin-bottom: 50px;
-  }
-
-  a {
-    font-size: 12px;
-  }
-
-  p {
-    font-size: 14px;
-    padding: 0 10%;
-  }
+  h2.heading {
+      margin-bottom: 30px;
+      height: 70;
+    }
 
   .card {
-    margin: 5px 5px 5px 5px;  
-    height: 300px;
-    
-    & input {
-      display: none
+      margin: 5px 5px 5px 5px;  
+      height: 370px;
+      background-color: white;  
+
+      display: -webkit-flex;
+      display: flex;
+      -webkit-flex-direction: column;
+      flex-direction: column; 
     }
-    
-    &:hover input {
-      display: block;
-    }    
+
+  .actions {
+    margin: 20 20 20 20;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row; 
+    justify-content: space-between;
   }
-  img.cardImage {
-    max-height: 170px;
+
+  img.cardimage {
+    height: 225px !important;
     width: auto;
-  }
+  }  
 }

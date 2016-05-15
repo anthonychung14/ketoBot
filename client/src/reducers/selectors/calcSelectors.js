@@ -13,20 +13,38 @@ const startMacros = {
   calories: 0
 }
 
+const startTotals = {
+  "Info": "Totals",
+  "Protein": 0,
+  "Fat": 0,
+  "Carbs": 0,
+  "Calories": 0  
+}
+
 export const calcFillerSelector = createSelector(
-  fridgeFillers, fridgeMap, (food, servings) => {
-    food.reduce((acc, recipe) => {
+  fridgeFillers, fridgeMap, (food, servings) => {    
+    let startMacros = Object.assign({}, startTotals)
+    return food.reduce((acc, recipe) => {
       acc['Protein'] += recipe.protein * servings[recipe.id]
       acc['Fat'] += recipe.fat * servings[recipe.id]
       acc['Carbs'] += (recipe.carbs - recipe.fiber) * servings[recipe.id]
       acc['Calories'] += recipe.calories * servings[recipe.id]
       return acc
-    }, {})
+    }, startMacros)
   }
 )
 
 export const calcTotalSelector = createSelector(  
   mealPlan, calcFillerSelector, (recipes, filler) => {    
+    if (!filler) {
+      let filler = Object.assign({}, {
+        "Protein": 0,
+        "Fat": 0,
+        "Carbs": 0,
+        "Calories": 0
+      })
+    }
+
     let newMacros = Object.assign({}, startMacros)
     recipes.chosenRecipes.reduce((acc, recipe) => {    
       for (var key in startMacros) {
@@ -37,10 +55,10 @@ export const calcTotalSelector = createSelector(
 
     let processedMacros = {
       'Info': 'Totals',
-      'Protein': newMacros.protein,
-      'Carbs': newMacros.net_carb,
-      'Fat': newMacros.fat,
-      'Calories': newMacros.calories
+      'Protein': newMacros.protein + filler.Protein,
+      'Carbs': newMacros.net_carb + filler.Carbs,
+      'Fat': newMacros.fat + filler.Fat,
+      'Calories': newMacros.calories + filler.Calories
     }
     return processedMacros
   }
@@ -59,16 +77,26 @@ export const calcRemaining = createSelector(
   }
 )
   
-
-export const calcPercent = createSelector(
+export const calcPercentCal = createSelector(  
   calcTotalSelector, userMacros, (calcTotal, userMacs) => {
     return calcTotal.Calories/userMacs.userPlan.calories
   }
 )
 
-  //   Object.assign({}, macros, {
-  //     macros.userPlan['protein']: macros.userPlan['protein'] - chosenTotals['protein'],
-  //     macros.userPlan['fat']: macros.userPlan['fat'] - chosenTotals['fat'],
-  //     macros.userPlan['net_carb']: macros.userPlan['net_carb'] - chosenTotals['net_carb'],
-  //     macros.userPlan['calories']: macros.userPlan['calories'] - chosenTotals['calories']
-  // })
+export const calcPercentPro = createSelector(  
+  calcTotalSelector, userMacros, (calcTotal, userMacs) => {
+    return calcTotal.Protein/userMacs.userPlan.protein
+  }
+)
+
+export const calcPercentFat = createSelector(  
+  calcTotalSelector, userMacros, (calcTotal, userMacs) => {
+    return calcTotal.Fat/userMacs.userPlan.fat
+  }
+)
+
+export const calcPercentCarb = createSelector(  
+  calcTotalSelector, userMacros, (calcTotal, userMacs) => {
+    return calcTotal.Carbs/userMacs.userPlan.carbs
+  }
+)

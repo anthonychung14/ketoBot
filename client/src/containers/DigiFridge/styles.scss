@@ -1,19 +1,13 @@
 :local(.styles) {
 
   padding: 50px 0;
-
   text-align: center;
-
-  .fridgeHeader {
-    text-align: center;    
-  }
-
+  
   display: -webkit-flex;
   display: flex;
   -webkit-flex-direction: column;
   flex-direction: column;
   flex-wrap: wrap;
-  justify-content: center;
 
   .tabs {
     padding-top: 8px;

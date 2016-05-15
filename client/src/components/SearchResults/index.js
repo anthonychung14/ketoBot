@@ -3,13 +3,14 @@ import * as actionCreators from '../../actions/userPlan'
 import { fetchNutrition, fetchRecipes, addStaplePlan } from '../../actions/items'
 import { openModal } from '../../actions/modalActions'
 
-
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 
 /* component styles */
 import { styles } from './styles.scss';
 import { Card, CardImage, Heading, Text } from 'rebass'
+
+import { RecipeCard } from 'components/RecipeCard'
 
 function mapStateToProps(state) {
   return { 
@@ -56,7 +57,7 @@ export default class Search extends Component {
   render() {
     return (
       <section className={`${styles}`}>        
-        {this.props.searchResults.map((element, index) => this.renderSearch(element, index))}                          
+        {this.props.searchResults.map((element, index) => <RecipeCard element={element} key={index}/>)}                          
       </section>
     );
   }

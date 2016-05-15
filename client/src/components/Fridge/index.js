@@ -6,7 +6,9 @@ import { bindActionCreators } from 'redux'
 
 /* component styles */
 import { styles } from './styles.scss';
-import { Card, CardImage, Heading, Text } from 'rebass'
+import { Card, CardImage, Heading, Text, ButtonCircle } from 'rebass'
+import Icon from 'react-geomicons'
+
 import { Table, Thead, Th, Tr, } from 'Reactable'
 
 function mapStateToProps(state) {
@@ -58,7 +60,7 @@ export class Fridge extends Component {
 
   renderRow(element, index) {
     return {
-      'Servings': element['servings'],
+      'Available': element['servings'],
       'Name': element['name'],
       'Calories': element['calories']
     }
@@ -77,12 +79,20 @@ export class Fridge extends Component {
   render() {
     const categories = [ 'Protein', 'Fats', 'Dairy' , 'Vegetables' ]
     return (
-      <section className={`${styles}`}>
-        <h2>Inventories</h2>
-        <div className="fridgeCards">
-        {categories.map((category,index) => this.renderCard(category, index))}
+      <div>
+        <h2>Inventory</h2>
+        <ButtonCircle onClick={this.props.openModal} title="Add">
+          <Icon
+           fill="currentColor"
+           height="2em"
+           name="compose"
+           width="2em"/>
+          </ButtonCircle>
+        <h5>Add to Fridge</h5>        
+        <div className={`${styles}`}>
+          {categories.map((category,index) => this.renderCard(category, index))}
         </div>
-      </section>
+      </div>
     );
   }
 }

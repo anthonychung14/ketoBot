@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { calcTotalSelector, calcRemaining, calcPercent } from '../../reducers/selectors/calcSelectors'
+import { calcTotalSelector, calcRemaining, calcPercentCal, calcPercentPro, calcPercentFat, calcPercentCarb } from '../../reducers/selectors/calcSelectors'
 
 import { Table, Thead, Th, Tr, } from 'Reactable'
 let Line = require('rc-progress').Line;
@@ -15,7 +15,10 @@ function mapStateToProps(state) {
   return {
     totals: calcTotalSelector(state),
     remaining: calcRemaining(state),
-    percentCal: calcPercent(state)
+    percentCal: calcPercentCal(state),
+    percentPro: calcPercentPro(state),
+    percentCarbs: calcPercentCarb(state),
+    percentFat: calcPercentFat(state)
   }
 }
 
@@ -43,10 +46,24 @@ export class PlannerCalorieCount extends Component {
       Carbs: nutri.net_carb * servings
     })
   }
+
+  buildFillRow(element, index) {
+    let id = element.id
+    let servings = this.props.fridgeServings[id]
+    return Object.assign({}, {
+      Info: element.name,
+      Servings: servings,
+      Calories: element.calories * servings,
+      Fat: element.fat * servings,
+      Carbs: (element.carbs - element.fiber) * servings,
+      Protein: element.protein * servings
+    })
+  }
   
   render() {            
-    let tableData = this.props.chosenRecipes.map((element, index) => this.buildRecipeRow(element, index))
-    let macs = [].concat(tableData, this.props.totals, this.props.remaining)    
+    let chosenRecipeRows = this.props.chosenRecipes.map((element, index) => this.buildRecipeRow(element, index))
+    let fridgeFillRows = this.props.fridgeFill.map((element, index) => this.buildFillRow(element, index))
+    let macs = [].concat(chosenRecipeRows, fridgeFillRows, this.props.totals, this.props.remaining)    
     
     return (              
         <section className={`${styles}`}>
@@ -54,22 +71,22 @@ export class PlannerCalorieCount extends Component {
             <Table className="table" data={macs}/>          
             <div>
             <h4>Calories</h4>
-            <Line percent="50" strokeWidth="4" strokeColor="#66ff66"/>
+            <Line percent={this.props.percentCal*100} strokeWidth="4" strokeColor="#66ff66"/>
             </div>
             
             <div>
             <h4>Protein</h4>
-            <Line percent="20" strokeWidth="4" strokeColor="#66ff66"/>
+            <Line percent={this.props.percentPro*100} strokeWidth="4" strokeColor="#66ff66"/>
             </div>
             
             <div>
             <h4>Fat</h4>
-            <Line percent="22" strokeWidth="4" strokeColor="#66ff66"/>
+            <Line percent={this.props.percentFat*100} strokeWidth="4" strokeColor="#66ff66"/>
             </div>
             
             <div>
             <h4>Carbs</h4>
-            <Line percent="68" strokeWidth="4" strokeColor="#66ff66"/>
+            <Line percent={this.props.percentCarbs*100} strokeWidth="4" strokeColor="#66ff66"/>
             </div>
         </section>
     );

@@ -30,13 +30,32 @@ export function mealPlan(state=initialState, action) {
 
     case ADD_FILLERPLAN:      
       var recipe = action.payload.recipe
-      var newMap = Object.assign({}, state.fridgeServings)
-      newMap[recipe.id] = Number(action.payload.servings)
+      var servings = Number(action.payload.servings)
+      var id = recipe.id
+      var newMap;
+      
+      if (state.fridgeServings[id]) {
+        console.log(state.fridgeServings[id], "this should be 1 or whatever")
+        newMap = Object.assign({}, state.fridgeServings, {
+          [id]: state.fridgeServings[id] + servings
+        })
+        return Object.assign({}, state, {
+          fridgeFill: state.fridgeFill.slice(),
+          fridgeServings: newMap
+        })
+      }
+      
+      else {
+        newMap = Object.assign({}, state.fridgeServings, {
+          [id]: servings
+        })
+        return Object.assign({}, state, {
+          fridgeFill: state.fridgeFill.concat(recipe),
+          fridgeServings: newMap
+        })
+      }
 
-      return Object.assign({}, state, {
-        fridgeFill: state.fridgeFill.concat(recipe),
-        fridgeServings: newMap
-      })
+      
 
     case ADD_STAPLEPLAN:      
       var pickedRecipe = action.payload

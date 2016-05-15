@@ -7,7 +7,8 @@ import { bindActionCreators } from 'redux'
 
 /* component styles */
 import { styles } from './styles.scss';
-import { Card, CardImage, Heading, Text } from 'rebass'
+import { Card, CardImage, Heading, Text, ButtonCircle } from 'rebass'
+import Icon from 'react-geomicons'
 import { RecipeModal } from 'components/RecipeModal'
 import { Button } from 'react-bootstrap'
 
@@ -45,14 +46,43 @@ export class Recipes extends Component {
   renderRecipe(element, index) {
     let boundRecipeInfo = this.getRecipeInfo.bind(this, element)
     return (
-        <Card rounded={true} width={250} key={index}>
+        <Card rounded={true} width={350} key={index}>
         <CardImage src={element.image} />
-        <Heading level={2} size={3}>{element.title}</Heading>
-          <Text>
-            <Button bsStyle="info" className="modalButton" onClick={boundRecipeInfo}>Quick Look</Button>
-            <Button bsStyle="success" className="modalButton" onClick={boundRecipeInfo}>Quick Look</Button>
-            <Button bsStyle="danger" className="modalButton" onClick={boundRecipeInfo}>Quick Look</Button>            
-          </Text>
+        <Heading level={2} size={3}>{element.title}</Heading>                  
+        <div className="actions">
+          <div>
+          <ButtonCircle title="No">
+            <Icon
+              fill="currentColor"
+              height="2em"
+              name="no"
+              width="2em"/>
+          </ButtonCircle>
+          <h5>Nope</h5>
+          </div>
+
+          <div>
+          <ButtonCircle onClick={boundRecipeInfo} title="Add">
+          <Icon
+            fill="currentColor"
+            height="2em"
+            name="list"
+            width="2em"/>
+          </ButtonCircle>
+          <h5>Info</h5>
+          </div>
+          
+          <div>
+          <ButtonCircle title="Add">
+          <Icon
+            fill="currentColor"
+            height="2em"
+            name="check"
+            width="2em"/>
+          </ButtonCircle>
+          <h5>Add</h5>
+          </div>
+        </div>        
         </Card>
     )
   }
@@ -61,12 +91,17 @@ export class Recipes extends Component {
     console.log(this.props)
     return (
       <section className={`${styles}`}>       
-        <div className="recipeHeader">
+        <div className="filter">
+          <h2>Hi</h2>
+          <h3>Filter will be here</h3>
         </div>
+
+        <div className="recipes">
         {this.props.recipes
           .filter((element,key) => this.props.recData.nutrition[element.id])
           .map((element,key) => this.renderRecipe(element,key))
           }
+        </div>
         <RecipeModal
           modalState ={this.props.modalState}
           openModal={this.props.actions.openModal}

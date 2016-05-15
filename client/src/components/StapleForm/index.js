@@ -31,7 +31,7 @@ class StapleForm extends Component {
   generateServings(ingred) {
     let numArray = [];
     let value = ingred.value || []
-    let selectedItem = this.props.fridgcloseeItems.filter(element => element.name === value)[0] || {servings:0}
+    let selectedItem = this.props.fridgeItems.filter(element => element.name === value)[0] || {servings:0}
     for (var i = 1; i <= selectedItem.servings; i++) {      
         numArray.push(i)      
     }

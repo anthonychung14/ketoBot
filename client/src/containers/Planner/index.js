@@ -20,7 +20,9 @@ function mapStateToProps(state) {
     chosenRecipes: state.mealPlan.chosenRecipes,
     servingMap: state.mealPlan.servingMap,
     fridgeItems: state.fridge.fridgeItems,
-    staples: state.staples.stapleData
+    staples: state.staples.stapleData,
+    fridgeFill: state.mealPlan.fridgeFill,
+    fridgeServings: state.mealPlan.fridgeServings
   }
 }
 
@@ -69,7 +71,9 @@ export class Planner extends Component {
               chosenRecipes={this.props.chosenRecipes} 
               servingMap={this.props.servingMap}
               fridgeItems={this.props.fridgeItems}
-              staples={this.props.staples} />
+              staples={this.props.staples} 
+              fridgeFill={this.props.fridgeFill}
+              fridgeServings={this.props.fridgeServings}/>
           </div>          
           <div className="tabView">            
             <KetoMagicView />

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import * as actionCreators from '../../actions/fridgeActions'
+import { RecipeCard } from 'components/RecipeCard'
 
 /* component styles */
 import { styles } from './styles.scss';
@@ -12,7 +13,7 @@ export class SearchFridgeResults extends Component {
 
   renderSearchRecipe(element, index) {
     return (
-      <Card rounded={true} width={256} key={index}>
+      <Card rounded={true} width={350} key={index}>
         <CardImage src={element.image} />
           <Heading level={2} size={3}>{element.title}</Heading>
           <Text> {element.time} time! </Text>
@@ -25,7 +26,7 @@ export class SearchFridgeResults extends Component {
     let searchRecipes = this.props.fridgeRecipes.searchRecipe || []
     return (
       <section className={`${styles}`}>        
-        {searchRecipes.map((element, index) => this.renderSearchRecipe(element, index))}        
+        {searchRecipes.map((element, index) => <RecipeCard element={element} index={index} />)}        
       </section>
     );
   }

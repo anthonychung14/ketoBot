@@ -98,17 +98,18 @@ export class DigiFridge extends Component {
               modalProps={this.props.modalStaple.modalProps}
               hideModal={this.props.actions.hidePlanModal}
               closeModal={this.props.actions.closePlanModal}
-              chosenRecipes={this.props.chosenRecipes}/>          
+              chosenRecipes={this.props.chosenRecipes}
+              fridgeFill={this.props.chosenRecipes.fridgeFill}
+              fridgeServings={this.props.chosenRecipes.fridgeServings}/>          
         </div>
         <div className="tabView">            
           <Fridge 
-              openModal={this.props.actions.formModal}/>
-          <button onClick={this.props.actions.formModal}>Add to Fridge</button>
+              openModal={this.props.actions.formModal}/>          
           <FridgeModal 
             modalState={this.props.modalState}
             openModal={this.props.actions.formModal}/>
         </div>
-        </SwipeableViews>
+        </SwipeableViews>        
       </section>
     );
   }
