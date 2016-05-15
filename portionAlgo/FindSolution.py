@@ -13,16 +13,16 @@ def FindTenSols(data, target):
   while len(results) < 10:
     if not comboGen.next():
       break;
-
     Combo = ConvertCombo(comboGen.next())
     solution = IterateStaples(Combo, target)
     totalDiff = 0
     for x in solution.diff:
       totalDiff += solution.diff[x]
-
     if totalDiff < 10:
       results.append(solution)  
-
+  
+  for result in results:
+    print (result.totals, result.diff, "yo")
   return results
 
 def ComboGenerator(arr):  
@@ -72,6 +72,7 @@ def IterateStaples(combo, target):
         staple.decrement()        
         combo.calcTotals()                
         combo.findDiff(target)
+        combo.adjustConflict(target)
         bestDiffs.append(deepcopy(combo))                                                
             
       #Optimal solution            
