@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from 'react'
 import WizardFormFirstPage from './WizardFormFirstPage'
 import WizardFormSecondPage from './WizardFormSecondPage'
 import WizardFormThirdPage from './WizardFormThirdPage'
+import { ButtonCircle } from 'rebass'
+import Icon from 'react-geomicons'
 
 import { styles } from './styles.scss';
 
@@ -25,7 +27,25 @@ class WizardForm extends Component {
     this.setState({ page: this.state.page - 1 })
   }
 
+  renderButton(){
+    if (this.state.page < 2) {
+      return (
+      <div>
+      <ButtonCircle type="submit" onClick={this.nextPage} title="next">
+      <Icon
+        fill="currentColor"
+        height="2em"
+        name="chevronRight"
+        width="2em"/>
+      </ButtonCircle>
+      <h5>Next</h5>       
+      </div>
+      )
+    }
+  }
+
   render() {
+    console.log(this.state.page, "state page")
     const { onSubmit } = this.props
     const { page } = this.state
     return (
@@ -33,11 +53,22 @@ class WizardForm extends Component {
       <h3>Edit your goals!</h3>
       <div>
         {page === 1 && <WizardFormFirstPage onSubmit={this.nextPage}/>}        
-        {page === 2 && <WizardFormSecondPage previousPage={this.previousPage} onSubmit={this.nextPage}/>}
+        {page === 2 && <WizardFormSecondPage previousPa2ge={this.previousPage} onSubmit={this.nextPage}/>}
         {page === 3 && <WizardFormThirdPage previousPage={this.previousPage} onSubmit={onSubmit}/>}
       </div>
-      <button onClick={this.props.previousPage}>Cancel</button>
+      <div className="actions">
+        <ButtonCircle onClick={this.props.previousPage} title="cancel">
+          <Icon
+            fill="currentColor"
+            height="2em"
+            name="close"
+            width="2em"/>
+        </ButtonCircle>
+        <h5>Cancel</h5> 
 
+        {this.renderButton()}
+        
+      </div>
       </section>
     )
   }

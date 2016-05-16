@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+
 import * as actionCreators from '../../actions/items'
 import { openModal } from '../../actions/modalActions'
-
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 
@@ -9,8 +9,10 @@ import { bindActionCreators } from 'redux'
 import { styles } from './styles.scss';
 import { Card, CardImage, Heading, Text, ButtonCircle } from 'rebass'
 import Icon from 'react-geomicons'
-import { RecipeModal } from 'components/RecipeModal'
 import { Button } from 'react-bootstrap'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+
+import { RecipeModal } from 'components/RecipeModal'
 
 function mapStateToProps(state) {  
   return { 
@@ -95,13 +97,19 @@ export class Recipes extends Component {
           <h2>Filter</h2>
           <h5>Choose your recipe</h5>
         </div>
-
-        <div className="recipes">
+        
+        <ReactCSSTransitionGroup 
+              transitionAppear={true} 
+              transitionName="card" 
+              transitionAppearTimeout={1500} transitionEnterTimeout={1500} transitionLeaveTimeout={1300}>
+        <div className="recipes">                    
         {this.props.recipes
           .filter((element,key) => this.props.recData.nutrition[element.id])
           .map((element,key) => this.renderRecipe(element,key))
           }
         </div>
+        </ReactCSSTransitionGroup>
+        
         <RecipeModal
           modalState ={this.props.modalState}
           openModal={this.props.actions.openModal}

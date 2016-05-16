@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
         
 import { styles } from './styles.scss';
 import * as actionCreators from '../../actions/createMealPlan'
+import { fetchFridge } from '../../actions/fridgeActions'
 
 import Tabs from 'material-ui/lib/tabs/tabs';
 import Tab from 'material-ui/lib/tabs/tab';
@@ -26,7 +27,8 @@ function mapStateToProps(state) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch) {  
+  actionCreators.fetchFridge = fetchFridge
   return { actions: bindActionCreators(actionCreators, dispatch)}
 }
 
@@ -73,7 +75,8 @@ export class Planner extends Component {
               fridgeItems={this.props.fridgeItems}
               staples={this.props.staples} 
               fridgeFill={this.props.fridgeFill}
-              fridgeServings={this.props.fridgeServings}/>
+              fridgeServings={this.props.fridgeServings}
+              fetchFridge={this.props.actions.fetchFridge}/>
           </div>          
           <div className="tabView">            
             <KetoMagicView />

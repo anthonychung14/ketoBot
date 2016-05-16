@@ -19,14 +19,22 @@
     display: -webkit-flex;
     display: flex;
     -webkit-flex-direction: column;
-    flex-direction: column;    
+    flex-direction: column;
+    &:hover {
+      background-color: #CFD8DC;      
+    }    
   }
 
   Table {
     max-height: 100;
   }
 
-  .addPlan {    
-    margin-top: auto;
+  .actions {    
+    margin: auto 20 5 20;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row; 
+    justify-content: space-around;
   }
 }

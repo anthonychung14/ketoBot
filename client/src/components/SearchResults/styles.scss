@@ -1,15 +1,9 @@
 :local(.styles) {
   position: relative;
-  margin: 10 10 10 10;
+  margin: 10 30 10 10;
   padding: 10 10 10 50;
 
-  border-left: 1px solid #CCC;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-flex-direction: row;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
+  border-left: 1px solid #1A237E;
 
   h2.heading {
     margin-bottom: 30px;
@@ -19,12 +13,34 @@
   .card {
     margin: 5px 5px 5px 5px;  
     height: 370px;
-    background-color: white;  
-
+    background-color: white;
+    border: 1px solid #1A237E !important;   
     display: -webkit-flex;
     display: flex;
     -webkit-flex-direction: column;
     flex-direction: column; 
+    &:hover {
+        background-color: #CFD8DC;      
+    }
+  }
+
+  .search {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between; 
+
+  }
+
+  .card-enter {
+    opacity: 0.01;
+  }
+
+  .card-enter.card-enter-active {
+    opacity: 1;
+    transition: opacity .8s ease-in;
   }
 
   .actions {

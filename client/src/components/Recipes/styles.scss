@@ -14,7 +14,7 @@
   text-align:center;   
 
   .filter {
-    border-right: 1px solid #CCC;
+    border-right: 1px solid #1A237E;
     margin: 40 40 40 40;
     padding: 40 40 40 40;
     display: -webkit-flex;
@@ -39,10 +39,23 @@
     margin: 5px 5px 5px 5px;  
     height: 370px;
     background-color: white;  
+    border: 1px solid #1A237E !important; 
     display: -webkit-flex;
     display: flex;
     -webkit-flex-direction: column;
-    flex-direction: column; 
+    flex-direction: column;      
+    &:hover {
+      background-color: #CFD8DC;      
+    }
+  }
+
+  .card-appear {
+    opacity: 0.01;
+  }
+
+  .card-appear.card-appear-active {
+    opacity: 1;
+    transition: opacity .8s ease-in;
   }
 
   .actions {
@@ -51,7 +64,7 @@
     display: flex;
     -webkit-flex-direction: row;
     flex-direction: row; 
-    justify-content: space-between;
+    justify-content: space-around;
   }
 
   img.cardimage {

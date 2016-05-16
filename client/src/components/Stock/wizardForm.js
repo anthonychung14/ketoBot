@@ -36,6 +36,14 @@ class WizardForm extends Component {
         {page === 2 && <WizardFormSecondPage previousPage={this.previousPage} onSubmit={this.nextPage}/>}
         {page === 3 && <WizardFormThirdPage previousPage={this.previousPage} onSubmit={onSubmit}/>}
       </div>
+      <ButtonCircle onClick={this.props.previousPage} title="cancel">
+          <Icon
+            fill="currentColor"
+            height="2em"
+            name="close"
+            width="2em"/>
+        </ButtonCircle>
+        <h5>Cancel</h5>      
       </section>
     )
   }

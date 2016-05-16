@@ -37,6 +37,7 @@ export class TopImage extends Component {
           ketoBot
         </h1>
         </LoadingOrderAnimation>
+        
         <LoadingOrderAnimation animation="fade-in"
           move="from-bottom-to-top"
           distance={60}
@@ -45,7 +46,7 @@ export class TopImage extends Component {
           <h2>
             because machines
           </h2>
-          </LoadingOrderAnimation>
+        </LoadingOrderAnimation>
 
         <LoadingOrderAnimation animation="fade-in"
           move="from-bottom-to-top"
@@ -60,6 +61,7 @@ export class TopImage extends Component {
             <h3>I am also a box</h3>
         </div>
         </LoadingOrderAnimation>
+        
         </section>
     );
   }

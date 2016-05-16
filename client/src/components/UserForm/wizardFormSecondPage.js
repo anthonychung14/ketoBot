@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from 'react'
 import { reduxForm } from 'redux-form'
 import { Link } from 'react-router'
 import { postProcess } from '../../actions/userPlan'
+import { ButtonCircle } from 'rebass'
+import Icon from 'react-geomicons'
 
 export const fields = [ 'calories', 'fat', 'protein', 'carbs', 'days', 'meals', 'freeCal' ]
 const validate = values => {
@@ -49,16 +51,18 @@ class WizardFormSecondPage extends Component {
           <div>
             <input type="number" placeholder="should have checkboxes" {...freeCal}/>          
           </div>
-        </div>            
+        </div>                    
+          <div>
+            <ButtonCircle type="submit" title="next">
+              <Icon
+                fill="currentColor"
+                height="2em"
+                name="check"
+                width="2em"/>
+            </ButtonCircle>
+            <h5>Submit</h5>
+            </div>
         
-        <div>
-          <button type="button" onClick={previousPage}>
-            <i/> Previous
-          </button>
-          <button type="submit" disabled={submitting}>
-            {submitting ? <i/> : <i/>} Finish
-          </button>
-        </div>
       </form>
     )
   }

@@ -46,16 +46,40 @@ export class StapleShow extends Component {
             <Heading level={2} size={3}>{element.recipe.title}</Heading>
             {this.renderNutrients(element)}
             
-            <div className="addPlan">
-              <ButtonCircle onClick={this.submit.bind(this, element)}title="Add">
-              <Icon
-                fill="currentColor"
-                height="2em"
-                name="check"
-                width="2em"/>
-              </ButtonCircle>
-              <h5>Add to Plan</h5>
-            </div>                   
+            <div className="actions">
+            <div>
+            <ButtonCircle title="No">
+            <Icon
+              fill="currentColor"
+              height="2em"
+              name="no"
+              width="2em"/>
+            </ButtonCircle>
+            <h5>Nope</h5>
+            </div>
+        
+            <div>
+            <ButtonCircle title="Info">
+            <Icon
+              fill="currentColor"
+              height="2em"
+              name="list"
+              width="2em"/>
+            </ButtonCircle>
+            <h5>Info</h5>
+            </div>     
+
+            <div>
+            <ButtonCircle onClick={this.submit.bind(this, element)} title="Add">
+            <Icon
+              fill="currentColor"
+              height="2em"
+              name="check"
+              width="2em"/>
+            </ButtonCircle>
+            <h5>Add</h5>
+            </div>
+          </div>                      
           </Card>
         )
       }

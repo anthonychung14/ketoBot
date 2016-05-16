@@ -17,7 +17,6 @@ class AddFillForm extends Component {
   }
 
   handleChange(){        
-    console.log("do the thing")
     this.props.subtractFillerPlan(this.props.filler)
   }
 

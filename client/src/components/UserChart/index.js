@@ -8,7 +8,7 @@ import { styles } from './styles.scss';
 const lineData = [
   {
     name: "Calories",
-    values: [ { x: 1, y: 1850 }, { x: 4, y: 2050 }, { x: 8, y: 2300 } ],
+    values: [ { x: 1, y: 1600 }, { x: 4, y: 1800 }, { x: 8, y: 1700 } ],
     strokeWidth: 3,
     strokeDashArray: "5,5",
   },
@@ -40,14 +40,13 @@ export default class UserChart extends Component {
         legend={true}
         data={lineData}
         width={500}
-        height={500}
+        height={400}
         viewBoxObject={{
           x: 0,
           y: 0,
-          width: 500,
-          height: 400}
+          width: 400,
+          height: 500}
         }
-        title="Macro/Calorie Tracking"
         yAxisLabel="Calories"
         xAxisLabel="Elapsed Time (Months)"
         gridHorizontal={true}/>

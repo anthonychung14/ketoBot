@@ -37,9 +37,9 @@ export class AllRecipes extends Component {
           className="tabs"
           onChange={this.handleChange}
           value={this.state.slideIndex}>            
-            <Tab label="ketoNew" value={0} />                        
-            <Tab label="ketoSearch" value={1} />
-            <Tab label="ketoFridge" value={2} />                        
+            <Tab label="Recipes" value={0} />                        
+            <Tab label="Search" value={1} />
+            <Tab label="Fridge" value={2} />                        
         </Tabs>
         
         <SwipeableViews

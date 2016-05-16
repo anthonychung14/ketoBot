@@ -25,7 +25,27 @@
     padding: 20 20 20 20;
     background-color: white;
     border: 1px solid #1A237E !important; 
-    text-align: center;   
-
+    text-align: center; 
+    &:hover {
+      background-color: #CFD8DC;      
+    }  
   }  
+  
+  .example-appear {
+    opacity: 0.01;
+  }
+
+  .example-appear.example-appear-active {
+    opacity: 1;
+    transition: opacity .8s ease-in;
+  }
+
+  .example-leave {
+    opacity: 1;
+  }
+
+  .example-leave.example-leave-active {
+    opacity: 0.01;
+    transition: opacity 300ms ease-in;
+  }
 }

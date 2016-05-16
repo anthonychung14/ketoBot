@@ -9,6 +9,8 @@ import { bindActionCreators } from 'redux'
 /* component styles */
 import { styles } from './styles.scss';
 import { Card, CardImage, Heading, Text } from 'rebass'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+
 
 import { RecipeCard } from 'components/RecipeCard'
 
@@ -45,19 +47,26 @@ export default class Search extends Component {
   renderSearch(element, index) {
     let boundRecipeInfo = this.getRecipeInfo.bind(this, element)
     return (
-      <Card rounded={true} width={256} key={index}>
+        <ReactCSSTransitionGroup 
+              transitionAppear={true} 
+              transitionName="card" 
+              transitionAppearTimeout={1500} transitionEnterTimeout={1500} transitionLeaveTimeout={1300}>
+        <Card rounded={true} width={256} key={index}>
         <CardImage src={element.image} />
           <Heading level={2} size={3}>{element.title}</Heading>
           <Text> {element.time} time! </Text>
           <input onClick={boundRecipeInfo} className="modalButton" type="button" value=" Quick Look " />
-      </Card>
+      </Card>      
+      </ReactCSSTransitionGroup>
     )
   }
 
   render() {
     return (
-      <section className={`${styles}`}>        
-        {this.props.searchResults.map((element, index) => <RecipeCard element={element} key={index}/>)}                          
+      <section className={`${styles}`}>                      
+          <div className="search">        
+          {this.props.searchResults.map((element, index) => <RecipeCard element={element} key={index}/>)}
+          </div>        
       </section>
     );
   }

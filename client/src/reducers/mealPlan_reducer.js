@@ -10,7 +10,7 @@ const initialState = {
 
 export function mealPlan(state=initialState, action) {
   switch(action.type) {
-    case ADD_RECPLAN:      
+    case ADD_RECPLAN:
       return Object.assign({}, state, {
         chosenRecipes: state.chosenRecipes.concat(action.payload),
         servingMap: 1        
@@ -29,7 +29,6 @@ export function mealPlan(state=initialState, action) {
       })
       
     case SUBTRACT_FILLERPLAN:
-      console.log(action.payload, "payload")
       var recipeOut = action.payload
       var fridgeCopy = state.fridgeFill.slice()
       var indexRecipe = fridgeCopy.indexOf(recipeOut)      
@@ -39,7 +38,7 @@ export function mealPlan(state=initialState, action) {
         [recipeOut.id]:  servings - 1      
       })
 
-      if (servingMap[recipeOut.id] === 0){
+      if (servingMap[recipeOut.id] === 0) {
         fridgeCopy.splice(indexRecipe, 1)  
         delete servingMap[recipeOut.id]
       }

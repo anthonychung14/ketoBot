@@ -19,12 +19,16 @@
   .card {
       margin: 5px 5px 5px 5px;  
       height: 370px;
-      background-color: white;  
+      background-color: white;
+      border: 1px solid #1A237E !important;   
 
       display: -webkit-flex;
       display: flex;
       -webkit-flex-direction: column;
       flex-direction: column; 
+      &:hover {
+        background-color: #CFD8DC;      
+      }
     }
 
   .actions {

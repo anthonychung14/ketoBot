@@ -4,12 +4,16 @@
   padding: 50px 0;
   align-self: center;
 
-  .tool {
-    text-align: center;
-    margin: 30px 0;
+  background-color: white;
 
-    img {
-      width: 80%;
-    }
+  .actions {
+    margin: auto 20 5 20;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row; 
+    justify-content: space-around;
+
   }
+  
 }

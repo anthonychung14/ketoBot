@@ -9,6 +9,7 @@ import SearchResults from 'components/SearchResults'
 
 /* component styles */
 import { styles } from './styles.scss';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 function mapStateToProps(state) {
   return { 
@@ -32,13 +33,11 @@ export class Search extends Component {
           <h2>Search</h2>
           <SearchForm/>
         </div>
-        
-        <div classNme="searchResults">
+                
+        <div className="searchResults">
           <SearchResults 
             recData={this.props.recData}/>
-        </div>
-        
-        
+        </div>        
         
       </section>
     );

@@ -16,7 +16,8 @@ export class PlannerTabView extends Component {
         <section className={`${styles}`}>
           <PlannerFill 
               fridgeItems={this.props.fridgeItems}
-              staples={this.props.staples}/>          
+              staples={this.props.staples}
+              fetchFridge={this.props.fetchFridge}/>          
           <PlannerCalorieCount 
               chosenRecipes={this.props.chosenRecipes}              
               servingMap={this.props.servingMap} 

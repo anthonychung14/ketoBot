@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { ButtonCircle } from 'rebass'
+import Icon from 'react-geomicons'
+
 
 /* component styles */
 import { styles } from './styles.scss';
@@ -42,7 +45,15 @@ export default class UserData extends Component {
           <h4>{userData.fat * userData.days}g fat</h4>
           <h4>{userData.carbs * userData.days}g carbs</h4>
         </div>
-        <button onClick={this.nextPage}>Edit Goals</button>
+        
+        <ButtonCircle onClick={this.nextPage} title="addStaple">
+          <Icon
+            fill="currentColor"
+            height="2em"
+            name="compose"
+            width="2em"/>
+        </ButtonCircle>
+        <h5>Edit Goals</h5>
         </div>
     )
   }

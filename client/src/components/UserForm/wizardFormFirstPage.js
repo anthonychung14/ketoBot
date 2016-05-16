@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { reduxForm } from 'redux-form'
+import { ButtonCircle } from 'rebass'
+import Icon from 'react-geomicons'
 
 export const fields = [ 'calories', 'fat', 'protein', 'carbs' ]
 const validate = values => {
@@ -31,6 +33,7 @@ class WizardFormFirstPage extends Component {
   render() {
     const {
       fields: { calories, fat, protein, carbs },
+      previousPage,
       handleSubmit
     } = this.props
     return (
@@ -61,17 +64,8 @@ class WizardFormFirstPage extends Component {
           <div>
             <input type="text" placeholder="Carbs" {...carbs}/>
           </div>
-        </div>     
+        </div>             
 
-        
-        <div>
-        <button type="button" onClick={this.previousPage}>
-            <i/> Previous
-          </button>
-          <button type="submit">
-            Next <i/>
-          </button>
-        </div>
       </form>
     )
   }

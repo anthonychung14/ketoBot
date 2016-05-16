@@ -41,6 +41,14 @@ export function subtractFillerPlan(element) {
   }
 }
 
+export const REMOVE_FILLERPLAN = "SUBTRACT_FILLERPLAN"
+export function removeFillerPlan(element) {          
+  return {
+    type: REMOVE_FILLERPLAN,
+    payload: element
+  }
+}
+
 
 // ASYNC //
 //GET NUTRITIONAL INFO

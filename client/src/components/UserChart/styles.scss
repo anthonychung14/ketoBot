@@ -1,13 +1,17 @@
 :local(.styles) {
   position: relative;
   border: 1px solid #00BCD4;
-  margin: 50 20 20 20;
+  margin: 50 20 50 20;
   padding: 20 20 20 20;    
+  background-color: white;
   
   display: -webkit-flex;
   display: flex;
   -webkit-flex-direction: column;
   flex-direction: column;
-  align-items: center;  
+  align-items: center;
 
+  .rd3-legend-chart {
+    margin-top: 20px;
+  }  
 }
