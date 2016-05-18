@@ -12,7 +12,15 @@ class FridgeItem(models.Model):
   protein = models.IntegerField(default=0)
   fat = models.IntegerField(default=0)
   carbs = models.IntegerField(default=0)
-  fiber = models.IntegerField(default=0) 
+  fiber = models.IntegerField(default=0)
+
+class FridgeFill(models.Model):  
+  r = models.ForeignKey(FridgeItem, on_delete=models.CASCADE)
+  servings = models.IntegerField(default=1)
+  calories = models.IntegerField(default=0)
+  protein = models.IntegerField(default=0)
+  fat = models.IntegerField(default=0)
+  carbs = models.IntegerField(default=0)
 
 
 

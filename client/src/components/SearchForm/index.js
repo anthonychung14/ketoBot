@@ -7,7 +7,6 @@ import { ButtonCircle } from 'rebass'
 import { retrieveSearch } from '../../actions/searchRecipes'
 
 export const fields = [ 'want', 'noWant' ]
-// ^^ All fields on last form
 
 const validate = values => {
   const errors = {}

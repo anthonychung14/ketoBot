@@ -21,7 +21,7 @@ from .models import FridgeItem
 from ketoBot.models import Recipe, Recipe_Nutrition
 from ketoBot.serializers import RecipeSerializer, RecipeNutritionSerializer
 
-from fridge.serializers import FridgeItemSerializer
+from fridge.serializers import FridgeItemSerializer, FridgeFillSerializer
 from portionAlgo.FindSolution import FindTenSols
 
 @api_view(['GET', 'POST'])
@@ -36,16 +36,34 @@ def portionAlgo(request):
     }
     
     fridgeItems = FridgeItem.objects.all()
-    fridgeSerial = FridgeItemSerializer(fridgeItems, many=True)
+    fridgeSerial = FridgeItemSerializer(fridgeItems, many=True)    
     result = FindTenSols(fridgeSerial.data, target)
 
+    data = []
     for i, combo in enumerate(result):
-      print (combo.totals, combo.diff, "combo data")
-      for staple in combo.staples:
-        print ("combo", i, "serving data", staple.servings)
-    
-    # response = json.dumps(result)
-    return Response("hooray")
+      comboResult = {
+        'totals': combo.totals,
+        'calories': combo.totals['protein']*4 + combo.totals['carbs']*4 + combo.totals['fat']*9,
+        'diff': combo.diff,
+        'items': []
+      }
+      for item in combo.staples:
+        lookupName = FridgeItem.objects.get(pk=item.id)
+        serial = FridgeItemSerializer(lookupName)
+        print(serial.data['name'])
+        fridgeItem = {
+          'id': item.id,
+          'name': serial.data['name'],
+          'protein': item.totals['protein'],
+          'fat': item.totals['fat'],
+          'carbs': item.totals['carbs'],
+          'servings': item.servings
+        }
+        comboResult['items'].append(fridgeItem)
+
+      data.append(comboResult)    
+      
+    return Response(data)
 
 
 @api_view(['GET', 'POST'])
