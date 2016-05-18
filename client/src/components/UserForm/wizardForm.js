@@ -29,7 +29,7 @@ class WizardForm extends Component {
 
   renderButton(){
     if (this.state.page < 2) {
-      return (
+      return (      
       <div>
       <ButtonCircle type="submit" onClick={this.nextPage} title="next">
       <Icon
@@ -41,11 +41,23 @@ class WizardForm extends Component {
       <h5>Next</h5>       
       </div>
       )
+    } else if (this.state.page ===2) {
+      return (
+      <div>
+        <ButtonCircle type="submit" title="next">
+          <Icon
+            fill="currentColor"
+            height="2em"
+            name="check"
+            width="2em"/>
+        </ButtonCircle>
+        <h5>Submit</h5>
+        </div>
+      )
     }
   }
 
-  render() {
-    console.log(this.state.page, "state page")
+  render() {    
     const { onSubmit } = this.props
     const { page } = this.state
     return (
@@ -56,7 +68,8 @@ class WizardForm extends Component {
         {page === 2 && <WizardFormSecondPage previousPa2ge={this.previousPage} onSubmit={this.nextPage}/>}
         {page === 3 && <WizardFormThirdPage previousPage={this.previousPage} onSubmit={onSubmit}/>}
       </div>
-      <div className="actions">
+      <div className="actions">        
+        <div>
         <ButtonCircle onClick={this.props.previousPage} title="cancel">
           <Icon
             fill="currentColor"
@@ -64,8 +77,8 @@ class WizardForm extends Component {
             name="close"
             width="2em"/>
         </ButtonCircle>
-        <h5>Cancel</h5> 
-
+        <h5>Cancel</h5>
+        </div>
         {this.renderButton()}
         
       </div>

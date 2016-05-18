@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Colors from 'material-ui/lib/styles/colors';
 import { PlannerActionBar } from 'components/PlannerActionBar'
+import { PlanTable } from 'mealPlan/PlanTable'
 import { calcTotalSelector, calcRemaining, calcPercentCal, calcPercentPro, calcPercentFat, calcPercentCarb } from '../../reducers/selectors/calcSelectors'
 
 import { Table, Thead, Th, Tr, } from 'Reactable'
@@ -68,7 +69,7 @@ export class PlannerCalorieCount extends Component {
     
     return (              
         <section className={`${styles}`}>
-            <h3>Meal Plan</h3>
+            <h3>Meal Plan</h3>            
             <Table className="table" data={macs}/>          
             
             <div className="progressBar">

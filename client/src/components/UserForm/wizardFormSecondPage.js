@@ -51,18 +51,7 @@ class WizardFormSecondPage extends Component {
           <div>
             <input type="number" placeholder="should have checkboxes" {...freeCal}/>          
           </div>
-        </div>                    
-          <div>
-            <ButtonCircle type="submit" title="next">
-              <Icon
-                fill="currentColor"
-                height="2em"
-                name="check"
-                width="2em"/>
-            </ButtonCircle>
-            <h5>Submit</h5>
-            </div>
-        
+        </div>                            
       </form>
     )
   }
