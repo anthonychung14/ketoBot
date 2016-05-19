@@ -21,6 +21,14 @@ export function addStaplePlan(element, chosenServings) {
   }
 }
 
+export const SUBTRACT_STAPLEPLAN = "SUBTRACT_STAPLEPLAN"
+export function subtractStaplePlan(element) {          
+  return {
+    type: SUBTRACT_STAPLEPLAN,
+    payload: element
+  }
+}
+
 export const ADD_FILLERPLAN = "ADD_FILLERPLAN"
 export function addFillerPlan(element, chosenServings) {        
   var addedFiller = Object.assign({}, {

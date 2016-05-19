@@ -1,0 +1,9 @@
+:local(.styles) {
+  align-self: center;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  justify-content: space-between;
+
+}

@@ -1,20 +1,10 @@
 :local(.styles) {  
   
-  padding: 20 40 20 40;
-  margin: 10 10 10 10;
 
   display: -webkit-flex;
   display: flex;
   -webkit-flex-direction: column;
   flex-direction: column;
-  align-items: center;
-  width: 20%;
 
-  h3 {
-    text-align:center;
-  }
 
-  padding: 10 10 10 10;
-  margin: 10 10 10 10;
-  
 }

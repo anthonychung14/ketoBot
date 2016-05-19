@@ -42,7 +42,7 @@ function mapDispatchToProps(dispatch) {
     addPlanModal,    
     hidePlanModal,
     closePlanModal
-    }
+  }  
   return { actions: bindActionCreators(actions, dispatch)}
 }
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Colors from 'material-ui/lib/styles/colors';
+import { AppBar } from 'material-ui';
 import { PlannerActionBar } from 'components/PlannerActionBar'
 import { PlanTable } from 'mealPlan/PlanTable'
 import { calcTotalSelector, calcRemaining, calcPercentCal, calcPercentPro, calcPercentFat, calcPercentCarb } from '../../reducers/selectors/calcSelectors'
@@ -15,6 +16,10 @@ import { styles } from './styles.scss';
 
 function mapStateToProps(state) {
   return {
+    chosenRecipes: state.mealPlan.chosenRecipes,
+    servingMap: state.mealPlan.servingMap,
+    fridgeFill: state.mealPlan.fridgeFill,
+    fridgeServings: state.mealPlan.fridgeServings,
     totals: calcTotalSelector(state),
     remaining: calcRemaining(state),
     percentCal: calcPercentCal(state),
@@ -68,34 +73,33 @@ export class PlannerCalorieCount extends Component {
     let macs = [].concat(chosenRecipeRows, fridgeFillRows, this.props.totals, this.props.remaining)    
     
     return (              
-        <section className={`${styles}`}>
-            <h3>Meal Plan</h3>            
-            <Table className="table" data={macs}/>          
-            
+        <section className={`${styles}`}>                        
+            <PlannerActionBar />       
             <div className="progressBar">
               <div>
               <h4>Calories: <span className="percent">{Math.floor(this.props.percentCal*100)}%</span></h4>
-              <Line percent={this.props.percentCal*100} strokeWidth="2" strokeColor={Colors.cyan700}/>
+              <Line percent={this.props.percentCal*100} strokeWidth="1" strokeColor={'#0088EE'}/>
               </div>
               
               <div>
               <h4>Protein: <span className="percent">{Math.floor(this.props.percentPro*100)}%</span></h4>              
-              <Line percent={this.props.percentPro*100} strokeWidth="2" strokeColor={Colors.cyan700}/>
+              <Line percent={this.props.percentPro*100} strokeWidth="1" strokeColor={'#0088EE'}/>
               </div>
               
               <div>
               <h4>Fat: <span className="percent">{Math.floor(this.props.percentFat*100)}%</span></h4>
-              <Line percent={this.props.percentFat*100} strokeWidth="2" strokeColor={Colors.cyan700}/>
+              <Line percent={this.props.percentFat*100} strokeWidth="1" strokeColor={'#0088EE'}/>
               </div>
               
               <div>
-              <h4>Carbs: <span className="percent">{Math.floor(this.props.percentCarbs*100)}%</span></h4>
-              
-              <Line percent={this.props.percentCarbs*100} strokeWidth="2" strokeColor={Colors.cyan700}/>            
-            </div>
-            <PlannerActionBar />       
-              
-            </div>
+              <h4>Carbs: <span className="percent">{Math.floor(this.props.percentCarbs*100)}%</span></h4>              
+              <Line percent={this.props.percentCarbs*100} strokeWidth="1" strokeColor={'#0088EE'}/>            
+              </div>
+            </div>            
+             
+             <h3>Meal Plan</h3>   
+            <Table className="table" data={macs}/>          
+            
         </section>
     );
   }

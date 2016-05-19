@@ -8,7 +8,6 @@ import { ButtonCircle } from 'rebass'
 import Icon from 'react-geomicons'
 
 
-
 export class StapleWindow extends Component {
   constructor(props) {
     super(props);

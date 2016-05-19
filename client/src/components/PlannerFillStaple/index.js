@@ -6,7 +6,7 @@ import { Table, Thead, Th, Tr, } from 'Reactable'
 import { Card, Heading, ButtonCircle } from 'rebass'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
-import AddFillForm from 'components/PlannerAddFillForm'
+import AddStapleForm from 'components/PlannerAddStapleForm'
 
  const initialFormValue = {
   initialValues: {
@@ -14,29 +14,29 @@ import AddFillForm from 'components/PlannerAddFillForm'
   }
 }
 
-export class PlannerFill extends Component {  
+export class PlannerFillStaple extends Component {  
   constructor(props) {
     super(props)
   }
 
   componentWillMount() { 
-    this.props.fetchFridge()
-    
+    this.props.fetchStaples()    
   }
 
   renderCard(element, key){
+    let stapleNutri = element.nutrition
     let nutrientTable = Object.assign({}, {
-      'Protein': element.protein,
-      'Carbs': element.carbs - element.fiber,
-      'Fat': element.fat,      
-      'Calories': element.calories,
+      'Protein': stapleNutri.protein,
+      'Carbs': stapleNutri.net_carb,
+      'Fat': stapleNutri.fat,      
+      'Calories': stapleNutri.calories,
     })
 
     return (      
       <Card rounded={true} width={400} key={key}>
-        <Heading level={2} size={3}>{element.name}</Heading>
+        <Heading level={2} size={3}>{element.recipe.title}</Heading>
         <Table className='table' data={[nutrientTable]} />
-        <AddFillForm {...initialFormValue} filler={element} form={element.name}/>          
+        <AddStapleForm {...initialFormValue} staples={element} form={element.recipe.title}/>          
       </Card>
     )
   }
@@ -48,7 +48,7 @@ export class PlannerFill extends Component {
               transitionAppear={true} 
               transitionName="example" 
               transitionAppearTimeout={1500} transitionEnterTimeout={1500} transitionLeaveTimeout={1300}>                    
-          {this.props.fridgeItems.map((element, key) => this.renderCard(element, key))}                  
+          {this.props.staples.map((element, key) => this.renderCard(element, key))}                  
           </ReactCSSTransitionGroup>
         </section>
     );

@@ -1,11 +1,12 @@
 :local(.styles) {
 
-  padding: 50px 0;
+  padding: 50px 0;  
 
   display: -webkit-flex;
   display: flex;
-  -webkit-flex-direction: column;
-  flex-direction: column;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  justify-content: flex-start;
 
   .tabs {
     padding-top: 8px;
@@ -15,17 +16,5 @@
   .tabView {
     height: 100vh;    
   }
-
-  .staples {
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-direction: column;
-    flex-direction: column;
-    flex-grow: 2;
-  }
-
-  .totals {
-    flex-grow: 3;
-  }
-  
+ 
 }

@@ -1,4 +1,4 @@
-import { ADD_RECPLAN, ADD_STAPLEPLAN, ADD_FILLERPLAN, SUBTRACT_FILLERPLAN } from '../actions/items'
+import { ADD_RECPLAN, ADD_STAPLEPLAN, SUBTRACT_STAPLEPLAN, ADD_FILLERPLAN, SUBTRACT_FILLERPLAN } from '../actions/items'
 import { HIDE_PLAN_MODAL } from '../actions/modalActions'
 
 const initialState = {
@@ -27,10 +27,29 @@ export function mealPlan(state=initialState, action) {
         chosenRecipes: recipes,
         servingMap: newMap
       })
+    case SUBTRACT_STAPLEPLAN:      
+      var recipeOut = action.payload
+      var stapleCopy = state.chosenRecipes.slice()
+      var indexRecipe = stapleCopy.indexOf(recipeOut)      
+      var servings = state.servingMap[recipeOut.recipe.id]
+      
+      var servingMap = Object.assign({}, state.servingMap, {
+        [recipeOut.recipe.id]: servings - 1      
+      })      
+
+      if (servingMap[recipeOut.recipe.id] === 0) {
+        stapleCopy.splice(indexRecipe, 1)  
+        delete servingMap[recipeOut.recipe.id]
+      }
+
+      return Object.assign({}, state, {
+        chosenRecipes: stapleCopy,
+        servingMap: servingMap
+      })
       
     case SUBTRACT_FILLERPLAN:
       var recipeOut = action.payload
-      var fridgeCopy = state.fridgeFill.slice()
+      var fridgeCopy = state.chosenRecipes.slice()
       var indexRecipe = fridgeCopy.indexOf(recipeOut)      
       var servings = state.fridgeServings[recipeOut.id]
 
@@ -85,7 +104,11 @@ export function mealPlan(state=initialState, action) {
       }
 
       var newMap = Object.assign({}, state.servingMap)
-      newMap[recipeId] = Number(action.payload.servings)
+      if (newMap[recipeId]) {
+        newMap[recipeId] += Number(action.payload.servings)
+      } else {
+        newMap[recipeId] = Number(action.payload.servings)
+      }
 
       return Object.assign({}, state, {
         chosenRecipes: newRecArray,
