@@ -24,6 +24,7 @@ def FindTenSols(data, target):
 def ComboGenerator(arr):  
  for i in range(len(arr) + 1):
      for combo in map(list, combinations(arr, i)):
+        print(combo)
         yield combo
 
 def ConvertCombo(arrayItem):  

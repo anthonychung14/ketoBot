@@ -37,7 +37,9 @@ const common = {
   },
 
   module: {
-    loaders: [{
+    loaders: [
+    { test: /\.css$/, loader: "style-loader!css-loader" },
+    {
       test: /bootstrap-sass\/assets\/javascripts\//,
       loader: 'imports?jQuery=jquery',
     }, {

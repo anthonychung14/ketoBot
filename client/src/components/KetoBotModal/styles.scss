@@ -1,5 +1,23 @@
 :local(.styles) {
-  button {
-    margin-right: 10px;
+
+  
+  display: flex;
+  display: -webkit-flex;    
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  justify-content: center;
+  background-image: 
+    linear-gradient(azure, beige);        
+  background-color: beige;
+  width: 350px;
+
+  .card {
+    
+
+  }
+
+  .table {
+    background-color: beige;
+
   }
 }

@@ -1,4 +1,5 @@
 import { REQUEST_ALGO, RECEIVE_ALGO } from '../actions/ketoMagicMealActions'
+import { OPEN_MODAL } from 'actions/modalActions'
 
 const initialState = { 
   mealPlanArray: [],
@@ -8,6 +9,10 @@ const initialState = {
 
 export function ketoMealPlan(state=initialState, action) {
   switch (action.type) {
+    case OPEN_MODAL:
+      return Object.assign({}, state, {
+        mealPlanArray: []
+      })
     case REQUEST_ALGO:
       return Object.assign({}, state, {
         isProcessing: true

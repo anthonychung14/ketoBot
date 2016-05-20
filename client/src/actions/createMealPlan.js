@@ -6,6 +6,24 @@ const ketoBot = "/ketoBot/recipes"
 const staples = "/ketoBot/staples"
 import { formModal } from './items'
 
+export function postFinalMealPlan(element) {    
+  return (dispatch, getState) => {
+    const mealPlan = getState().mealPlan;    
+    console.log(mealPlan, element, "yayayaya")
+    let finalMealPlan = {}
+
+
+    //dispatch(ASYNC)
+  }
+
+
+
+  return {
+    type: POST_FINAL_MEAL
+  }
+}
+
+
 export function createStaple(props, ingredData) {       
   //Convenience hash
   let foodHash = props.ingredient.reduce((prev, current) => {

@@ -1,7 +1,6 @@
 class Staple:  
   def __init__(self, macro):
     self.id = macro['id']
-    print(macro)
     self.macros = macro['baseMacros']
     self.totals = macro['totalMacros']    
     self.servings = 1

@@ -27,7 +27,7 @@ from portionAlgo.FindSolution import FindTenSols
 @api_view(['GET', 'POST'])
 def portionAlgo(request):
   if request.method == 'POST':        
-    print(request.body)
+    # print(request.body)
     remaining = json.loads(request.body)
     target = {
       'protein': remaining['Protein'],
@@ -50,7 +50,6 @@ def portionAlgo(request):
       for item in combo.staples:
         lookupName = FridgeItem.objects.get(pk=item.id)
         serial = FridgeItemSerializer(lookupName)
-        print(serial.data['name'])
         fridgeItem = {
           'id': item.id,
           'name': serial.data['name'],

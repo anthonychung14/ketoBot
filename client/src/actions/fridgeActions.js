@@ -56,7 +56,6 @@ export const DEL_FRIDGE = "DEL_FRIDGE"
 export function delFridgeItem(item, items) {  
   const itemIndex = items.indexOf(item)
   const searchArray = items.slice(0, itemIndex).concat(items.slice(itemIndex+ 1))
-  console.log(itemIndex, searchArray, "trynna del a fridge")
   return {
     type: DEL_FRIDGE,
     payload: searchArray

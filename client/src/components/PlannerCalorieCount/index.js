@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Colors from 'material-ui/lib/styles/colors';
 import { AppBar } from 'material-ui';
 import { PlannerActionBar } from 'components/PlannerActionBar'
-import { PlanTable } from 'mealPlan/PlanTable'
+import { PlanTable } from 'components/mealPlan/PlanTable'
 import { calcTotalSelector, calcRemaining, calcPercentCal, calcPercentPro, calcPercentFat, calcPercentCarb } from '../../reducers/selectors/calcSelectors'
 
 import { Table, Thead, Th, Tr, } from 'Reactable'
