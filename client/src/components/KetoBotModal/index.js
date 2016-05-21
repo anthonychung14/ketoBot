@@ -35,9 +35,32 @@ export class KetoBotModal extends Component {
     super(props);
   }
 
-  confirm(element) {        
+  confirm(element, key) {        
     this.props.openModal()
     //Move this logic to a selector next
+
+    let fridgeMeal = this.props.mealPlan.fridgeFill.map((element, key) => {
+      return {
+        id: element.id
+      }
+    })
+
+    let servingMap = this.props.mealPlan.servingMap
+
+    let recipeMeal = this.props.mealPlan.chosenRecipes.map((element, key) => {
+      console.log(element)
+      return {
+        id: element.recipe.id,
+        name: element.recipe.recipe.title,
+        time: element.recipe.recipe.time,
+        staple: element.recipe.recipe.staple,
+        servings: servingMap[element.recipe.recipe.id],
+        nutrition: {
+          protein: element.recipe.nutrition.protein,
+          fat: element.recipe.nutrition.fat,
+          carbs: element.recipe.nutrition.net_carb}
+      }
+      })
 
     let finalMeal = {
       id: element.id,
@@ -48,7 +71,6 @@ export class KetoBotModal extends Component {
       fridge: []
 
     }
-
 
     this.props.actions.postFinalMealPlan(element)
     this.context.router.push('dashboard')
