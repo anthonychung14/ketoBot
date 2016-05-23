@@ -24,12 +24,13 @@ const common = {
 
   output: {
     path: PATHS.build,
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    publicPath: 'http://localhost:3000/dist/bundle/'
   },
 
-  // plugins: [
-  //   new BundleTracker({filename: '../webpack-stats.json'}),
-  // ],
+  plugins: [
+    new BundleTracker({filename: './webpack-stats.json'}),
+  ],
 
   resolve: {
     extensions: ['', '.jsx', '.js', '.json', '.scss'],

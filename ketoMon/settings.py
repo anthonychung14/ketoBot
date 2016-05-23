@@ -23,18 +23,18 @@ ALLOWED_HOSTS = []
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'client/src'), # We do this so that django's collectstatic copies or our bundles to the STATIC_ROOT or syncs them to whatever storage we use.
+    # 'http://localhost:3000/client/dist'
+)
 
 WEBPACK_LOADER = {
     'DEFAULT': {
-        'BUNDLE_DIR_NAME': 'dist/',
+        'BUNDLE_DIR_NAME': '/client/dist/',
         'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json')
     }
 }
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'client'), # We do this so that django's collectstatic copies or our bundles to the STATIC_ROOT or syncs them to whatever storage we use.
-    'localhost:3000/dist/bundle'
-)
 
 INSTALLED_APPS = [
     'ketoBot.apps.ketoBotConfig',
