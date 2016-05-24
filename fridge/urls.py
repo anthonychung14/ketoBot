@@ -5,5 +5,6 @@ urlpatterns = patterns(
   'fridge.views',
   url(r'^items$', views.fridge, name='fridge'),
   url(r'^search$', views.search, name='search'),
-  url(r'^portionAlgo$', views.portionAlgo, name='portionAlgo')
+  url(r'^portionAlgo$', views.portionAlgo, name='portionAlgo'),
+  url(r'^makePlan$', views.makePlan, name='makePlan')
 )

@@ -6,6 +6,7 @@ import { retrieveSearch } from './searchRecipes'
 const baseURL = "http://localhost:8000"
 const userPlan = "/users/plan"
 const ketoBot = "/ketoBot"
+const mealPlan = "/fridge/makePlan"
 const recipeSearch = "/recipes/search"
 
 
@@ -69,6 +70,37 @@ export function fetchPlan(request) {
         }
         dispatch(receivePlan(request, parsed))
     })
+  }
+}
+
+//GET MEAL PLANS
+export const REQUEST_MEAL_PLAN = "REQUEST_MEAL_PLAN"
+export function requestMealPlan(request) {
+  return {
+    type: REQUEST_MEAL_PLAN,
+    payload: request
+  }
+}
+
+export const RECEIVE_MEAL_PLAN = "RECEIVE_MEAL_PLAN"
+export function receiveMealPlan(request, json) {
+  return {
+    type: RECEIVE_MEAL_PLAN,
+    request,
+    mealPlans: json
+  }
+}
+
+export function fetchMealPlan(request) {
+  return function(dispatch) {
+    dispatch(requestMealPlan(request))
+    return fetch(`${baseURL}${mealPlan}`, {
+      method: 'GET'
+    })
+    .then(response => response.json())
+    .then(json => {        
+      dispatch(receiveMealPlan(request, json))
+    })            
   }
 }
 

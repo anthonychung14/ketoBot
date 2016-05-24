@@ -9,9 +9,10 @@ import { styles } from './styles.scss';
 export default class UserFoods extends Component {  
     constructor(props) {
       super(props)
-    }
-    
+    }  
+
   render() {    
+    console.log(this.props, "got props?")
     return (              
         <section className={`${styles}`}>
         <h3>History of orders</h3>

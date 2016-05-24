@@ -30,9 +30,7 @@ export function sendForAlgo(userData) {
 }
 
 export const RECEIVE_ALGO = "RECEIVE_ALGO"
-export function receiveAlgo(request, json) {
-  //Do some fancy stuff to process the data you get back
-  console.log("THE JASON ", json)
+export function receiveAlgo(request, json) {  
   return {
     type: RECEIVE_ALGO,    
     algoMeal: json

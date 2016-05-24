@@ -15,7 +15,6 @@ export function mealPlan(state=initialState, action) {
         chosenRecipes: state.chosenRecipes.concat(action.payload),
         servingMap: 1        
       })
-
     case HIDE_PLAN_MODAL:
       var recipes = state.chosenRecipes.slice()
       var lastChosen = recipes.pop()      

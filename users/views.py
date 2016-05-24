@@ -20,15 +20,15 @@ def userPlan(request):
     cache.set("userGoal", request.body)    
     cache.persist("userGoal")
     serializer = UserPlanSerializer(cache.get("userGoal"))
-    return Response(serializer.data)
     
     ##save to DB from redis at a later time
-    # serializer = UserPlanSerializer(data = request.data)
-    # if serializer.is_valid():
-    #   serializer.save()
-      # return Response(serializer.data, status=status.HTTP_201_CREATED)    
-    # else:
-    #   return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    serializerSave = UserPlanSerializer(data = request.data)
+    if serializerSave.is_valid():
+      serializerSave.save()
+      return Response(serializer.data, status=status.HTTP_201_CREATED)    
+    else:
+      return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    return Response(serializer.data)
 
   elif request.method == 'GET':
     if cache.get("userGoal"):      

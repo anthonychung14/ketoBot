@@ -23,6 +23,7 @@ class WizardFormSecondPage extends Component {
   }
 
   onSubmit(props) {
+    console.log("did I fire")
     this.props.postProcess(props, this.context.router)    
   }
 
@@ -51,7 +52,17 @@ class WizardFormSecondPage extends Component {
           <div>
             <input type="number" placeholder="should have checkboxes" {...freeCal}/>          
           </div>
-        </div>                            
+        </div>
+        <div>
+        <ButtonCircle type="submit" title="submit">
+          <Icon
+            fill="currentColor"
+            height="2em"
+            name="check"
+            width="2em"/>
+        </ButtonCircle>
+        <h5>Submit</h5>
+        </div>                                    
       </form>
     )
   }
@@ -70,5 +81,3 @@ export default reduxForm({
   destroyOnUnmount: false,     // <------ preserve form data
                        // <------ only validates the fields on this page
 }, null, { postProcess })(WizardFormSecondPage)
-
-// {days.touched && days.error && <div>{days.error}</div>}

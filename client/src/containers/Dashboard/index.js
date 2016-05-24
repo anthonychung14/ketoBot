@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import * as actionCreators from '../../actions/userPlan'
+
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import { styles } from './styles.scss';
@@ -21,7 +22,8 @@ import SwipeableViews from 'react-swipeable-views';
 
 function mapStateToProps(state) {
   return { 
-    userPlan: state.userPlan
+    userPlan: state.userPlan,
+    userMealPlan: state.userPlan.chosenMealPlans
   };
 }
 
@@ -47,6 +49,7 @@ export class Dashboard extends Component {
   componentWillMount() {
     console.log(this.props)
     this.props.actions.fetchPlan()
+    this.props.actions.fetchMealPlan()
   }
 
   render() {
@@ -66,7 +69,7 @@ export class Dashboard extends Component {
           <div className="userData">
             <UserData userPlan={this.props.userPlan}/>
             <UserChart />
-            <UserFoods />
+            <UserFoods mealPlans={this.props.userMealPlan}/>
           </div>
         </SwipeableViews>
       </section>

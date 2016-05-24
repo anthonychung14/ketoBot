@@ -1,8 +1,10 @@
-import { REQUEST_PLAN, RECEIVE_PLAN } from '../actions/userPlan'
+import { REQUEST_PLAN, RECEIVE_PLAN, REQUEST_MEAL_PLAN, RECEIVE_MEAL_PLAN } from '../actions/userPlan'
 
 const initialState = {
-  isSearching: false,
-  userPlan: {}
+  isSearching: false,  
+  userPlan: {},
+  isFetching: false,
+  chosenMealPlans: []
 }
 
 export function userPlan(state = initialState, action) {
@@ -15,6 +17,15 @@ export function userPlan(state = initialState, action) {
       return Object.assign({}, state, {
         isSearching: false,
         userPlan: action.userPlan
+      })
+    case REQUEST_MEAL_PLAN:
+      return Object.assign({}, state, {
+        isFetching: true
+      })
+    case RECEIVE_MEAL_PLAN:
+      return Object.assign({}, state, {
+        isFetching: false,
+        chosenMealPlans: action.mealPlans
       })
     default:
       return state;

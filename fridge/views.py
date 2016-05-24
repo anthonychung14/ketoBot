@@ -17,17 +17,16 @@ from rest_framework.decorators import parser_classes
 
 from django.core.cache import cache
 
-from .models import FridgeItem
+from .models import FridgeItem, MealPlan, MealPlanItem
 from ketoBot.models import Recipe, Recipe_Nutrition
 from ketoBot.serializers import RecipeSerializer, RecipeNutritionSerializer
+from fridge.serializers import FridgeItemSerializer, FridgeFillSerializer, MealPlanSerializer, MealPlanItemSerializer
 
-from fridge.serializers import FridgeItemSerializer, FridgeFillSerializer
 from portionAlgo.FindSolution import FindTenSols
 
 @api_view(['GET', 'POST'])
 def portionAlgo(request):
-  if request.method == 'POST':        
-    # print(request.body)
+  if request.method == 'POST':          
     remaining = json.loads(request.body)
     target = {
       'protein': remaining['Protein'],
@@ -64,17 +63,66 @@ def portionAlgo(request):
       
     return Response(data)
 
-
+########## MEAL PLAN #############
 @api_view(['GET', 'POST'])
-def mealPlanMagic(request):
-  if request.method == 'GET':
-    #Reach into the DB and go get it
+def makePlan(request):
+  if request.method == 'GET':    
     print("hi")
+    fetchMealPlans = MealPlan.objects.all()[:5]
+    gotMealPlans = MealPlanSerializer(fetchMealPlans, many=True)
+
+    return Response(gotMealPlans.data)
 
 
   elif request.method == 'POST':
-    ##get data, serialize, and then post it son
-    print("bye")
+    totalData = request.data['finalMeal']
+    totalItems = []    
+    totalSerial = MealPlanSerializer(data=request.data['finalMeal'])
+
+    if totalSerial.is_valid():
+      savedTotal = totalSerial.save()
+      savedTotalId = savedTotal.id      
+    else:
+      print('serialization failed')
+      return Response(totalSerial.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    fridgeSubtract = []
+    stapleFindIngred = []
+    for item in request.data['finalMealItems']:      
+      itemData = {
+        'name': item['name'],
+        'mealPlanRef': savedTotalId,
+        'typeof': item['typeof'],
+        'servings': item['servings'],
+        'calories': item['calories'],
+        'carbs': item['carbs'],
+        'protein': item['protein'],
+        'fat': item['fat'],
+        'eaten': False,
+      }
+
+      if item['typeof'] == 'algoFridge' or item['typeof'] == 'userFridge':
+        itemData['fridgeRef'] = item['foreignKey']
+        fridgeSubtract.append(item['foreignKey'])
+      elif item['typeof'] == 'userStaple':
+        itemData['recipeRef'] = item['foreignKey']
+        stapleFindIngred.append(item['foreignKey'])
+
+      updateItems = FridgeItem.objects.filter(pk__in=fridgeSubtract)
+      for item in updateItems:
+        available = item.servings
+        item.servings = available - itemData['servings']
+        item.save()
+
+      
+      itemSerializer = MealPlanItemSerializer(data=itemData)
+      if itemSerializer.is_valid():
+        savedItem = itemSerializer.save()
+      else:
+        print("serialization of item failed")
+        return Response(itemSerializer.errors, status=status.HTTP_400_BAD_REQUEST)    
+    
+    return Response(request.data['finalMeal'])
 
 
 @api_view(['GET', 'POST'])
@@ -97,7 +145,6 @@ def fridge(request):
 def search(request):
   queryJSON = json.loads(request.body)
   #if one long, transform into string
-
   #if more than two, put an OR between all of them  
   def makeQuery(queryClient):
     string = ""
