@@ -8,17 +8,17 @@ def FindTenSols(data, target):
   comboGen = ComboGenerator(data)
   comboGen.next()
   
-  while len(results) < 10:
+  while len(results) < 3:
     if not comboGen.next():
       break;
     Combo = ConvertCombo(comboGen.next())
     solution = IterateStaples(Combo, target)
     totalDiff = 0
-    results.append(solution)              
-    # for x in solution.diff:
-    #   totalDiff += solution.diff[x]
-    # if totalDiff < 20:
-    #   results.append(solution)  
+    # results.append(solution)
+    for x in solution.diff:
+      totalDiff += solution.diff[x]
+    if totalDiff < 30:
+      results.append(solution)  
   
   results.sort(key=lambda k: k.diff)
   return results
