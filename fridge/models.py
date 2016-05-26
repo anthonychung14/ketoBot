@@ -15,6 +15,10 @@ class FridgeItem(models.Model):
   carbs = models.IntegerField(default=0)
   fiber = models.IntegerField(default=0)
 
+class FridgeInventory(models.Model):
+  fridgeItem = models.ForeignKey(FridgeItem, on_delete=models.CASCADE)
+  eaten = models.BooleanField(default=False)
+
 class FridgeFill(models.Model):  
   r = models.ForeignKey(FridgeItem, on_delete=models.CASCADE)
   servings = models.IntegerField(default=1)

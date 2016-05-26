@@ -93,11 +93,13 @@ def recipe_list(request):
           'r': rKey,
           'amount':  obj['servings'],
           'measurement': obj['measurement'],
-          'name': obj['name'],          
+          'name': obj['name'],
+          'rawString': obj['name']
         }
 
         ingredSerializer = IngredientSerializer(data=recipeIngred)        
-        
+        print(ingredSerializer, recipeIngred)
+
         if ingredSerializer.is_valid():
           savedIngred = ingredSerializer.save()
           iKey = savedIngred.id

@@ -20,10 +20,9 @@ class Recipe_Nutrition(models.Model):
     net_carb = models.IntegerField(default=0)
     protein = models.IntegerField(default=0)
 
-#Ingredient object in ES => Enough data for NLP, feedback, regressions
-#on certain ingredients?
+#Ingredient object in ES => Enough data for NLP, feedback, regressions on certain ingredients?
 class Ingredient (models.Model):
-    r = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+    r = models.ForeignKey(Recipe, on_delete=models.CASCADE)    
     rawString = models.CharField(max_length=200)
     amount = models.FloatField(default = 0)
     measurement = models.CharField(max_length=200)

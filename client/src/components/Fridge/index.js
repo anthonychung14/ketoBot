@@ -77,7 +77,7 @@ export class Fridge extends Component {
   }
 
   render() {
-    const categories = [ 'Protein', 'Fats', 'Dairy' , 'Vegetables' ]
+    const categories = [ 'Protein', 'Fats', 'Dairy' , 'Vegetables', 'Carbs' ]
     return (
       <div>
         <h2>Inventory</h2>

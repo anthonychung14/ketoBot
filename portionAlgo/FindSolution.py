@@ -8,23 +8,24 @@ def FindTenSols(data, target):
   comboGen = ComboGenerator(data)
   comboGen.next()
   
-  while len(results) < 5:
+  while len(results) < 10:
     if not comboGen.next():
       break;
     Combo = ConvertCombo(comboGen.next())
     solution = IterateStaples(Combo, target)
     totalDiff = 0
-    for x in solution.diff:
-      totalDiff += solution.diff[x]
-    if totalDiff < 10:
-      results.append(solution)  
+    results.append(solution)              
+    # for x in solution.diff:
+    #   totalDiff += solution.diff[x]
+    # if totalDiff < 20:
+    #   results.append(solution)  
   
+  results.sort(key=lambda k: k.diff)
   return results
 
 def ComboGenerator(arr):  
  for i in range(len(arr) + 1):
      for combo in map(list, combinations(arr, i)):
-        print(combo)
         yield combo
 
 def ConvertCombo(arrayItem):  

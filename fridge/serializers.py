@@ -1,10 +1,16 @@
 from rest_framework import serializers
-from models import FridgeItem, FridgeFill, MealPlan, MealPlanItem
+from models import FridgeItem, FridgeFill, FridgeInventory, MealPlan, MealPlanItem
 
 class FridgeItemSerializer(serializers.ModelSerializer):
   class Meta:
     model = FridgeItem
     fields = ('id','name', 'category', 'amount', 'measurement', 'servings', 'calories', 'protein', 'fat', 'carbs', 'fiber')
+
+class FridgeInventorySerializer(serializers.ModelSerializer):
+  class Meta:
+    model = FridgeInventory
+    fields = ('fridgeItem', 'eaten')
+
 
 class FridgeFillSerializer(serializers.ModelSerializer):
   class Meta:

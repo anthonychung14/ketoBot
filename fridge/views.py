@@ -17,13 +17,14 @@ from rest_framework.decorators import parser_classes
 
 from django.core.cache import cache
 
-from .models import FridgeItem, MealPlan, MealPlanItem
-from ketoBot.models import Recipe, Recipe_Nutrition
-from ketoBot.serializers import RecipeSerializer, RecipeNutritionSerializer
-from fridge.serializers import FridgeItemSerializer, FridgeFillSerializer, MealPlanSerializer, MealPlanItemSerializer
+from .models import FridgeItem, MealPlan, MealPlanItem, FridgeInventory
+from ketoBot.models import Recipe, Recipe_Nutrition, Ingredient
+from ketoBot.serializers import RecipeSerializer, RecipeNutritionSerializer, IngredientSerializer
+from fridge.serializers import FridgeItemSerializer, FridgeFillSerializer, MealPlanSerializer, MealPlanItemSerializer, FridgeInventorySerializer
 
 from portionAlgo.FindSolution import FindTenSols
 
+##### ROUTE FOR PORTION ALGORITHM ######
 @api_view(['GET', 'POST'])
 def portionAlgo(request):
   if request.method == 'POST':          
@@ -67,13 +68,11 @@ def portionAlgo(request):
 @api_view(['GET', 'POST'])
 def makePlan(request):
   if request.method == 'GET':    
-    print("hi")
     fetchMealPlans = MealPlan.objects.all()[:5]
     gotMealPlans = MealPlanSerializer(fetchMealPlans, many=True)
-
     return Response(gotMealPlans.data)
 
-
+  
   elif request.method == 'POST':
     totalData = request.data['finalMeal']
     totalItems = []    
@@ -86,8 +85,8 @@ def makePlan(request):
       print('serialization failed')
       return Response(totalSerial.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    fridgeSubtract = []
-    stapleFindIngred = []
+    ## SUBTRACTION and DB POSTING LOGIC ##    
+    inventory = []
     for item in request.data['finalMealItems']:      
       itemData = {
         'name': item['name'],
@@ -100,44 +99,79 @@ def makePlan(request):
         'fat': item['fat'],
         'eaten': False,
       }
-
-      if item['typeof'] == 'algoFridge' or item['typeof'] == 'userFridge':
-        itemData['fridgeRef'] = item['foreignKey']
-        fridgeSubtract.append(item['foreignKey'])
-      elif item['typeof'] == 'userStaple':
-        itemData['recipeRef'] = item['foreignKey']
-        stapleFindIngred.append(item['foreignKey'])
-
-      updateItems = FridgeItem.objects.filter(pk__in=fridgeSubtract)
-      for item in updateItems:
-        available = item.servings
-        item.servings = available - itemData['servings']
-        item.save()
-
       
-      itemSerializer = MealPlanItemSerializer(data=itemData)
-      if itemSerializer.is_valid():
-        savedItem = itemSerializer.save()
-      else:
-        print("serialization of item failed")
-        return Response(itemSerializer.errors, status=status.HTTP_400_BAD_REQUEST)    
-    
+      if item['typeof'] == 'algoFridge' or item['typeof'] == 'userFridge':
+        servings = item['servings']            
+        itemData['fridgeRef'] = item['foreignKey']
+        itemSerializer = MealPlanItemSerializer(data=itemData)        
+        
+        if itemSerializer.is_valid():
+          savedItem = itemSerializer.save()
+        else:
+          print("serialization of fridge item failed")
+          return Response(itemSerializer.errors, status=status.HTTP_400_BAD_REQUEST)        
+        
+        for item in range(0, servings):                  
+          fridgeItem = FridgeItem.objects.get(pk=itemData['fridgeRef'])
+          inventory.append(FridgeInventory(fridgeItem=fridgeItem, eaten=True))
+        
+      elif item['typeof'] == 'userStaple':
+        servings = item['servings']            
+        itemData['recipeRef'] = item['foreignKey']        
+        itemSerializer = MealPlanItemSerializer(data=itemData)
+        
+        if itemSerializer.is_valid():
+          savedItem = itemSerializer.save()
+        else:
+          print("serialization of fridge item failed")
+          return Response(itemSerializer.errors, status=status.HTTP_400_BAD_REQUEST)        
+
+        for item in Ingredient.objects.filter(r_id=itemData['recipeRef']):          
+          ingred = IngredientSerializer(item)
+          totalServings = int(ingred.data['amount'] * servings)
+
+          for num in range(0, totalServings):                                  
+            gotItem = FridgeItem.objects.get(name=ingred['name'].value)            
+            inventory.append(FridgeInventory(fridgeItem=gotItem, eaten=True))
+
+    FridgeInventory.objects.bulk_create(inventory)    
     return Response(request.data['finalMeal'])
 
-
+####### POST FRIDGE ITEMS TO DB #######
 @api_view(['GET', 'POST'])
 def fridge(request):
   if request.method == 'GET':    
+    # for row in FridgeItem.objects.all():
+    #   if FridgeItem.objects.filter(name=row.name).count() > 1:
+    #     row.delete()
+
     allItems = FridgeItem.objects.all()
     itemSerializer = FridgeItemSerializer(allItems, many=True)
+    
+    for item in itemSerializer.data:
+      avail = FridgeInventory.objects.filter(fridgeItem=item['id'], eaten=False).count()
+      eaten = FridgeInventory.objects.filter(fridgeItem=item['id'], eaten=True).count()
+      total = avail - eaten
+      item['servings'] = avail - eaten
+      FridgeItem.objects.filter(pk=item['id']).update(servings=total)
+
+    updated = FridgeItem.objects.all()
+    updatedSerializer = FridgeItemSerializer(updated, many=True)
     return Response(itemSerializer.data)
     
   elif request.method == 'POST':
-    serializer = FridgeItemSerializer(data = request.data)
+    serializer = FridgeItemSerializer(data = request.data)    
+    inventory = []
+    
     if serializer.is_valid():
-      serializer.save()
+      fridgefk = serializer.save()
+      servings = serializer.data['servings']      
+      for item in range(0, servings):        
+        inventory.append(FridgeInventory(fridgeItem=fridgefk, eaten=False))      
+      FridgeInventory.objects.bulk_create(inventory)        
       return Response(serializer.data, status=status.HTTP_201_CREATED)    
     else:
+      print(serializer, serializer.data, "not valid")
       return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 

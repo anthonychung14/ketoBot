@@ -114,6 +114,7 @@ export function finishFridgePost(request, json) {
 export function postFridge(formProps) {
   return function(dispatch) {    
     dispatch(startFridgePost(formProps))
+    console.log(JSON.stringify(formProps))
     return fetch(`${fridgeURL}`, {
       method: 'POST',    
       headers: {
