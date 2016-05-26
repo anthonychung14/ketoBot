@@ -78,22 +78,22 @@ export class PlannerCalorieCount extends Component {
             <div className="progressBar">
               <div>
               <h4>Calories: <span className="percent">{Math.floor(this.props.percentCal*100)}%</span></h4>
-              <Line percent={this.props.percentCal*100} strokeWidth="1" strokeColor={'#0088EE'}/>
+              <Line percent={this.props.percentCal*100} strokeWidth="1" strokeColor={'#E040FB'}/>
               </div>
               
               <div>
               <h4>Protein: <span className="percent">{Math.floor(this.props.percentPro*100)}%</span></h4>              
-              <Line percent={this.props.percentPro*100} strokeWidth="1" strokeColor={'#0088EE'}/>
+              <Line percent={this.props.percentPro*100} strokeWidth="1" strokeColor={'#E040FB'}/>
               </div>
               
               <div>
               <h4>Fat: <span className="percent">{Math.floor(this.props.percentFat*100)}%</span></h4>
-              <Line percent={this.props.percentFat*100} strokeWidth="1" strokeColor={'#0088EE'}/>
+              <Line percent={this.props.percentFat*100} strokeWidth="1" strokeColor={'#E040FB'}/>
               </div>
               
               <div>
               <h4>Carbs: <span className="percent">{Math.floor(this.props.percentCarbs*100)}%</span></h4>              
-              <Line percent={this.props.percentCarbs*100} strokeWidth="1" strokeColor={'#0088EE'}/>            
+              <Line percent={this.props.percentCarbs*100} strokeWidth="1" strokeColor={'#E040FB'}/>            
               </div>
             </div>            
              

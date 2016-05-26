@@ -11,16 +11,18 @@
   flex: 0 0 70%;
   align-items: center;
 
-  .progressBar {
-    border: 1px solid #00BCD4;  
+  .progressBar {    
     padding: 20 20 20 20;
     margin: 20 20 20 20;    
     background-color: white;
-    width: 60%
+    width: 60%;
+    border: 1px solid #1A237E;
+    box-shadow: 10px 10px 5px grey;
   }
 
   .table {
-    border: 1px solid #00BCD4;  
+    border: 1px solid #1A237E;
+    box-shadow: 10px 10px 5px grey;
     padding: 20 20 20 20;
     margin: 20 20 20 20;
     background-color: white;

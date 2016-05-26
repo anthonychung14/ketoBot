@@ -2,13 +2,11 @@
   display: -webkit-flex;
   display: flex;
   -webkit-flex-direction: row;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-direction: row; 
 
   .tabs {
     flex: 0 0 100%;   
     padding-top: 8px;
-
   }  
 
   padding: 50px 0;

@@ -27,7 +27,7 @@ function mapDispatchToProps(dispatch) {
   return { actions: bindActionCreators(actionCreators, dispatch)}
 }
 
-export class Recipes extends Component {
+class Recipes extends Component {
   componentWillMount () {
     let boundFetchNutrition = this.props.actions.fetchNutrition 
     this.props.actions.fetchRecipes()
@@ -48,20 +48,10 @@ export class Recipes extends Component {
   renderRecipe(element, index) {
     let boundRecipeInfo = this.getRecipeInfo.bind(this, element)
     return (
-        <Card rounded={true} width={350} key={index}>
+        <Card rounded={true} width={300} key={index}>
         <CardImage src={element.image} />
         <Heading level={2} size={3}>{element.title}</Heading>                  
-        <div className="actions">
-          <div>
-          <ButtonCircle title="No">
-            <Icon
-              fill="currentColor"
-              height="2em"
-              name="no"
-              width="2em"/>
-          </ButtonCircle>
-          <h5>Nope</h5>
-          </div>
+        <div className="actions">          
 
           <div>
           <ButtonCircle onClick={boundRecipeInfo} title="Add">
@@ -89,15 +79,9 @@ export class Recipes extends Component {
     )
   }
 
-  render() {
-    console.log(this.props)
+  render() {    
     return (
-      <section className={`${styles}`}>       
-        <div className="filter">
-          <h2>Filter</h2>
-          <h5>Choose your recipe</h5>
-        </div>
-        
+      <section className={`${styles}`}>                       
         <ReactCSSTransitionGroup 
               transitionAppear={true} 
               transitionName="card" 

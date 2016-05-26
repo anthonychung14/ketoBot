@@ -1,29 +1,12 @@
 :local(.styles) {
-  position: relative;
-  height: 100vh;
-
-  h2.heading {
-    margin-bottom: 30px;
-    height: 70;
-  }
-
+  position: absolute;
   display: -webkit-flex;
   display: flex;
   -webkit-flex-direction: row;
   flex-direction: row;  
   text-align:center;   
+  padding-top: 20px;
 
-  .filter {
-    border-right: 1px solid #1A237E;
-    margin: 40 40 40 40;
-    padding: 40 40 40 40;
-    display: -webkit-flex;
-
-    display: flex;
-    -webkit-flex-direction: column;
-    flex-direction: column;
-    flex-wrap: wrap;
-  }
 
   .recipes {    
     display: -webkit-flex;
@@ -32,14 +15,17 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-
+    height: 100vh;
+    overflow-y: scroll;
   }
   
   .card {
     margin: 5px 5px 5px 5px;  
-    height: 370px;
+    border-radius: 50px;
+    height: 350px;
     background-color: white;  
     border: 1px solid #1A237E !important; 
+    box-shadow: 10px 10px 5px grey;
     display: -webkit-flex;
     display: flex;
     -webkit-flex-direction: column;
@@ -59,16 +45,21 @@
   }
 
   .actions {
-    margin: 20 20 20 20;
+    
     display: -webkit-flex;
     display: flex;
     -webkit-flex-direction: row;
     flex-direction: row; 
     justify-content: space-around;
+    margin-top: auto;
   }
 
   img.cardimage {
-    height: 225px !important;
+    height: 215px !important;
     width: auto;
   }  
+
+  button.ButtonCircle {
+    
+  }
 }
