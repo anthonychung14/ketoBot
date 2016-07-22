@@ -131,9 +131,7 @@ def makePlan(request):
           totalServings = int(ingred.data['amount'] * servings)
 
           for num in range(0, totalServings):                                  
-            print(ingred['name'].value)
-            gotItem = FridgeItem.objects.get(name=ingred['name'].value)
-
+            gotItem = FridgeItem.objects.get(name=ingred['name'].value)            
             inventory.append(FridgeInventory(fridgeItem=gotItem, eaten=True))
 
     FridgeInventory.objects.bulk_create(inventory)    
