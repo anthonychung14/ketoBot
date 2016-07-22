@@ -35,9 +35,10 @@ export class KetoBotModal extends Component {
     super(props);
   }
 
-  confirm(element, key) {        
+  confirm(element) {        
     this.props.openModal()
     //Move this logic to a selector next
+<<<<<<< HEAD
     let fridgeMeal = this.props.mealPlan.fridgeFill.map((element, key) => {
       return {
         id: element.id
@@ -57,6 +58,8 @@ export class KetoBotModal extends Component {
           carbs: element.recipe.nutrition.net_carb}
       }
     })
+=======
+>>>>>>> parent of 79f7795... styling to ketoBotModal
 
     let finalMeal = {
       id: element.id,
@@ -66,6 +69,7 @@ export class KetoBotModal extends Component {
       totals: element.calories,
       fridge: []
     }
+
 
     this.props.actions.postFinalMealPlan(element)
     this.context.router.push('dashboard')
