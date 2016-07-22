@@ -39,6 +39,7 @@ export class KetoBotModal extends Component {
     this.props.openModal()
     //Move this logic to a selector next
 <<<<<<< HEAD
+<<<<<<< HEAD
     let fridgeMeal = this.props.mealPlan.fridgeFill.map((element, key) => {
       return {
         id: element.id
@@ -58,6 +59,8 @@ export class KetoBotModal extends Component {
           carbs: element.recipe.nutrition.net_carb}
       }
     })
+=======
+>>>>>>> parent of 79f7795... styling to ketoBotModal
 =======
 >>>>>>> parent of 79f7795... styling to ketoBotModal
 
