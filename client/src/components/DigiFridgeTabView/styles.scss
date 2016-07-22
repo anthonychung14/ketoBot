@@ -1,0 +1,15 @@
+:local(.styles) {
+  text-align: center;
+  
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  width: 30%;
+
+  .tabView {
+    height: 100vh;    
+  }
+
+  border: 1px solid #1A237E;
+}

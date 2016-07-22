@@ -9,8 +9,6 @@ import { styles } from './styles.scss';
 class FridgeWizard extends Component {
   constructor(props) {
     super(props)
-
-    // Pro tip: The best place to bind your member functions is in the component constructor
     this.nextPage = this.nextPage.bind(this)
     this.previousPage = this.previousPage.bind(this)
     this.state = {
@@ -38,9 +36,6 @@ class FridgeWizard extends Component {
       </section>
     )
   }
-}
-
-FridgeWizard.propTypes = {
 }
 
 export default FridgeWizard

@@ -3,6 +3,17 @@
   
   align-self: center;
   border: 1px solid #1A237E;
-  width: 30%;    
+  width: 20%;    
+
+
+.tabView {
+    display: flex;
+    flex-direction: column;    
+    align-items: center;
+    margin-left: 10%;
+
+  
+  }
+
 }
 

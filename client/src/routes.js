@@ -6,7 +6,6 @@ import { App } from 'containers/App';
 import { AllRecipes } from 'containers/AllRecipes';
 import { HomePage  } from 'containers/HomePage';
 import { Dashboard } from 'containers/Dashboard';
-import { DigiFridge2 } from 'containers/DigiFridge2';
 import { DigiFridge } from 'containers/DigiFridge';
 
 import { Planner } from 'containers/Planner';

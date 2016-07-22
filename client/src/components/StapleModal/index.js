@@ -11,7 +11,7 @@ export class StapleModal extends Component {
   }
 
   render() {                
-    if (!this.props.modalState.openStaple) { return ( <span/>) }
+    if (!this.props.modalState.openStaple) { return <h1></h1>}
       return (
        <Modal show={this.props.modalState.openStaple} onHide={this.props.stapleModal}>        
         <Modal.Header>            

@@ -48,17 +48,6 @@ export class StapleShow extends Component {
             
             <div className="actions">
             <div>
-            <ButtonCircle title="No">
-            <Icon
-              fill="currentColor"
-              height="2em"
-              name="no"
-              width="2em"/>
-            </ButtonCircle>
-            <h5>Nope</h5>
-            </div>
-        
-            <div>
             <ButtonCircle title="Info">
             <Icon
               fill="currentColor"

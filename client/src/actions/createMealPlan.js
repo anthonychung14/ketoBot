@@ -102,8 +102,6 @@ export function postFinalMealPlan(element) {
       finalMeal,
       finalMealItems: algoFridgeItems.concat(fridgeFillItems, chosenMealItems)      
     }
-
-    console.log(finalItem['finalMealItems'], "are carbs here")
     
     const request = fetch(`${baseURL}${postPlan}`, {    
       method: 'POST',    

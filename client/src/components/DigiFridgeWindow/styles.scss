@@ -5,12 +5,12 @@
   
   display: -webkit-flex;
   display: flex;
-  -webkit-flex-direction: column;
-  flex-direction: column;
+  -webkit-flex-direction: row;
+  flex-direction: row;
   flex-wrap: wrap;
 
-  .tabView {
-    height: 100vh;    
+  .tabs {
+    padding-top: 8px;
   }
 
   .modalStaplePlan {

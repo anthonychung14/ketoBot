@@ -6,7 +6,7 @@ import Tabs from 'material-ui/lib/tabs/tabs';
 import Tab from 'material-ui/lib/tabs/tab';
 import SwipeableViews from 'react-swipeable-views';
 
-export class DigiFridge2 extends Component {
+export class DigiFridgeTabView extends Component {
   
   constructor(props){
     super(props);   

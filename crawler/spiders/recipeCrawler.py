@@ -23,7 +23,7 @@ class RecipeCrawlerSpider(CrawlSpider):
 
   rules = (
       #make this 0-9 when you're ready to get all of it
-      Rule(LinkExtractor(allow=r'page/[0-9]/'), callback='parse_item', follow=True),
+      Rule(LinkExtractor(allow=r('.*\/(.*?)$'), callback='parse_item', follow=True),
   )
 
   def parse_item(self, response):

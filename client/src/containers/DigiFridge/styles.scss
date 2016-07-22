@@ -5,16 +5,11 @@
   
   display: -webkit-flex;
   display: flex;
-  -webkit-flex-direction: column;
-  flex-direction: column;
-  flex-wrap: wrap;
+  -webkit-flex-direction: row;
+  flex-direction: row;  
 
   .tabs {
     padding-top: 8px;
-  }
-
-  .modalStaplePlan {
-    width: 90vw;
-  }
+  }  
 
 }

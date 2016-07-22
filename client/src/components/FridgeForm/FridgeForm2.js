@@ -4,7 +4,6 @@ import { styles } from './styles.scss';
 
 import { postFridge, fetchFridge } from '../../actions/fridgeActions'
 
-//TODO: onsubmit, clear form and allow for next item to be posted
 //TODO: allow user to "refill" based on common items bought
 
 /* component styles */
